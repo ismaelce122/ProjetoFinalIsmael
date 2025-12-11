@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<h1 class="bg-warning text-center">Cadastrar Mecânicos</h1>
+<form class="m-auto w-25 mt-4 border border-black p-3">
+    <div>
+        <label for="nome">Nome:</label>
+        <input class="w-100" type="text" id="nome" name="nome" placeholder="digite seu nome">
+    </div>
+    <div>
+        <label for="especialidades">Especialidades:</label>
+        <select name="especialidades" id="especialidades">
+            <option value="">-- selecione --</option>
+            <option value="motor">Motor</option>
+            <option value="freios">Freios</option>
+            <option value="suspensao">Suspensão</option>
+            <option value="eletrica">Elétrica</option>
+            <option value="pneus">Pneus</option>
+        </select>
+    </div>
+</form>
+
+{% endblock %}
