@@ -2,17 +2,23 @@
 
 {% block conteudo %}
 
-<h1 class="bg-warning text-center">Página Inicial do Ismael Silva Pinho</h1>
-<h2 class="bg-info">Projeto Final</h2>
-<form class="m-auto w-25 mt-4 border border-black p-3">
-    <div>
-        <label for="nome">Nome:</label>
-        <input class="w-100" type="text" id="nome" name="nome" placeholder="digite seu nome">
+<h1 class="bg-warning text-center">Sistema de Ordem de Serviços</h1>
+<div class="container card1 mt-4">
+    <h2 class="text-center">Menu</h2>
+    <div class="p-4 box">
+        <a href="{{url_for('CadastrarVeiculos')}}" class="botao">➕ Cadastrar Clientes</a>
+        <a href="{{url_for('CadastrarVeiculos')}}" class="botao">➕ Cadastrar Veículos</a>
+        <a href="{{url_for('CadastrarVeiculos')}}" class="botao">➕ Cadastrar Mecânicos</a>
+        <a href="{{url_for('CadastrarVeiculos')}}" class="botao">➕ Criar OS</a>
+        <a href="{{url_for('CadastrarVeiculos')}}" class="botao">➕ Gerenciar OS</a>
+        <a href="{{url_for('CadastrarVeiculos')}}" class="botao">➕ Estoque</a>
     </div>
-    <div>
-        <label for="senha">Senha:</label>
-        <input class="w-100" type="password" id="senha" name="senha" placeholder="digite sua senha">
+</div>
+<div class="container card1 mt-4">
+    <h2 class="text-center">Relatórios</h2>
+    <div class="p-4 box">
+        Ordens de Serviço
     </div>
-</form>
+</div>
 
 {% endblock %}
