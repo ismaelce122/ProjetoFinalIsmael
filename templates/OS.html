@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<h1 class="bg-warning text-center">Ordens de Serviço</h1>
+<form class="m-auto w-25 mt-4 border border-black p-3">
+    <div>
+        <label for="Cliente">Cliente:</label>
+        <input class="w-100" type="text" id="cliente" name="cliente" placeholder="digite o nome do cliente">
+    </div>
+    <div>
+        <label for="Veículo">Veículo:</label>
+        <input class="w-100" type="text" id="veiculo" name="veiculo" placeholder="digite o veículo">
+    </div>
+    <div>
+        <label for="Data de abertura">Data de abertura:</label>
+        <input class="w-100" type="text" id="data_abertura" name="data_abertura" placeholder="digite a data de abertura">
+    </div>
+    <div>
+        <label for="Status">Status:</label>
+        <select name="status" id="status">
+            <option value="">-- selecione --</option>
+            <option value="aberto">Aberto</option>
+            <option value="em_andamento">Em andamento</option>
+            <option value="concluido">Concluído</option>
+        </select>
+    </div>
+   
+    <div>
+        <label for="Problema relatado pelo cliente">Problema relatado pelo cliente:</label>
+        <input class="w-100" type="text" id="problema" name="problema" placeholder="digite o problema relatado pelo cliente">
+    </div>
+    <div>
+        <label for="Diagnóstico da oficina">Diagnóstico da oficina:</label>
+        <input class="w-100" type="text" id="diagnostico" name="diagnostico" placeholder="digite o diagnóstico da oficina">
+    </div>
+     <div>
+        <label for="Mecanico designado"></label>Mecânico designado:</label>
+        <input class="w-100" type="text" id="mecanico" name="mecanico" placeholder="digite o mecânico designado">
+    </div>
+     <div>
+        <label for="Itens da OS">Itens da OS:</label>
+        <select name="Serviços" id="">Serviços</select>
+            <option value="">-- selecione --</option>
+            <option value="troca_oleo">Troca de óleo</option>
+            <option value="alinhamento">Alinhamento</option>
+            <option value="balanceamento">Balanceamento</option>
+            <option value="freios">Freios</option>
+            <option value="suspensao">Suspensão</option>
+            <option value="motor">Motor</option>
+        <select name="Peças" id="Peças"></select>
+            <option value="">-- selecione --</option>
+            <option value="filtros">Filtros</option>
+            <option value="pneus">Pneus</option>
+            <option value="baterias">Baterias</option>
+            <option value="pastilhas_freio">Pastilhas de freio</option>
+            <option value="discos_freio">Discos de freio</option>
+
+    </div>
+</form>
+
+{% endblock %}

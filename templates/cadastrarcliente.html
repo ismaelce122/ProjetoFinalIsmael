@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<h1 class="bg-warning text-center">Cadastrar Clientes</h1>
+<form class="m-auto w-25 mt-4 border border-black p-3">
+    <div>
+        <label for="nome">Nome:</label>
+        <input class="w-100" type="text" id="nome" name="nome" placeholder="digite seu nome">
+    </div>
+    <div>
+        <label for="Telefone">Telefone:</label>
+        <input class="w-100" type="text" id="telefone" name="telefone" placeholder="digite seu telefone">
+    </div>
+    <div>
+        <label for="e-mail">E-mail:</label>
+        <input class="w-100" type="text" id="email" name="email" placeholder="digite seu e-mail">
+    </div>
+    <div>
+        <label for="CPF/CNPJ">CPF/CNPJ:</label>
+        <input class="w-100" type="text" id="cpf" name="cpf" placeholder="digite seu CPF">
+    </div>
+   
+    <div>
+        <label for="Endereco">Endereço:</label>
+        <input class="w-100" type="text" id="endereco" name="endereco" placeholder="digite seu endereço">
+    </div>
+    <div>
+        <label for="Observações">Observações:</label>
+        <input class="w-100" type="text" id="observacoes" name="observacoes" placeholder="digite suas observações">
+    </div>
+</form>
+
+{% endblock %}
