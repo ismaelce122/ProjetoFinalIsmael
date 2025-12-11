@@ -1,4 +1,25 @@
-body { 
-    font-family: system-ui, sans-serif; 
-    margin: 3rem;
+.card1 {
+    box-shadow: 2px 2px 3px black;
+    border-radius: 5px;
+}
+
+.box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.botao {
+    border-radius: 5px;
+    background-color: rgb(30, 224, 72);
+    width: 190px;
+    height: 30px;
+    cursor: pointer;
+}
+
+a {
+    display: block;
+    text-decoration: none;
+    color: white;
+    margin-left: 10px;
 }

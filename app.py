@@ -18,6 +18,9 @@ def CadastrarMecanicos():
 def OS():
     return render_template("OS.html")
 
+@app.route("/cadastrarveiculos")
+def CadastrarVeiculos():
+    return render_template("cadastrarveiculos.html")
 
 # Executa o servidor SOMENTE localmente
 if __name__ == "__main__":
