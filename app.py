@@ -22,6 +22,10 @@ def CriarOs():
 def CadastrarVeiculos():
     return render_template("cadastrarveiculos.html")
 
+@app.route("/login")
+def Login():
+    return render_template("login.html")
+
 # Executa o servidor SOMENTE localmente
 if __name__ == "__main__":
     app.run(debug=True)

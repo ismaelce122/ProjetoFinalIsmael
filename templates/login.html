@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+Login
+<form action="{{ url_for('Login') }}" method="post"></form>
+    <input type="text" name="username" id="username">
+    <input type="password" name="password" id="password">
+    <button type="submit">Login</button>
+</form>
+
+Senha
+
+{% endblock %}
