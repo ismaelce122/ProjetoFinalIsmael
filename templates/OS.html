@@ -2,7 +2,7 @@
 
 {% block conteudo %}
 
-<h1 class="bg-warning text-center">Ordens de Serviço</h1>
+<h1 class="bg-warning text-center">Ordem de Serviço</h1>
 <form class="m-auto w-25 mt-4 border border-black p-3">
     <div>
         <label for="Cliente">Cliente:</label>
@@ -39,8 +39,8 @@
         <input class="w-100" type="text" id="mecanico" name="mecanico" placeholder="digite o mecânico designado">
     </div>
      <div>
-        <label for="Itens da OS">Itens da OS:</label>
-        <select name="Serviços" id="">Serviços</select>
+        <label for="servicos">Itens da OS:</label>
+        <select name="servicos" id="servicos">
             <option value="">-- selecione --</option>
             <option value="troca_oleo">Troca de óleo</option>
             <option value="alinhamento">Alinhamento</option>
@@ -48,13 +48,17 @@
             <option value="freios">Freios</option>
             <option value="suspensao">Suspensão</option>
             <option value="motor">Motor</option>
-        <select name="Peças" id="Peças"></select>
+        </select>
+        <br>
+        <label for="pecas">Peças:</label>
+        <select name="pecas" id="pecas">
             <option value="">-- selecione --</option>
             <option value="filtros">Filtros</option>
             <option value="pneus">Pneus</option>
             <option value="baterias">Baterias</option>
             <option value="pastilhas_freio">Pastilhas de freio</option>
             <option value="discos_freio">Discos de freio</option>
+        </select>
 
     </div>
 </form>

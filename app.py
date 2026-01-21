@@ -1,6 +1,17 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
+import mysql.connector as my
+import bcrypt
 
 app = Flask(__name__)
+
+def conectar():
+    conexao = my.connect(
+        host = 'localhost',
+        user = 'root',
+        password = '',
+        database = 'sistema_os'
+    )
+    return conexao
 
 @app.route("/")
 def index():
