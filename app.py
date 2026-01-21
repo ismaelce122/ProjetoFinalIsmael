@@ -15,7 +15,7 @@ def CadastrarMecanicos():
     return render_template("cadastrarmecanicos.html")
 
 @app.route("/OS")
-def OS():
+def CriarOs():
     return render_template("OS.html")
 
 @app.route("/cadastrarveiculos")
