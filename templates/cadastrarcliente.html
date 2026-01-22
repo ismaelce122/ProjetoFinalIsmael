@@ -3,7 +3,7 @@
 {% block conteudo %}
 
 <h1 class="bg-warning text-center">Cadastrar Clientes</h1>
-<form class="m-auto w-25 mt-4 border border-black p-3">
+<form class="m-auto w-25 mt-4 border border-black p-3" method="post" action="{{url_for('Login')}}">
     <div>
         <label for="nome">Nome:</label>
         <input class="w-100" type="text" id="nome" name="nome" placeholder="digite seu nome">
