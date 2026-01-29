@@ -13,7 +13,6 @@ app.secret_key = os.getenv("FLASK_SECRET_KEY")
 
 tz = pytz.timezone('America/Fortaleza')
 hora = datetime.now(tz)
-print(hora)
 
 def ConectarBanco():
     conexao = my.connect(
