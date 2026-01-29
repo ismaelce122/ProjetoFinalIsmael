@@ -95,6 +95,11 @@ def Login():
             else:
                 print('Senha Incorreta!!!')
                 return redirect(url_for('Login'))
+            
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('Login'))
 
 # Executa o servidor SOMENTE localmente
 if __name__ == "__main__":
