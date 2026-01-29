@@ -1,6 +1,8 @@
 from flask import Flask, render_template, session, redirect, url_for, request
 import mysql.connector as my
 from dotenv import load_dotenv
+from datetime import datetime
+import pytz
 import os
 import bcrypt
 
@@ -8,6 +10,9 @@ load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY")
+
+fusobrasilia = pytz.timezone('America/SaoPaulo')
+hora = datetime.now(fuso_brasilia)
 
 def ConectarBanco():
     conexao = my.connect(
@@ -50,9 +55,8 @@ def CadastrarCliente():
         try:
             conexao = ConectarBanco()
             cursor = conexao.cursor()
-            cursor.execute("SET time_zone = '-03:00'")
-            sql = 'INSERT INTO clientes (nome, telefone, email, documento, endereco, senha) VALUES (%s, %s, %s, %s, %s, %s)'
-            cursor.execute(sql, (cliente['nome'], cliente['telefone'], cliente['email'], cliente['documento'], cliente['endereco'], cliente['senhaHash']))
+            sql = 'INSERT INTO clientes (nome, telefone, email, documento, endereco, senha, criado_em) VALUES (%s, %s, %s, %s, %s, %s, %s)'
+            cursor.execute(sql, (cliente['nome'], cliente['telefone'], cliente['email'], cliente['documento'], cliente['endereco'], cliente['senhaHash'], hora))
             conexao.commit()
             conexao.close()
             cadastrou = True
