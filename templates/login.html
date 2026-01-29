@@ -1,14 +1,60 @@
 {% extends 'base.html' %}
 
+{% block head %}
+
+<link rel="stylesheet" href="/static/login.css">
+
+{% endblock %}
+
 {% block conteudo %}
 
-Login
-<form action="{{ url_for('Login') }}" method="post"></form>
-    <input type="text" name="username" id="username">
-    <input type="password" name="password" id="password">
-    <button type="submit">Login</button>
-</form>
+<div class="container">
+    <div class="left">
+        <h2 id="leftTitle">Seja Bem-Vindo a ISP Serviços!</h2>
+        <p id="leftText">Se não tem uma conta?</p>
+        <button id="leftButton" onclick="mostrarCadastro()">Cadastre-se</button>
+    </div>
+    <div class="right">
+        <form id="formLogin" class="form" action="{{url_for('Login')}}" method="post">
+            <h2>Login</h2>
+            <div class="form-group">
+                <input type="email" name="email" id="email" placeholder="Email" required />
+            </div>
+            <div class="form-group">
+                <input type="password" name="senha" id="senha" placeholder="Senha" required />
+            </div>
+            <button type="submit">Entrar</button>
+        </form>
 
-Senha
+        <form id="formCadastro" class="form" action="{{url_for('CadastrarCliente')}}" method="post" style="display: none;">
+            <h2>Crie a sua conta</h2>
+            <div class="form-group">
+                <input type="text" name="nome" id="nome" placeholder="Nome completo" required />
+            </div>
+            <div class="form-group">
+                <input type="text" name="telefone" id="telefone" placeholder="Telefone" required />
+            </div>
+            <div class="form-group">
+                <input type="email" name="email" id="email" placeholder="Email" required />
+            </div>
+            <div class="form-group">
+                <input type="text" name="documento" id="documento" placeholder="Documento" required />
+            </div>
+            <div class="form-group">
+                <input type="text" name="endereco" id="endereco" placeholder="Endereço" required />
+            </div>
+            <div class="form-group">
+                <input type="password" name="senha" id="senha" placeholder="Senha" required />
+            </div>
+            <button type="submit">Cadastrar</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script src="/static/login.js"></script>
 
 {% endblock %}

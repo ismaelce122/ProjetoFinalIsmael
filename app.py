@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, session, redirect, url_for, request
 import mysql.connector as my
 from dotenv import load_dotenv
 import os
@@ -20,11 +20,46 @@ def ConectarBanco():
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    if session:
+        return redirect(url_for('PainelServicos'))
+    else:
+        return render_template('login.html')
 
-@app.route("/cadastrarcliente")
+@app.route("/painelServicos")
+def PainelServicos():
+    if session:
+        return render_template('painelServicos.html', session = session)
+    else:
+        return render_template('login.html')
+    
+@app.route("/cadastrarcliente", methods = ['GET', 'POST'])
 def CadastrarCliente():
-    return render_template("cadastrarcliente.html")
+    if request.method == 'GET':
+        return render_template('login.html')
+    elif request.method == 'POST':
+        senha = request.form.get('senha')
+        cliente = {
+                'nome': request.form.get('nome'),
+                'telefone': request.form.get('telefone'), 
+                'email': request.form.get('email'),
+                'documento': request.form.get('documento'),
+                'endereco': request.form.get('endereco'),   
+                'senhaHash': bcrypt.hashpw(senha.encode('utf-8'), bcrypt.gensalt())
+            }
+        cadastrou = False
+        try:
+            conexao = ConectarBanco()
+            cursor = conexao.cursor()
+            sql = 'INSERT INTO clientes (nome, telefone, email, documento, endereco, senha) VALUES (%s, %s, %s, %s, %s, %s)'
+            cursor.execute(sql, (cliente['nome'], cliente['telefone'], cliente['email'], cliente['documento'], cliente['endereco'], cliente['senhaHash']))
+            conexao.commit()
+            conexao.close()
+            cadastrou = True
+            return redirect(url_for('PainelServicos', cadastrou = cadastrou))
+        except Exception as e:
+            erro = True
+            print(f'Houve um erro: {e}')
+            return render_template('login.html') 
 
 @app.route("/cadastrarmecanicos")
 def CadastrarMecanicos():
@@ -38,9 +73,28 @@ def CriarOs():
 def CadastrarVeiculos():
     return render_template("cadastrarveiculos.html")
 
-@app.route("/login")
+@app.route("/login", methods = ['GET', 'POST'])
 def Login():
-    return render_template("login.html")
+    if request.method == 'GET':
+        return render_template('login.html')
+    elif request.method == 'POST':
+        email = request.form.get('email')
+        senha = request.form.get('senha')
+        conexao = ConectarBanco()
+        cursor = conexao.cursor(dictionary=True)
+        sql = 'SELECT * FROM clientes WHERE email= %s'
+        cursor.execute(sql, (email, ))
+        usuario = cursor.fetchone()
+        if usuario:
+            senhaHash = usuario['senha']
+            print(f'Usuário Logado: {usuario['nome']}')
+            if bcrypt.checkpw(senha.encode('utf-8'), senhaHash.encode('utf-8')):
+                session['usuario_nome'] = usuario['nome']
+                session['usuario_id'] = usuario['id']
+                return redirect(url_for('PainelServicos'))
+            else:
+                print('Senha Incorreta!!!')
+                return redirect(url_for('Login'))
 
 # Executa o servidor SOMENTE localmente
 if __name__ == "__main__":
