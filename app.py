@@ -11,8 +11,9 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY")
 
-tz = pytz.timezone('America/Sao_Paulo')
+tz = pytz.timezone('America/Fortaleza')
 hora = datetime.now(tz)
+print(hora)
 
 def ConectarBanco():
     conexao = my.connect(
