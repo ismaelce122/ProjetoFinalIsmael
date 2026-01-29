@@ -4,21 +4,21 @@
 
 <div class="container-fluid titulo">
     <h1 class="text-center">ISP Serviços</h1>
-    <h3 class="text-center">Olá, seja bem-vindo {{session.usuario_nome}}</h3>
+    <h3 class="text-center">Olá, seja bem-vindo(a) {{session.usuario_nome}}</h3>
 </div>
 <div class="container card1 mt-4">
     <h2 class="text-center">Menu</h2>
     <div class="p-4 box d-lg-flex justify-content-lg-center gap-lg-2">
-        <a href="{{url_for('CadastrarCliente')}}" class="botao d-flex justify-content-center align-items-center"><i class="fas fa-user-plus"></i>Cadastrar Cliente</a>
-        <a href="{{url_for('CadastrarVeiculos')}}" class="botao d-flex justify-content-center align-items-center"><i class="fas fa-car"></i>Cadastrar Veículos</a>
-        <a href="{{url_for('CadastrarMecanicos')}}" class="botao d-flex justify-content-center align-items-center"><i class="fas fa-wrench"></i>Cadastrar Mecânicos</a>
-        <a href="{{url_for('CriarOs')}}" class="botao d-flex justify-content-center align-items-center"><i class="fas fa-file-alt"></i>Criar OS</a>
-        <a href="{{url_for('CadastrarVeiculos')}}" class="botao d-flex justify-content-center align-items-center"><i class="fas fa-folder-open"></i>Gerenciar OS</a>
-        <a href="{{url_for('CadastrarVeiculos')}}" class="botao d-flex justify-content-center align-items-center"><i class="fas fa-box"></i>Estoque</a>
-        <a href="{{url_for('logout')}}" class="botao d-flex justify-content-center align-items-center"><i class="fas fa-sign-out-alt"></i>Sair</a>
+        <a href="{{url_for('CadastrarCliente')}}" class="botao mb-2 mb-lg-0 d-flex justify-content-center align-items-center"><i class="fas fa-user-plus"></i>Clientes</a>
+        <a href="{{url_for('CadastrarVeiculos')}}" class="botao mb-2 mb-lg-0 d-flex justify-content-center align-items-center"><i class="fas fa-car"></i>Veículos</a>
+        <a href="{{url_for('CadastrarMecanicos')}}" class="botao mb-2 mb-lg-0 d-flex justify-content-center align-items-center"><i class="fas fa-wrench"></i>Mecânicos</a>
+        <a href="{{url_for('CriarOs')}}" class="botao mb-2 mb-lg-0 d-flex justify-content-center align-items-center"><i class="fas fa-file-alt"></i>Criar OS</a>
+        <a href="{{url_for('CadastrarVeiculos')}}" class="botao mb-2 mb-lg-0 d-flex justify-content-center align-items-center"><i class="fas fa-folder-open"></i>Gerenciar OS</a>
+        <a href="{{url_for('CadastrarVeiculos')}}" class="botao mb-2 mb-lg-0 d-flex justify-content-center align-items-center"><i class="fas fa-box"></i>Estoque</a>
+        <a href="{{url_for('logout')}}" class="botao mb-2 mb-lg-0 d-flex justify-content-center align-items-center"><i class="fas fa-sign-out-alt"></i>Sair</a>
     </div>
 </div>
-<div class="container card1 mt-4">
+<div class="container card1">
     <h2 class="text-center">Relatórios</h2>
     <div class="p-4 box">
         Ordens de Serviço

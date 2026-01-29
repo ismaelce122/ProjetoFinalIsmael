@@ -1,5 +1,5 @@
 from flask import Flask, render_template, session, redirect, url_for, request
-import mysql.connector as my
+import pymysql as my
 from dotenv import load_dotenv
 from datetime import datetime
 import pytz
@@ -11,15 +11,16 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY")
 
-fusobrasilia = pytz.timezone('America/SaoPaulo')
-hora = datetime.now(fuso_brasilia)
+tz = pytz.timezone('America/Sao_Paulo')
+hora = datetime.now(tz)
 
 def ConectarBanco():
     conexao = my.connect(
         host = os.getenv("DB_HOST"),
         user = os.getenv("DB_USER"),
         password = os.getenv("DB_PASSWORD"),
-        database = os.getenv("DB_NAME")
+        database = os.getenv("DB_NAME"),
+        cursorclass = my.cursors.DictCursor 
     )
     return conexao
 
@@ -86,7 +87,7 @@ def Login():
         email = request.form.get('email')
         senha = request.form.get('senha')
         conexao = ConectarBanco()
-        cursor = conexao.cursor(dictionary=True)
+        cursor = conexao.cursor()
         sql = 'SELECT * FROM clientes WHERE email= %s'
         cursor.execute(sql, (email, ))
         usuario = cursor.fetchone()
@@ -106,6 +107,5 @@ def logout():
     session.clear()
     return redirect(url_for('Login'))
 
-# Executa o servidor SOMENTE localmente
 if __name__ == "__main__":
     app.run(debug=True)

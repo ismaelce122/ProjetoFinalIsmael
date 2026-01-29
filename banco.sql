@@ -47,7 +47,7 @@ DROP TABLE clientes;
 
 SELECT * FROM clientes;
 
-INSERT INTO clientes(nome, telefone, email, documento, endereco) VALUES ('Joana', '(85)94754-2233', 'joana@gmail.com', '800.833.333-44', 'rua 77 - Maraponga');
+INSERT INTO clientes(nome, telefone, email, documento, endereco, senha) VALUES ('Joana', '(85)94754-2233', 'joana@gmail.com', '800.833.333-44', 'rua 77 - Maraponga', '12345');
 
 
 DB_HOST= localhost
