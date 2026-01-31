@@ -1,5 +1,11 @@
 const botoes = document.querySelectorAll('.botao-menu')
 
+window.addEventListener("pageshow", function(event) {
+            if (event.persisted) {
+                window.location.reload();
+            }
+        })
+
 botoes.forEach((botao) => {
     botao.addEventListener('touchstart', () => {
         botao.style.backgroundColor = '#0056b3'
