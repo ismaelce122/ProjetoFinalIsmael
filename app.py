@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, redirect, url_for, request
+from flask import Flask, render_template, session, redirect, url_for, request, make_response
 from datetime import datetime
 from config import banco as db
 import pymysql
@@ -14,17 +14,17 @@ hora = datetime.now(tz)
 
 @app.route("/")
 def index():
-    if session:
-        return redirect(url_for('PainelServicos'))
+    if 'usuario' not in session:
+        return redirect(url_for('Login'))
     else:
-        return render_template('login.html')
+        return redirect(url_for('PainelServicos'))
 
 @app.route("/painelServicos")
 def PainelServicos():
-    if session:
-        return render_template('painelServicos.html', session = session)
+    if 'usuario' not in session:
+        return redirect(url_for('Login')):
     else:
-        return render_template('login.html')
+        return render_template('painelServicos.html', session = session)
     
 @app.route("/cadastrarcliente", methods = ['GET', 'POST'])
 def CadastrarCliente():
@@ -121,6 +121,13 @@ def Login():
 def logout():
     session.clear()
     return render_template('login.html')
+    
+@app.after_request
+def add_header(response):
+    response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+    return response
 
 if __name__ == "__main__":
     app.run(debug=True)
