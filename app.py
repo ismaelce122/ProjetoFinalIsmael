@@ -14,15 +14,15 @@ hora = datetime.now(tz)
 
 @app.route("/")
 def index():
-    if 'usuario' not in session:
-        return redirect(url_for('Login'))
-    return redirect(url_for('PainelServicos'))
-
+    if session:
+        return redirect(url_for('PainelServicos'))
+    return redirect(url_for('Login'))
+    
 @app.route("/painelServicos")
 def PainelServicos():
-    if 'usuario' not in session:
-        return redirect(url_for('Login'))
-    return render_template('painelServicos.html', session = session)
+    if session:
+        return render_template('painelServicos.html', session = session)
+    return redirect(url_for('Login'))
     
 @app.route("/cadastrarcliente", methods = ['GET', 'POST'])
 def CadastrarCliente():
