@@ -14,8 +14,6 @@ hora = datetime.now(tz)
 
 @app.route("/")
 def index():
-    if session:
-        return redirect(url_for('PainelServicos'))
     return redirect(url_for('Login'))
     
 @app.route("/painelServicos")
