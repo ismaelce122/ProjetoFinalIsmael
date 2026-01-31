@@ -8,8 +8,9 @@
     <link rel="shortcut icon" href="{{url_for('static',
     filename='image/icone.png')}}" type="image/png">
     <link rel="stylesheet" href="{{url_for('static',
-    filename='css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="/static/style.css">
+    filename='css_bootstrap/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',
+    filename='css/base.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     {% block head %}{% endblock %}
 </head>
@@ -19,7 +20,8 @@
 
     {% endblock %}
 
-    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="{{url_for('static',
+    filename='js_bootstrap/bootstrap.bundle.min.js')}}"></script>
     {% block scripts %}{% endblock %}
 </body>
 
