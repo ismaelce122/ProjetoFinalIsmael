@@ -22,7 +22,7 @@ def index():
 @app.route("/painelServicos")
 def PainelServicos():
     if 'usuario' not in session:
-        return redirect(url_for('Login')):
+        return redirect(url_for('Login'))
     else:
         return render_template('painelServicos.html', session = session)
     
