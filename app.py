@@ -2,15 +2,16 @@ from flask import Flask, render_template, session, redirect, url_for, request, m
 from datetime import datetime
 from config import banco as db
 import pymysql
-import pytz
+#import pytz
 import bcrypt
 import os
 
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY")
 
-tz = pytz.timezone('America/Sao_Paulo')
-hora = datetime.now(tz)
+# tz = pytz.timezone('America/Sao_Paulo')
+hora = datetime.now()
+print(hora)
 
 @app.route("/")
 def index():
