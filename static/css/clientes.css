@@ -1,0 +1,90 @@
+table {
+    margin-top: 20px;
+    border: 1px solid black;
+    box-shadow: 2px 2px 8px 3px black;
+    margin-bottom: 30px;
+    overflow-x: scroll;
+}
+thead {
+    text-align: center;
+    background-color: #007bff;
+    border: 1px solid black;
+}
+
+th, tr, td {
+    padding: 5px;
+    border: 1px solid black;
+}
+
+.box_clientes {
+    margin: auto;
+    width: 95%;
+}
+
+.titulo_clientes {
+    background-color: #007bff;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.editar {
+    text-decoration: none;
+    font-size: 20px;
+    width: 30px;
+    font-weight: 400;
+    display: block;
+    text-align: center;
+    color: black;
+    background-color: rgb(245, 245, 52);
+    border-radius: 5px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.editar:hover {
+    background-color: rgb(214, 214, 21);
+}
+
+.excluir {
+    text-decoration: none;
+    font-size: 20px;
+    width: 30px;
+    font-weight: 400;
+    display: block;
+    text-align: center;
+    color: black;
+    background-color: rgb(199, 2, 2);
+    border-radius: 5px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.excluir:hover {
+    background-color: darkred;
+}
+
+.botao_clientes {
+    background-color: #007bff;
+    color: #ffffff;
+    width: 180px;
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 20px 30px;
+    font-size: 15px;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.botao_clientes:hover {
+    background-color: #0056b3;
+    transform: scale(0.9);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+} 
+
+.botao_clientes i {
+    font-size: 20px;
+}

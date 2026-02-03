@@ -15,24 +15,29 @@ criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 
 CREATE TABLE veiculos (
 id INT PRIMARY KEY AUTO_INCREMENT,
-id_clientes INT,
+id_cliente INT,
+FOREIGN KEY(id_cliente) REFERENCES clientes(id),
 modelo VARCHAR(50) NOT NULL,
 marca VARCHAR(50) NOT NULL,
 ano VARCHAR(50) NOT NULL,
 placa VARCHAR(50) NOT NULL,
-observacoes VARCHAR(150)
+observacoes VARCHAR(150),
+criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE mecanicos (
 id INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(100) NOT NULL,
-especialidades VARCHAR(100) NOT NULL
+especialidades VARCHAR(100) NOT NULL,
+criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE os (
 id INT PRIMARY KEY AUTO_INCREMENT,
-id_clientes INT,
-id_veiculos INT,
+id_cliente INT,
+id_mecanico INT,
+FOREIGN KEY(id_cliente) REFERENCES clientes(id),
+FOREIGN KEY(id_mecanico) REFERENCES mecanicos(id), 
 data_os DATE DEFAULT(CURRENT_DATE()),
 status_os VARCHAR(100) NOT NULL,
 problema VARCHAR(150) NOT NULL,
@@ -40,12 +45,13 @@ diagnostico VARCHAR(150) NOT NULL,
 mecanico VARCHAR(100) NOT NULL,
 itens_os VARCHAR(100) NOT NULL,
 valor_total VARCHAR(100) NOT NULL,
-observacoes VARCHAR(150)
+observacoes VARCHAR(150),
+criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-DROP TABLE clientes;
-
 SELECT * FROM clientes;
+
+SELECT * FROM veiculos;
 
 INSERT INTO clientes(nome, telefone, email, documento, endereco, senha) VALUES ('Joana', '(85)94754-2233', 'joana@gmail.com', '800.833.333-44', 'rua 77 - Maraponga', '12345');
 

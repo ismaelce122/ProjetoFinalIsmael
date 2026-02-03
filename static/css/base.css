@@ -3,11 +3,13 @@
     border-radius: 5px;
     width: 95%;
     margin-bottom: 30px;
+    padding-top: 20px;
 }
 
 .titulo {
-    height: 120px;
+    height: 110px;
     background-color: #007bff;
+    padding-top: 10px;
 }
 
 .box {
@@ -43,4 +45,5 @@ a {
     display: block;
     text-decoration: none;
     color: white;
+    margin-top: 20px;
 }

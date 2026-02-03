@@ -1,10 +1,10 @@
 const botoes = document.querySelectorAll('.botao-menu')
 
-window.addEventListener("pageshow", function(event) {
-            if (event.persisted) {
+window.addEventListener("pageshow", (e) => {
+     if (e.persisted) {
                 window.location.reload();
             }
-        })
+})
 
 botoes.forEach((botao) => {
     botao.addEventListener('touchstart', () => {

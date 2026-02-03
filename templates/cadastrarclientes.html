@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<h1 class="text-center mt-4">Cadastrar Cliente</h1>
+<div class="container mt-2">
+    <form class="form-control p-3" action="{{url_for('CadastrarClientes')}}" method="post">
+        <div>
+            <label class="form-label" for="nome">Nome:</label>
+            <input class="form-control" type="text" id="nome" name="nome">
+        </div>
+        <div>
+            <label class="form-label" for="telefone">Telefone:</label>
+            <input class="form-control" type="text" id="telefone" name="telefone">
+        </div>
+        <div>
+            <label class="form-label" for="email">E-mail:</label>
+            <input class="form-control" type="email" id="email" name="email">
+        </div>
+        <div>
+            <label class="form-label" for="documento">Documento:</label>
+            <input class="form-control" type="text" id="documento" name="documento">
+        </div>
+        <div>
+            <label class="form-label" for="enderco">Endereço:</label>
+            <input class="form-control" type="text" id="endereco" name="endereco">
+        </div>
+        <div>
+            <label class="form-label" for="senha">Senha:</label>
+            <input class="form-control" type="password" id="senha" name="senha">
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Cadastrar</button>
+    </form>
+</div>
+
+{% endblock %}

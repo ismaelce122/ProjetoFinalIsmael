@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+<link rel="stylesheet" href="{{url_for('static',
+    filename='css/clientes.css')}}">
+
+{% endblock %}
+
+{% block conteudo %}
+
+<h1 class="titulo_clientes text-center">Clientes</h1>
+
+<div class="box_clientes">
+    <a href="{{url_for('CadastrarClientes')}}"
+        class="botao-menu botao_clientes mt-4"><i
+            class="fas fa-user-plus"></i>Cadastrar Cliente</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Telefone</th>
+                <th>E-mail</th>
+                <th>Cpf</th>
+                <th>Endereço</th>
+                <th>Data do Cadastro</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cliente in listaClientes %}
+            <tr>
+                <td>{{cliente.nome}}</td>
+                <td>{{cliente.telefone}}</td>
+                <td>{{cliente.email}}</th>
+                <td>{{cliente.documento}}</td>
+                <td>{{cliente.endereco}}</td>
+                <td>{{cliente.criado_em}}</td>
+                <td>
+                    <div class="d-flex">
+                        <a href="#" class="editar"><i class="fa fa-edit"></i></a>
+                        <a href="#" class="excluir"><i class="fa fa-trash"></i></a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script src="{{url_for('static',
+    filename='js/painelServicos.js')}}"></script>
+
+{% endblock %}
