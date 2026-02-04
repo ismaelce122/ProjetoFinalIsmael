@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+<link rel="stylesheet" href="{{url_for('static',
+    filename='css/estoque.css')}}">
+
+{% endblock %}
+
+{% block conteudo %}
+
+<h1 class="titulo_estoque text-center">Estoque</h1>
+
+<div class="box_clientes container">
+    <a href="{{url_for('CadastrarCategoria')}}"
+        class="botao-menu botao_estoque mt-4"><i
+        class="fas fa-car-battery"></i>Criar Categoria</a>
+    <a href="{{url_for('CadastrarSubcategoria')}}"
+        class="botao-menu botao_estoque mt-4"><i
+        class="fas fa-stop"></i>Criar Subcategoria</a>
+    <a href="{{url_for('CadastrarPeca')}}"
+        class="botao-menu botao_estoque mt-4"><i
+        class="fas fa-cog fa-spin"></i>Cadastrar Peça</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Quantidade</th>
+                <th>Preço</th>
+                <th>Localização</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for peca in resultado %}
+            <tr>
+                <td>{{peca.nome}}</td>
+                <td>{{peca.quantidade}}</td>
+                <td>R$ {{peca.preco}}</th>
+                <td>{{peca.localizacao}}</td>
+                <td>
+                    <div class="d-flex">
+                        <a href="{{url_for('EditarPeca', id = peca.id, id_subcategoria = peca.id_subcategoria)}}" class="editar"><i class="fa fa-edit"></i></a>
+                        <a href="{{url_for('DeletarPeca', id = peca.id)}}" class="excluir"><i class="fa fa-trash"></i></a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script src="{{url_for('static',
+    filename='js/painelServicos.js')}}"></script>
+
+{% endblock %}

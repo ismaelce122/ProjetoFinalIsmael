@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<h1 class="text-center mt-4">Editar Cliente</h1>
+<div class="container mt-2">
+    <form class="form-control p-3" action="{{url_for('EditarVeiculo', id = resultado.id)}}" method="post">
+        <div>
+            <label class="form-label" for="marca">Marca:</label>
+            <input class="form-control" type="text" id="marca" name="marca" value="{{resultado.marca}}">
+        </div>
+        <div>
+            <label class="form-label" for="modelo">Modelo:</label>
+            <input class="form-control" type="text" id="modelo" name="modelo" value="{{resultado.modelo}}">
+        </div>
+        <div>
+            <label class="form-label" for="ano">Ano:</label>
+            <input class="form-control" type="text" id="ano" name="ano" value="{{resultado.ano}}">
+        </div>
+        <div>
+            <label class="form-label" for="placa">Placa:</label>
+            <input class="form-control" type="text" id="placa" name="placa" value="{{resultado.placa}}">
+        </div>
+        <div>
+            <label class="form-label" for="observacoes">Observações:</label>
+            <input class="form-control" type="text" id="observacoes" name="observacoes" value="{{resultado.observacoes}}">
+        </div>
+        <button type="submit" class="btn btn-warning mt-3">Atualizar</button>
+    </form>
+</div>
+
+{% endblock %}

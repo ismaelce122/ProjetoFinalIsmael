@@ -11,7 +11,7 @@
 
 <h1 class="titulo_clientes text-center">Clientes</h1>
 
-<div class="box_clientes">
+<div class="box_clientes d-flex flex-column">
     <a href="{{url_for('CadastrarClientes')}}"
         class="botao-menu botao_clientes mt-4"><i
             class="fas fa-user-plus"></i>Cadastrar Cliente</a>
@@ -38,8 +38,8 @@
                 <td>{{cliente.criado_em}}</td>
                 <td>
                     <div class="d-flex">
-                        <a href="#" class="editar"><i class="fa fa-edit"></i></a>
-                        <a href="#" class="excluir"><i class="fa fa-trash"></i></a>
+                        <a href="{{url_for('EditarCliente', id = cliente.id)}}" class="editar"><i class="fa fa-edit"></i></a>
+                        <a href="{{url_for('DeletarCliente', id = cliente.id)}}" class="excluir"><i class="fa fa-trash"></i></a>
                     </div>
                 </td>
             </tr>

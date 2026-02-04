@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<h1 class="text-center mt-4">Cadastrar Peça</h1>
+<div class="container mt-2">
+    <form class="form-control p-3" action="{{url_for('EditarPeca', id = pecas.id, id_subcategoria = idSubcategoria.id)}}" method="post">
+        <div>
+            <label class="form-label" for="nome">Nome:</label>
+            <input class="form-control" type="text" id="nome" name="nome" value="{{pecas.nome}}">
+        </div>
+        <div>
+            <label class="form-label" for="quantidade">Quantidade:</label>
+            <input class="form-control" type="number" id="quantidade" name="quantidade" value="{{pecas.quantidade}}">
+        </div>
+        <div>
+            <label class="form-label" for="preco">Preço:</label>
+            <input class="form-control" type="number" id="preco" name="preco" value="{{pecas.preco}}">
+        </div>
+        <div>
+            <label class="form-label" for="localizacao">Localização:</label>
+            <input class="form-control" type="text" id="localizacao" name="localizacao" value="{{pecas.localizacao}}">
+        </div>
+         <div class="mt-3">
+            <label class="form-label" for="id_subcategoria">Sub-Categoria:</label>
+            <select name="id_subcategoria" id="id_subcategoria">
+                <option value="{{idSubcategoria.id}}">{{idSubcategoria.nome}}</option>
+                {% for sub in subcategoria %}
+                    <option value="{{sub.id}}">{{sub.nome}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-warning mt-3">Atualizar</button>
+    </form>
+</div>
+
+{% endblock %}

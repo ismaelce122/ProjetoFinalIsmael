@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<h1 class="text-center mt-4">Cadastrar Subcategoria de Peças</h1>
+<div class="container mt-2">
+    <form class="form-control p-3" action="{{url_for('CadastrarSubcategoria')}}" method="post">
+        <div>
+            <label class="form-label" for="nome">Nome:</label>
+            <input class="form-control" type="text" id="nome" name="nome">
+        </div>
+        <div class="mt-3">
+            <label class="form-label" for="id_categoria">Categoria:</label>
+            <select name="id_categoria" id="id_categoria">
+                <option value="">-- selecione uma categoria --</option>
+                {% for categoria in resultado %}
+                    <option value="{{categoria.id}}">{{categoria.nome}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Cadastrar</button>
+    </form>
+</div>
+
+{% endblock %}

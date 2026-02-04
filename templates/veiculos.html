@@ -11,7 +11,7 @@
 
 <h1 class="titulo_veiculos text-center">Veículos</h1>
 
-<div class="box_veiculos">
+<div class="box_veiculos d-flex flex-column">
     <a href="{{url_for('CadastrarVeiculos')}}"
         class="botao-menu botao_veiculos mt-4"><i
             class="fas fa-car-side"></i>Cadastrar Veículo</a>
@@ -38,8 +38,8 @@
                 <td>{{veiculo.observacoes}}</td>
                 <td>
                     <div class="d-flex">
-                        <a href="#" class="editar"><i class="fa fa-edit"></i></a>
-                        <a href="#" class="excluir"><i class="fa fa-trash"></i></a>
+                        <a href="{{url_for('EditarVeiculo', id = veiculo.id)}}" class="editar"><i class="fa fa-edit"></i></a>
+                        <a href="{{url_for('DeletarVeiculo', id = veiculo.id)}}" class="excluir"><i class="fa fa-trash"></i></a>
                     </div>
                 </td>
             </tr>

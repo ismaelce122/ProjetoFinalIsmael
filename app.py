@@ -14,7 +14,7 @@ def index():
         return redirect(url_for('PainelServicos'))
     return redirect(url_for('Login'))
     
-@app.route("/painelServicos")
+@app.route("/painel")
 def PainelServicos():
     if session:
         return render_template('painelServicos.html', session = session)
@@ -55,7 +55,7 @@ def CadastrarUsuario():
             conexao.close()
             cursor.close()
         
-@app.route('/buscar_clientes')
+@app.route('/clientes')
 def BuscarClientes():
     tz = pytz.timezone('America/Fortaleza')
     listaClientes = []
@@ -134,7 +134,7 @@ def Login():
             conexao.close()
             cursor.close()
 
-@app.route("/cadastrar_clientes", methods = ['GET', 'POST'])
+@app.route("/clientes/cadastrar", methods = ['GET', 'POST'])
 def CadastrarClientes():
     if request.method == 'GET':
         return render_template("cadastrarclientes.html")
@@ -168,13 +168,111 @@ def CadastrarClientes():
         finally:
             conexao.close()
             cursor.close()
+
+@app.route("/clientes/editar/<int:id>", methods = ['GET', 'POST'])
+def EditarCliente(id):
+    if request.method == 'GET':
+        try:
+            conexao = db.ConectarBanco()
+            cursor = conexao.cursor()
+            sql = 'SELECT * FROM clientes WHERE id = %s'
+            cursor.execute(sql, (id, ))
+            resultado = cursor.fetchone()
+            return render_template('editar_clientes.html', resultado = resultado)
+        except pymysql.MySQLError as e:
+            print('-----------------------------------------------')
+            print(f'Erro no banco de dados: {e.args[0]}')
+            print(f'Mensagem do Erro: {e.args[1]}')
+            print('-----------------------------------------------')
+            return f'<h2>Erro no banco de dados: {e}</h2>'    
+        except Exception as e:
+            erro = True
+            print(f'Houve um erro: {e}')
+            return f'<h2>Houve um erro: {e}</h2>'
+        finally:
+            conexao.close()
+            cursor.close()
+    elif request.method == 'POST':
+        cliente = {
+                'nome': request.form.get('nome'),
+                'telefone': request.form.get('telefone'), 
+                'email': request.form.get('email'),
+                'documento': request.form.get('documento'),
+                'endereco': request.form.get('endereco')
+            }
+        try:
+            conexao = db.ConectarBanco()
+            cursor = conexao.cursor()
+            sql = 'UPDATE clientes SET nome = %s, telefone = %s, email = %s, documento=%s, endereco=%s WHERE id = %s'
+            cursor.execute(sql, (cliente['nome'], cliente['telefone'], cliente['email'], cliente['documento'], cliente['endereco'], id))
+            conexao.commit()
+            return redirect(url_for('BuscarClientes'))
+        except pymysql.MySQLError as e:
+            print('-----------------------------------------------')
+            print(f'Erro no banco de dados: {e.args[0]}')
+            print(f'Mensagem do Erro: {e.args[1]}')
+            print('-----------------------------------------------')
+            return f'<h2>Erro no banco de dados: {e}</h2>'
+        except Exception as e:
+            erro = True
+            print(f'Houve um erro: {e}')
+            return f'<h2>Houve um erro: {e}</h2>'
+        finally:
+            conexao.close()
+            cursor.close()
+
+@app.route("/clientes/deletar/<int:id>")
+def DeletarCliente(id):
+    try:
+        conexao = db.ConectarBanco()
+        cursor = conexao.cursor()
+        sql = 'DELETE FROM clientes WHERE id = %s'
+        cursor.execute(sql, (id, ))
+        conexao.commit()
+        return redirect(url_for('BuscarClientes'))
+    except pymysql.MySQLError as e:
+        print('-----------------------------------------------')
+        print(f'Erro no banco de dados: {e.args[0]}')
+        print(f'Mensagem do Erro: {e.args[1]}')
+        print('-----------------------------------------------')
+        return f'<h2>Erro no banco de dados: {e}</h2>'    
+    except Exception as e:
+        erro = True
+        print(f'Houve um erro: {e}')
+        return f'<h2>Houve um erro: {e}</h2>'
+    finally:
+        conexao.close()
+        cursor.close()
     
 @app.route('/logout')
 def logout():
     session.clear()
     return render_template('login.html')
 
-@app.route("/cadastrarveiculos", methods = ['GET', 'POST'])
+@app.route("/veiculos")
+def BuscarVeiculos():
+    try:
+        conexao = db.ConectarBanco()
+        cursor = conexao.cursor()
+        sql = 'SELECT * FROM veiculos JOIN clientes ON veiculos.id_cliente = clientes.id ORDER BY nome'
+        cursor.execute(sql)
+        resultado = cursor.fetchall()
+        return render_template('veiculos.html', resultado = resultado)
+    except pymysql.MySQLError as e:
+        print('-----------------------------------------------')
+        print(f'Erro no banco de dados: {e.args[0]}')
+        print(f'Mensagem do Erro: {e.args[1]}')
+        print('-----------------------------------------------')
+        return f'<h2>Erro no banco de dados: {e}</h2>'    
+    except Exception as e:
+        erro = True
+        print(f'Houve um erro: {e}')
+        return f'<h2>Houve um erro: {e}</h2>'
+    finally:
+        conexao.close()
+        cursor.close()
+
+@app.route("/veiculos/cadastrar", methods = ['GET', 'POST'])
 def CadastrarVeiculos():
     if request.method == 'GET':
         try:
@@ -227,15 +325,67 @@ def CadastrarVeiculos():
             conexao.close()
             cursor.close()
 
-@app.route("/buscar_veiculos")
-def BuscarVeiculos():
+@app.route("/veiculos/editar/<int:id>", methods = ['GET', 'POST'])
+def EditarVeiculo(id):
+    if request.method == 'GET':
+        try:
+            conexao = db.ConectarBanco()
+            cursor = conexao.cursor()
+            sql = 'SELECT * FROM veiculos WHERE id = %s'
+            cursor.execute(sql, (id, ))
+            resultado = cursor.fetchone()
+            return render_template('editar_veiculos.html', resultado = resultado)
+        except pymysql.MySQLError as e:
+            print('-----------------------------------------------')
+            print(f'Erro no banco de dados: {e.args[0]}')
+            print(f'Mensagem do Erro: {e.args[1]}')
+            print('-----------------------------------------------')
+            return f'<h2>Erro no banco de dados: {e}</h2>'    
+        except Exception as e:
+            erro = True
+            print(f'Houve um erro: {e}')
+            return f'<h2>Houve um erro: {e}</h2>'
+        finally:
+            conexao.close()
+            cursor.close()
+    elif request.method == 'POST':
+        veiculo = {
+                'marca': request.form.get('marca'),
+                'modelo': request.form.get('modelo'), 
+                'ano': request.form.get('ano'),
+                'placa': request.form.get('placa'),
+                'observacoes': request.form.get('observacoes')
+            }
+        try:
+            conexao = db.ConectarBanco()
+            cursor = conexao.cursor()
+            sql = 'UPDATE veiculos SET marca = %s, modelo = %s, ano = %s, placa=%s, observacoes=%s WHERE id = %s'
+            cursor.execute(sql, (veiculo['marca'], veiculo['modelo'], veiculo['ano'], veiculo['placa'], veiculo['observacoes'], id))
+            conexao.commit()
+            return redirect(url_for('BuscarVeiculos'))
+        except pymysql.MySQLError as e:
+            print('-----------------------------------------------')
+            print(f'Erro no banco de dados: {e.args[0]}')
+            print(f'Mensagem do Erro: {e.args[1]}')
+            print('-----------------------------------------------')
+            return f'<h2>Erro no banco de dados: {e}</h2>'
+        except Exception as e:
+            erro = True
+            print(f'Houve um erro: {e}')
+            return f'<h2>Houve um erro: {e}</h2>'
+        finally:
+            conexao.close()
+            cursor.close()
+
+@app.route("/veiculos/deletar/<int:id>")
+def DeletarVeiculo(id):
     try:
         conexao = db.ConectarBanco()
         cursor = conexao.cursor()
-        sql = 'SELECT * FROM veiculos JOIN clientes ON veiculos.id_cliente = clientes.id ORDER BY nome'
-        cursor.execute(sql)
-        resultado = cursor.fetchall()
-        return render_template('veiculos.html', resultado = resultado)
+        sql = 'DELETE FROM veiculos WHERE id = %s'
+        cursor.execute(sql, (id, ))
+        conexao.commit()
+        return redirect(url_for('BuscarVeiculos'))
     except pymysql.MySQLError as e:
         print('-----------------------------------------------')
         print(f'Erro no banco de dados: {e.args[0]}')
@@ -250,17 +400,373 @@ def BuscarVeiculos():
         conexao.close()
         cursor.close()
 
-@app.route("/cadastrarmecanicos")
-def CadastrarMecanicos():
-    return render_template("cadastrarmecanicos.html")
-
-@app.route("/buscar_mecanicos")
+@app.route("/mecanicos")
 def BuscarMecanicos():
-    return render_template("mecanicos.html")
+    try:
+        conexao = db.ConectarBanco()
+        cursor = conexao.cursor()
+        sql = 'SELECT * FROM mecanicos ORDER BY nome ASC'
+        cursor.execute(sql)
+        resultado = cursor.fetchall()
+        return render_template('mecanicos.html', resultado = resultado)
+    except pymysql.MySQLError as e:
+        print('-----------------------------------------------')
+        print(f'Erro no banco de dados: {e.args[0]}')
+        print(f'Mensagem do Erro: {e.args[1]}')
+        print('-----------------------------------------------')
+        return f'<h2>Erro no banco de dados: {e}</h2>'    
+    except Exception as e:
+        erro = True
+        print(f'Houve um erro: {e}')
+        return f'<h2>Houve um erro: {e}</h2>'
+    finally:
+        conexao.close()
+        cursor.close()
 
-@app.route("/OS")
+@app.route("/mecanicos/cadastrar", methods = ['GET', 'POST'])
+def CadastrarMecanicos():
+    if request.method == 'GET':
+        return render_template("cadastrarmecanicos.html")
+    elif request.method == 'POST':
+        mecanico = {
+                'nome': request.form.get('nome'),
+                'especialidade': request.form.get('especialidade')
+            }
+        try:
+            conexao = db.ConectarBanco()
+            cursor = conexao.cursor()
+            sql = 'INSERT INTO mecanicos (nome, especialidade) VALUES (%s, %s)'
+            cursor.execute(sql, (mecanico['nome'], mecanico['especialidade']))
+            conexao.commit()
+            return redirect(url_for('BuscarMecanicos'))
+        except pymysql.MySQLError as e:
+            print('-----------------------------------------------')
+            print(f'Erro no banco de dados: {e.args[0]}')
+            print(f'Mensagem do Erro: {e.args[1]}')
+            print('-----------------------------------------------')
+            return f'<h2>Erro no banco de dados: {e}</h2>'
+        except Exception as e:
+            erro = True
+            print(f'Houve um erro: {e}')
+            return f'<h2>Houve um erro: {e}</h2>'
+        finally:
+            conexao.close()
+            cursor.close()
+
+@app.route("/mecanicos/editar/<int:id>", methods = ['GET', 'POST'])
+def EditarMecanico(id):
+    if request.method == 'GET':
+        try:
+            conexao = db.ConectarBanco()
+            cursor = conexao.cursor()
+            sql = 'SELECT * FROM mecanicos WHERE id = %s'
+            cursor.execute(sql, (id, ))
+            resultado = cursor.fetchone()
+            return render_template('editar_mecanicos.html', resultado = resultado)
+        except pymysql.MySQLError as e:
+            print('-----------------------------------------------')
+            print(f'Erro no banco de dados: {e.args[0]}')
+            print(f'Mensagem do Erro: {e.args[1]}')
+            print('-----------------------------------------------')
+            return f'<h2>Erro no banco de dados: {e}</h2>'    
+        except Exception as e:
+            erro = True
+            print(f'Houve um erro: {e}')
+            return f'<h2>Houve um erro: {e}</h2>'
+        finally:
+            conexao.close()
+            cursor.close()
+    elif request.method == 'POST':
+        mecanico = {
+                'nome': request.form.get('nome'),
+                'especialidade': request.form.get('especialidade')
+            }
+        try:
+            conexao = db.ConectarBanco()
+            cursor = conexao.cursor()
+            sql = 'UPDATE mecanicos SET nome = %s, especialidade = %s WHERE id = %s'
+            cursor.execute(sql, (mecanico['nome'], mecanico['especialidade'], id))
+            conexao.commit()
+            return redirect(url_for('BuscarMecanicos'))
+        except pymysql.MySQLError as e:
+            print('-----------------------------------------------')
+            print(f'Erro no banco de dados: {e.args[0]}')
+            print(f'Mensagem do Erro: {e.args[1]}')
+            print('-----------------------------------------------')
+            return f'<h2>Erro no banco de dados: {e}</h2>'
+        except Exception as e:
+            erro = True
+            print(f'Houve um erro: {e}')
+            return f'<h2>Houve um erro: {e}</h2>'
+        finally:
+            conexao.close()
+            cursor.close()
+
+@app.route("/mecanicos/deletar/<int:id>")
+def DeletarMecanico(id):
+    try:
+        conexao = db.ConectarBanco()
+        cursor = conexao.cursor()
+        sql = 'DELETE FROM mecanicos WHERE id = %s'
+        cursor.execute(sql, (id, ))
+        conexao.commit()
+        return redirect(url_for('BuscarMecanicos'))
+    except pymysql.MySQLError as e:
+        print('-----------------------------------------------')
+        print(f'Erro no banco de dados: {e.args[0]}')
+        print(f'Mensagem do Erro: {e.args[1]}')
+        print('-----------------------------------------------')
+        return f'<h2>Erro no banco de dados: {e}</h2>'    
+    except Exception as e:
+        erro = True
+        print(f'Houve um erro: {e}')
+        return f'<h2>Houve um erro: {e}</h2>'
+    finally:
+        conexao.close()
+        cursor.close()
+
+@app.route("/ordens_de_servico")
 def CriarOs():
     return render_template("OS.html")
+
+@app.route("/ordens_de_servico/criar_ordem", methods = ['GET', 'POST'])
+def CadastrarOs():
+    if request.method == 'GET':
+        return render_template("cadastrar_os.html")
+    elif request.method == 'POST':
+        pass
+
+@app.route("/estoque")
+def Estoque():
+    try:
+        conexao = db.ConectarBanco()
+        cursor = conexao.cursor()
+        sql = 'SELECT * FROM pecas ORDER BY nome ASC'
+        cursor.execute(sql)
+        resultado = cursor.fetchall()
+        return render_template("estoque.html", resultado = resultado)
+    except pymysql.MySQLError as e:
+        print('-----------------------------------------------')
+        print(f'Erro no banco de dados: {e.args[0]}')
+        print(f'Mensagem do Erro: {e.args[1]}')
+        print('-----------------------------------------------')
+        return f'<h2>Erro no banco de dados: {e}</h2>'    
+    except Exception as e:
+        erro = True
+        print(f'Houve um erro: {e}')
+        return f'<h2>Houve um erro: {e}</h2>'
+    finally:
+        conexao.close()
+        cursor.close()
+
+@app.route("/estoque/cadastrar_categoria", methods = ['GET', 'POST'])
+def CadastrarCategoria():
+    if request.method == 'GET':
+        return render_template("cadastrar_categoria.html")
+    elif request.method == 'POST':
+        categoria = request.form.get('nome')
+        try:
+            conexao = db.ConectarBanco()
+            cursor = conexao.cursor()
+            sql = 'INSERT INTO categoria (nome) VALUES (%s)'
+            cursor.execute(sql, (categoria, ))
+            conexao.commit()
+            return redirect(url_for('Estoque'))
+        except pymysql.MySQLError as e:
+            print('-----------------------------------------------')
+            print(f'Erro no banco de dados: {e.args[0]}')
+            print(f'Mensagem do Erro: {e.args[1]}')
+            print('-----------------------------------------------')
+            return f'<h2>Erro no banco de dados: {e}</h2>'
+        except Exception as e:
+            erro = True
+            print(f'Houve um erro: {e}')
+            return f'<h2>Houve um erro: {e}</h2>'
+        finally:
+            conexao.close()
+            cursor.close()
+
+@app.route("/estoque/cadastrar_subcategoria", methods = ['GET', 'POST'])
+def CadastrarSubcategoria():
+    if request.method == 'GET':
+        try:
+            conexao = db.ConectarBanco()
+            cursor = conexao.cursor()
+            sql = 'SELECT * FROM categoria ORDER BY nome ASC'
+            cursor.execute(sql)
+            resultado = cursor.fetchall()
+            return render_template("cadastrar_subcategoria.html", resultado = resultado)
+        except pymysql.MySQLError as e:
+            print('-----------------------------------------------')
+            print(f'Erro no banco de dados: {e.args[0]}')
+            print(f'Mensagem do Erro: {e.args[1]}')
+            print('-----------------------------------------------')
+            return f'<h2>Erro no banco de dados: {e}</h2>'    
+        except Exception as e:
+            erro = True
+            print(f'Houve um erro: {e}')
+            return f'<h2>Houve um erro: {e}</h2>'
+        finally:
+            conexao.close()
+            cursor.close()
+    elif request.method == 'POST':
+        sub_categoria = {
+            'nome': request.form.get('nome'),
+            'id_categoria': request.form.get('id_categoria')
+        }
+        try:
+            conexao = db.ConectarBanco()
+            cursor = conexao.cursor()
+            sql = 'INSERT INTO subcategoria (nome, id_categoria) VALUES (%s, %s)'
+            cursor.execute(sql, (sub_categoria['nome'], sub_categoria['id_categoria']))
+            conexao.commit()
+            return redirect(url_for('Estoque'))
+        except pymysql.MySQLError as e:
+            print('-----------------------------------------------')
+            print(f'Erro no banco de dados: {e.args[0]}')
+            print(f'Mensagem do Erro: {e.args[1]}')
+            print('-----------------------------------------------')
+            return f'<h2>Erro no banco de dados: {e}</h2>'
+        except Exception as e:
+            erro = True
+            print(f'Houve um erro: {e}')
+            return f'<h2>Houve um erro: {e}</h2>'
+        finally:
+            conexao.close()
+            cursor.close()
+
+@app.route("/estoque/cadastrar_peca", methods = ['GET', 'POST'])
+def CadastrarPeca():
+    if request.method == 'GET':
+        try:
+            conexao = db.ConectarBanco()
+            cursor = conexao.cursor()
+            sql = 'SELECT * FROM subcategoria ORDER BY nome ASC'
+            cursor.execute(sql)
+            resultado = cursor.fetchall()
+            return render_template("cadastrar_peca.html", resultado = resultado)
+        except pymysql.MySQLError as e:
+            print('-----------------------------------------------')
+            print(f'Erro no banco de dados: {e.args[0]}')
+            print(f'Mensagem do Erro: {e.args[1]}')
+            print('-----------------------------------------------')
+            return f'<h2>Erro no banco de dados: {e}</h2>'    
+        except Exception as e:
+            erro = True
+            print(f'Houve um erro: {e}')
+            return f'<h2>Houve um erro: {e}</h2>'
+        finally:
+            conexao.close()
+            cursor.close()
+    elif request.method == 'POST':
+        peca = {
+                'nome': request.form.get('nome'),
+                'quantidade': request.form.get('quantidade'), 
+                'preco': request.form.get('preco'),
+                'localizacao': request.form.get('localizacao'),
+                'id_subcategoria': request.form.get('id_subcategoria')
+            }
+        try:
+            conexao = db.ConectarBanco()
+            cursor = conexao.cursor()
+            sql = 'INSERT INTO pecas (nome, quantidade, preco, localizacao, id_subcategoria) VALUES (%s, %s, %s, %s, %s)'
+            cursor.execute(sql, (peca['nome'], peca['quantidade'], peca['preco'], peca['localizacao'], peca['id_subcategoria']))
+            conexao.commit()
+            return redirect(url_for('Estoque'))
+        except pymysql.MySQLError as e:
+            print('-----------------------------------------------')
+            print(f'Erro no banco de dados: {e.args[0]}')
+            print(f'Mensagem do Erro: {e.args[1]}')
+            print('-----------------------------------------------')
+            return f'<h2>Erro no banco de dados: {e}</h2>'
+        except Exception as e:
+            erro = True
+            print(f'Houve um erro: {e}')
+            return f'<h2>Houve um erro: {e}</h2>'
+        finally:
+            conexao.close()
+            cursor.close()
+
+@app.route("/estoque/editar_peca/<int:id>/<int:id_subcategoria>", methods = ['GET', 'POST'])
+def EditarPeca(id, id_subcategoria):
+    if request.method == 'GET':
+        try:
+            conexao = db.ConectarBanco()
+            cursor = conexao.cursor()
+            sql = 'SELECT * FROM subcategoria WHERE id = %s'
+            cursor.execute(sql, (id_subcategoria, ))
+            idSubcategoria = cursor.fetchone()
+            sql = 'SELECT * FROM pecas WHERE id = %s'
+            cursor.execute(sql, (id, ))
+            pecas = cursor.fetchone()
+            sql = 'SELECT * FROM subcategoria WHERE id <> %s ORDER BY nome ASC'
+            cursor.execute(sql, (id_subcategoria, ))
+            subcategoria = cursor.fetchall()
+            return render_template('editar_pecas.html', subcategoria = subcategoria, pecas = pecas, idSubcategoria = idSubcategoria)
+        except pymysql.MySQLError as e:
+            print('-----------------------------------------------')
+            print(f'Erro no banco de dados: {e.args[0]}')
+            print(f'Mensagem do Erro: {e.args[1]}')
+            print('-----------------------------------------------')
+            return f'<h2>Erro no banco de dados: {e}</h2>'    
+        except Exception as e:
+            erro = True
+            print(f'Houve um erro: {e}')
+            return f'<h2>Houve um erro: {e}</h2>'
+        finally:
+            conexao.close()
+            cursor.close()
+    elif request.method == 'POST':
+        peca = {
+                'nome': request.form.get('nome'),
+                'quantidade': request.form.get('quantidade'), 
+                'preco': request.form.get('preco'),
+                'localizacao': request.form.get('localizacao'),
+                'id_subcategoria': request.form.get('id_subcategoria')
+            }
+        try:
+            conexao = db.ConectarBanco()
+            cursor = conexao.cursor()
+            sql = 'UPDATE pecas SET nome = %s, quantidade = %s, preco = %s, localizacao = %s, id_subcategoria = %s WHERE id = %s'
+            cursor.execute(sql, (peca['nome'], peca['quantidade'], peca['preco'], peca['localizacao'], peca['id_subcategoria'], id))
+            conexao.commit()
+            return redirect(url_for('Estoque'))
+        except pymysql.MySQLError as e:
+            print('-----------------------------------------------')
+            print(f'Erro no banco de dados: {e.args[0]}')
+            print(f'Mensagem do Erro: {e.args[1]}')
+            print('-----------------------------------------------')
+            return f'<h2>Erro no banco de dados: {e}</h2>'
+        except Exception as e:
+            erro = True
+            print(f'Houve um erro: {e}')
+            return f'<h2>Houve um erro: {e}</h2>'
+        finally:
+            conexao.close()
+            cursor.close()
+
+@app.route("/estoque/deletar_peca/<int:id>")
+def DeletarPeca(id):
+    try:
+        conexao = db.ConectarBanco()
+        cursor = conexao.cursor()
+        sql = 'DELETE FROM pecas WHERE id = %s'
+        cursor.execute(sql, (id, ))
+        conexao.commit()
+        return redirect(url_for('Estoque'))
+    except pymysql.MySQLError as e:
+        print('-----------------------------------------------')
+        print(f'Erro no banco de dados: {e.args[0]}')
+        print(f'Mensagem do Erro: {e.args[1]}')
+        print('-----------------------------------------------')
+        return f'<h2>Erro no banco de dados: {e}</h2>'    
+    except Exception as e:
+        erro = True
+        print(f'Houve um erro: {e}')
+        return f'<h2>Houve um erro: {e}</h2>'
+    finally:
+        conexao.close()
+        cursor.close()
     
 @app.after_request
 def add_header(response):

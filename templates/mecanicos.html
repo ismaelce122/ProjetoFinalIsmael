@@ -11,7 +11,7 @@
 
 <h1 class="titulo_mecanicos text-center">Mecânicos</h1>
 
-<div class="box_mecanicos">
+<div class="box_mecanicos d-flex flex-column">
     <a href="{{url_for('CadastrarMecanicos')}}"
         class="botao-menu botao_mecanicos mt-4"><i
             class="fas fa-tools"></i>Cadastrar Mecânico</a>
@@ -24,14 +24,14 @@
             </tr>
         </thead>
         <tbody>
-            {% for cliente in listaClientes %}
+            {% for mecanico in resultado %}
             <tr>
-                <td>{{cliente.nome}}</td>
-                <td>{{cliente.telefone}}</td>
+                <td>{{mecanico.nome}}</td>
+                <td>{{mecanico.especialidade}}</td>
                 <td>
                     <div class="d-flex">
-                        <a href="#" class="editar"><i class="fa fa-edit"></i></a>
-                        <a href="#" class="excluir"><i class="fa fa-trash"></i></a>
+                        <a href="{{url_for('EditarMecanico', id = mecanico.id)}}" class="editar"><i class="fa fa-edit"></i></a>
+                        <a href="{{url_for('DeletarMecanico', id = mecanico.id)}}" class="excluir"><i class="fa fa-trash"></i></a>
                     </div>
                 </td>
             </tr>

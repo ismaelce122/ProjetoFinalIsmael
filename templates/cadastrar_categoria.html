@@ -2,16 +2,12 @@
 
 {% block conteudo %}
 
-<h1 class="text-center mt-4">Cadastrar Mecânico</h1>
+<h1 class="text-center mt-4">Cadastrar Categoria de Peças</h1>
 <div class="container mt-2">
-    <form class="form-control p-3" action="{{url_for('CadastrarMecanicos')}}" method="post">
+    <form class="form-control p-3" action="{{url_for('CadastrarCategoria')}}" method="post">
         <div>
             <label class="form-label" for="nome">Nome:</label>
             <input class="form-control" type="text" id="nome" name="nome">
-        </div>
-        <div>
-            <label class="form-label" for="especialidade">Especialidade:</label>
-            <input class="form-control" type="text" id="especialidade" name="especialidade">
         </div>
         <button type="submit" class="btn btn-primary mt-3">Cadastrar</button>
     </form>
