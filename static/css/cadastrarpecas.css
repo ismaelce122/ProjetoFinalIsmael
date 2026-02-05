@@ -1,14 +1,15 @@
 body {
-    background-image: url(/static/image/mecanico.jpg);
+    background-image: url(/static/image/peça1.jpg);
     background-size: cover;
     background-repeat: no-repeat;
 }
 
 .box1 {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(2, 2, 2, 0.7);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
     width: 600px; 
+    color: white;
     margin-top: 100px;
 }
