@@ -11,10 +11,26 @@
 
 <h1 class="titulo_clientes text-center">Clientes</h1>
 
-<div class="box_clientes d-flex flex-column">
-    <a href="{{url_for('CadastrarClientes')}}"
-        class="botao-menu botao_clientes mt-4"><i
+<div class="box_clientes d-flex gap-4">
+    <a href="{{url_for('CadastrarClientes')}}" class="botao-menu botao_clientes"><i
             class="fas fa-user-plus"></i>Cadastrar Cliente</a>
+    <a href="{{url_for('BuscarVeiculos')}}"
+        class="botao-menu botao mb-2 mb-lg-0 d-flex justify-content-center align-items-center"><i
+            class="fas fa-car"></i>Veículos</a>
+    <a href="{{url_for('BuscarMecanicos')}}"
+        class="botao-menu botao mb-2 mb-lg-0 d-flex justify-content-center align-items-center"><i
+            class="fas fa-wrench"></i>Mecânicos</a>
+    <a href="{{url_for('CriarOs')}}"
+        class="botao-menu botao mb-2 mb-lg-0 d-flex justify-content-center align-items-center"><i
+            class="fas fa-folder-open"></i>Gerenciar OS</a>
+    <a href="{{url_for('Estoque')}}"
+        class="botao-menu botao mb-2 mb-lg-0 d-flex justify-content-center align-items-center"><i
+            class="fas fa-box"></i>Estoque</a>
+    <a href="{{url_for('logout')}}"
+        class="botao-menu botao mb-2 mb-lg-0 d-flex justify-content-center align-items-center"><i
+            class="fas fa-sign-out-alt"></i>Sair</a>
+</div>
+<div class="box_clientes">
     <table>
         <thead>
             <tr>
@@ -38,8 +54,10 @@
                 <td>{{cliente.criado_em}}</td>
                 <td>
                     <div class="d-flex">
-                        <a href="{{url_for('EditarCliente', id = cliente.id)}}" class="editar"><i class="fa fa-edit"></i></a>
-                        <a href="{{url_for('DeletarCliente', id = cliente.id)}}" class="excluir"><i class="fa fa-trash"></i></a>
+                        <a href="{{url_for('EditarCliente', id = cliente.id)}}" class="editar"><i
+                                class="fa fa-edit"></i></a>
+                        <a href="{{url_for('DeletarCliente', id = cliente.id)}}" class="excluir"><i
+                                class="fa fa-trash"></i></a>
                     </div>
                 </td>
             </tr>

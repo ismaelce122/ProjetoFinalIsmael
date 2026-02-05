@@ -666,6 +666,8 @@ def CadastrarPeca():
                 'localizacao': request.form.get('localizacao'),
                 'id_subcategoria': request.form.get('id_subcategoria')
             }
+        if peca['localizacao'] == '' or peca['localizacao'] == None:
+            peca['localizacao'] = 'Localização a ser Definida.'
         try:
             conexao = db.ConectarBanco()
             cursor = conexao.cursor()

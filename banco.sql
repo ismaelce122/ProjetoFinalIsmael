@@ -45,7 +45,7 @@ diagnostico VARCHAR(150) NOT NULL,
 mecanico VARCHAR(100) NOT NULL,
 itens_os VARCHAR(100) NOT NULL,
 valor_total VARCHAR(100) NOT NULL,
-observacoes VARCHAR(150),
+observacoes VARCHAR(150) NOT NULL,
 criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -69,9 +69,9 @@ id INT PRIMARY KEY AUTO_INCREMENT,
 id_subcategoria INT,
 FOREIGN KEY(id_subcategoria) REFERENCES subcategoria(id),
 nome VARCHAR(100) NOT NULL,
-quantidade INT DEFAULT 0,
-preco DECIMAL(10, 2) DEFAULT 0.00,
-localizacao VARCHAR(100) DEFAULT 'Localização a ser Definida.',
+quantidade INT DEFAULT NOT NULL,
+preco DECIMAL(10, 2) DEFAULT NOT NULL,
+localizacao VARCHAR(100) DEFAULT NOT NULL,
 criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
