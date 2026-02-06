@@ -304,6 +304,8 @@ def CadastrarVeiculos():
                 'placa': request.form.get('placa'),   
                 'observacoes': request.form.get('observacoes')
             }
+        if veiculo['observacoes'] == '' or veiculo['observacoes'] == None:
+            veiculo['observacoes'] = 'Sem Observações'
         try:
             conexao = db.ConectarBanco()
             cursor = conexao.cursor()
@@ -667,7 +669,11 @@ def CadastrarPeca():
                 'id_subcategoria': request.form.get('id_subcategoria')
             }
         if peca['localizacao'] == '' or peca['localizacao'] == None:
-            peca['localizacao'] = 'Localização a ser Definida.'
+            peca['localizacao'] = 'Localização a ser Definida'
+        if peca['quantidade'] == '' or peca['quantidade'] == None:
+            peca['quantidade'] = str('Sem Estoque')
+        if peca['preco'] == '' or peca['preco'] == None:
+            peca['preco'] = 'Preço Indefinido'
         try:
             conexao = db.ConectarBanco()
             cursor = conexao.cursor()

@@ -1,10 +1,19 @@
 {% extends 'base.html' %}
 
+{% block head %}
+
+<link rel="stylesheet" href="{{url_for('static',
+    filename='css/editar_veiculo.css')}}">
+
+{% endblock %}
+
 {% block conteudo %}
 
-<h1 class="text-center mt-4">Editar Cliente</h1>
-<div class="container mt-2">
-    <form class="form-control p-3" action="{{url_for('EditarVeiculo', id = resultado.id)}}" method="post">
+<div class="container mt-4 mb-5">
+    <form class="form-control p-3 box1" action="{{url_for('EditarVeiculo', id = resultado.id)}}" method="post">
+        <div>
+            <h1 class="text-center">Editar Veículo</h1>
+        </div>
         <div>
             <label class="form-label" for="marca">Marca:</label>
             <input class="form-control" type="text" id="marca" name="marca" value="{{resultado.marca}}">
@@ -23,9 +32,17 @@
         </div>
         <div>
             <label class="form-label" for="observacoes">Observações:</label>
-            <input class="form-control" type="text" id="observacoes" name="observacoes" value="{{resultado.observacoes}}">
+            <input class="form-control" type="text" id="observacoes" name="observacoes"
+                value="{{resultado.observacoes}}">
         </div>
-        <button type="submit" class="btn btn-warning mt-3">Atualizar</button>
+        <div class="d-flex justify-content-center gap-2 mt-4">
+            <div>
+                <a href="{{url_for('BuscarVeiculos')}}" class="btn btn-secondary">Cancelar</a>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-success">Salvar</button>
+            </div>
+        </div>
     </form>
 </div>
 

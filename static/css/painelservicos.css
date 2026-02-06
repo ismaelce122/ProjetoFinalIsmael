@@ -1,0 +1,12 @@
+.box1 {
+    box-shadow: 2px 2px 8px 3px black;
+    border-radius: 5px;
+    width: 95%;
+    margin: auto;
+    margin-bottom: 30px;
+    padding-top: 20px;
+}
+
+.box2 {
+    display: block;
+}

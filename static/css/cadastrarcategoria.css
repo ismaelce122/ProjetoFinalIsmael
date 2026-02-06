@@ -1,5 +1,5 @@
 body {
-    background-image: url(/static/image/peça3.jpg);
+    background-image: url(/static/image/peça2.jpg);
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -9,7 +9,7 @@ body {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-    width: 600px; 
+    width: 480px; 
     color: white;
-    margin-top: 100px;
+    margin-top: 50px;
 }

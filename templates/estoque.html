@@ -9,19 +9,15 @@
 
 {% block conteudo %}
 
-<h1 class="titulo_estoque text-center">Estoque</h1>
-
-<div class="box_clientes container">
-    <a href="{{url_for('CadastrarCategoria')}}"
-        class="botao-menu botao_estoque mt-4"><i
-        class="fas fa-car-battery"></i>Criar Categoria</a>
-    <a href="{{url_for('CadastrarSubcategoria')}}"
-        class="botao-menu botao_estoque mt-4"><i
-        class="fas fa-stop"></i>Criar Subcategoria</a>
-    <a href="{{url_for('CadastrarPeca')}}"
-        class="botao-menu botao_estoque mt-4"><i
-        class="fas fa-cog fa-spin"></i>Cadastrar Peça</a>
-    <table>
+<div class="box_estoque d-flex flex-column mt-4">
+    <div>
+        <a href="{{url_for('CadastrarCategoria')}}" class="botao-menu botao_estoque"><i
+                class="fas fa-car-battery"></i>Cadastrar Categoria</a>
+        <a href="{{url_for('CadastrarSubcategoria')}}" class="botao-menu botao_estoque"><i class="fas fa-stop"></i>Cadastrar Subcategoria</a>
+        <a href="{{url_for('CadastrarPeca')}}" class="botao-menu botao_estoque"><i
+                class="fas fa-cog fa-spin"></i>Cadastrar Peça</a>
+    </div>
+    <table class="mt-2">
         <thead>
             <tr>
                 <th>Nome</th>
@@ -40,8 +36,10 @@
                 <td>{{peca.localizacao}}</td>
                 <td>
                     <div class="d-flex">
-                        <a href="{{url_for('EditarPeca', id = peca.id, id_subcategoria = peca.id_subcategoria)}}" class="editar"><i class="fa fa-edit"></i></a>
-                        <a href="{{url_for('DeletarPeca', id = peca.id)}}" class="excluir"><i class="fa fa-trash"></i></a>
+                        <a href="{{url_for('EditarPeca', id = peca.id, id_subcategoria = peca.id_subcategoria)}}"
+                            class="editar"><i class="fa fa-edit"></i></a>
+                        <a href="{{url_for('DeletarPeca', id = peca.id)}}" class="excluir"><i
+                                class="fa fa-trash"></i></a>
                     </div>
                 </td>
             </tr>

@@ -9,7 +9,13 @@ body {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-    width: 600px; 
+    width: 480px; 
     color: white;
-    margin-top: 100px;
+    margin-top: 50px;
+}
+
+.opcoes {
+    background-color: rgba(2, 2, 2, 0.6);
+    outline: none;
+    color: white;
 }

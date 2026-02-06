@@ -1,5 +1,4 @@
 table {
-    margin-top: 20px;
     border: 1px solid black;
     box-shadow: 2px 2px 8px 3px black;
     margin-bottom: 30px;
@@ -9,6 +8,7 @@ thead {
     text-align: center;
     background-color: #007bff;
     border: 1px solid black;
+    color: white;
 }
 
 th, tr, td {
@@ -19,12 +19,6 @@ th, tr, td {
 .box_clientes {
     margin: auto;
     width: 95%;
-}
-
-.titulo_clientes {
-    background-color: #007bff;
-    padding-top: 10px;
-    padding-bottom: 10px;
 }
 
 .editar {
@@ -66,10 +60,10 @@ th, tr, td {
 .botao_clientes {
     background-color: #007bff;
     color: #ffffff;
-    width: 180px;
+    width: 200px;
     text-decoration: none;
     border-radius: 10px;
-    padding: 20px 30px;
+    padding: 10px 15px;
     font-size: 15px;
     font-weight: bold;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);

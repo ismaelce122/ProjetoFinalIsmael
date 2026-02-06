@@ -9,13 +9,13 @@
 
 {% block conteudo %}
 
-<h1 class="titulo_veiculos text-center">Veículos</h1>
-
-<div class="box_veiculos d-flex flex-column">
-    <a href="{{url_for('CadastrarVeiculos')}}"
-        class="botao-menu botao_veiculos mt-4"><i
-            class="fas fa-car-side"></i>Cadastrar Veículo</a>
-    <table>
+<div class="box_veiculos d-flex flex-column mt-4">
+    <a href="{{url_for('CadastrarVeiculos')}}"class="botao-menu botao_veiculos">
+        <i class="fas fa-plus"></i>
+        <i class="fas fa-car-side"></i>
+        Cadastrar Veículo
+    </a>
+    <table class="mt-2">
         <thead>
             <tr>
                 <th>Cliente</th>

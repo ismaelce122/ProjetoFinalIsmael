@@ -1,18 +1,19 @@
-{% extends 'base.html' %}
+{% extends 'base_cadastros.html' %}
 
 {% block head %}
 
 <link rel="stylesheet" href="{{url_for('static',
-    filename='css/CadastrarMecanico.css')}}">
+    filename='css/cadastrarmecanico.css')}}">
 
 {% endblock %}
 
-
 {% block conteudo %}
 
-
-<div class="container mt-2">
+<div class="container">
     <form class="form-control p-3 box1" action="{{url_for('CadastrarMecanicos')}}" method="post">
+        <div>
+            <h2 class="text-center">Cadastrar Mecânico</h2>
+        </div>
         <div>
             <label class="form-label" for="nome">Nome:</label>
             <input class="form-control" type="text" id="nome" name="nome">
@@ -21,7 +22,14 @@
             <label class="form-label" for="especialidade">Especialidade:</label>
             <input class="form-control" type="text" id="especialidade" name="especialidade">
         </div>
-        <button type="submit" class="btn btn-primary mt-3">Cadastrar</button>
+        <div class="d-flex justify-content-center gap-2 mt-4">
+            <div>
+                <a href="{{url_for('BuscarMecanicos')}}" class="btn btn-primary">Voltar</a>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-success">Cadastrar</button>
+            </div>
+        </div>
     </form>
 </div>
 

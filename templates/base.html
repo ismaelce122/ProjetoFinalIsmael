@@ -16,6 +16,41 @@
 </head>
 
 <body>
+    <div class="container-fluid d-flex gap-4 titulo">
+        <div class="w-50 d-flex align-items-center">
+            <a href="{{url_for('PainelServicos')}}">
+                <h1 class="text-center">ISP Serviços</h1>
+            </a>
+        </div>
+        <div class="w-100  d-flex align-items-center">
+            <h5 class="text-start">Olá, seja bem-vindo(a) {{session.usuario_nome}}</h5>
+        </div>
+    </div>
+    <div class="card1 mt-3">
+        <div class="box d-lg-flex justify-content-lg-center gap-lg-2">
+            <a href="{{url_for('PainelServicos')}}"
+                class="botao-menu botao mb-2 mb-lg-0 d-flex justify-content-center align-items-center"><i
+                    class="fas fa-columns"></i>Painel</a>
+            <a href="{{url_for('BuscarClientes')}}"
+                class="botao-menu botao mb-2 mb-lg-0 d-flex justify-content-center align-items-center"><i
+                    class="fas fa-user"></i>Clientes</a>
+            <a href="{{url_for('BuscarVeiculos')}}"
+                class="botao-menu botao mb-2 mb-lg-0 d-flex justify-content-center align-items-center"><i
+                    class="fas fa-car"></i>Veículos</a>
+            <a href="{{url_for('BuscarMecanicos')}}"
+                class="botao-menu botao mb-2 mb-lg-0 d-flex justify-content-center align-items-center"><i
+                    class="fas fa-wrench"></i>Mecânicos</a>
+            <a href="{{url_for('CriarOs')}}"
+                class="botao-menu botao mb-2 mb-lg-0 d-flex justify-content-center align-items-center"><i
+                    class="fas fa-folder-open"></i>Gerenciar OS</a>
+            <a href="{{url_for('Estoque')}}"
+                class="botao-menu botao mb-2 mb-lg-0 d-flex justify-content-center align-items-center"><i
+                    class="fas fa-box"></i>Estoque</a>
+            <a href="{{url_for('logout')}}"
+                class="botao-menu botao mb-2 mb-lg-0 d-flex justify-content-center align-items-center"><i
+                    class="fas fa-sign-out-alt"></i>Sair</a>
+        </div>
+    </div>
     {% block conteudo %}
 
     {% endblock %}

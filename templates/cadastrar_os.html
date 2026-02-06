@@ -1,10 +1,19 @@
-{% extends 'base.html' %}
+{% extends 'base_cadastros.html' %}
+
+{% block head %}
+
+<link rel="stylesheet" href="{{url_for('static',
+    filename='css/cadastrar_os.css')}}">
+
+{% endblock %}
 
 {% block conteudo %}
 
-<h1 class="text-center mt-4">Criar Ordem de Serviço</h1>
-<div class="container mt-2">
-    <form class="form-control p-3">
+<div class="container">
+    <form class="form-control p-3 box1">
+        <div>
+            <h2 class="text-center">Cadastrar Ordem de Serviço</h2>
+        </div>
         <div>
             <label class="form-label" for="nome">Nome:</label>
             <input class="form-control" type="text" id="nome" name="nome">
@@ -29,7 +38,14 @@
             <label class="form-label" for="senha">Senha:</label>
             <input class="form-control" type="password" id="senha" name="senha">
         </div>
-        <button type="submit" class="btn btn-primary mt-3">Cadastrar</button>
+        <div class="d-flex justify-content-center gap-2 mt-4">
+            <div>
+                <a href="{{url_for('CriarOs')}}" class="btn btn-primary">Voltar</a>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-success">Cadastrar</button>
+            </div>
+        </div>
     </form>
 </div>
 

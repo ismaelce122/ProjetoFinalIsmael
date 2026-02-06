@@ -1,24 +1,17 @@
 {% extends 'base.html' %}
 
+{% block head %}
+
+<link rel="stylesheet" href="{{url_for('static',
+    filename='css/painelservicos.css')}}">
+
+{% endblock %}
+
 {% block conteudo %}
 
-<div class="container-fluid titulo">
-    <h1 class="text-center">ISP Serviços</h1>
-    <h5 class="text-center">Olá, seja bem-vindo(a) {{session.usuario_nome}}</h5>
-</div>
-<div class="container mt-2">
-    <div class="box d-lg-flex justify-content-lg-center gap-lg-2">
-        <a href="{{url_for('BuscarClientes')}}" class="botao-menu botao mb-2 mb-lg-0 d-flex justify-content-center align-items-center"><i class="fas fa-user"></i>Clientes</a>
-        <a href="{{url_for('BuscarVeiculos')}}" class="botao-menu botao mb-2 mb-lg-0 d-flex justify-content-center align-items-center"><i class="fas fa-car"></i>Veículos</a>
-        <a href="{{url_for('BuscarMecanicos')}}" class="botao-menu botao mb-2 mb-lg-0 d-flex justify-content-center align-items-center"><i class="fas fa-wrench"></i>Mecânicos</a>
-        <a href="{{url_for('CriarOs')}}" class="botao-menu botao mb-2 mb-lg-0 d-flex justify-content-center align-items-center"><i class="fas fa-folder-open"></i>Gerenciar OS</a>
-        <a href="{{url_for('Estoque')}}" class="botao-menu botao mb-2 mb-lg-0 d-flex justify-content-center align-items-center"><i class="fas fa-box"></i>Estoque</a>
-        <a href="{{url_for('logout')}}" class="botao-menu botao mb-2 mb-lg-0 d-flex justify-content-center align-items-center"><i class="fas fa-sign-out-alt"></i>Sair</a>
-    </div>
-</div>
-<div class="container card1 mt-4">
+<div class="box1 mt-5">
     <h2 class="text-center">Relatórios</h2>
-    <div class="p-4 box">
+    <div class="box2 p-4">
         Ordens de Serviço
     </div>
 </div>
