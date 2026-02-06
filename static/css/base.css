@@ -17,6 +17,13 @@ body {
     color: white;
 }
 
+.isp {
+    color: white;
+    margin-top: 150px;
+    margin-bottom: 2px;
+    text-shadow: 2px 2px 2px black;
+}
+
 .botao {
     background-color: #007bff;
     color: #ffffff;
