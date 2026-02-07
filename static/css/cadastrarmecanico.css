@@ -14,3 +14,15 @@ body {
     margin-top: 50px;
     margin-bottom: 30px;
 }
+
+@media (max-width: 800px) {
+    body {
+        height: 100vh;
+        padding-top: 50px;
+    }
+
+    .box1 {
+        width: 95%;
+        margin: auto;
+    }
+}

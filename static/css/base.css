@@ -4,11 +4,16 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     height: 100%;
+    padding-bottom: 80px;
 }
 
 .card1 {
     margin: auto;
     width: 95%;
+}
+
+.card_celular {
+    display: none;
 }
 
 .titulo {
@@ -19,7 +24,7 @@ body {
 
 .isp {
     color: black;
-    margin-top: 150px;
+    margin-top: 20px;
     font-weight: bold;
     margin-bottom: 2px;
     text-shadow: 2px 2px 4px white;
@@ -55,4 +60,36 @@ a {
     display: block;
     text-decoration: none;
     color: white;
+}
+
+@media (max-width: 800px) {
+    .card1 {
+        display: none;
+    }
+
+    .card_celular {
+        position: fixed;
+        z-index: 1000;
+        width: 100%;
+        bottom: 0px;
+        left: 0px;
+        height: 60px;
+        display: flex;
+        justify-content: space-evenly;
+        background-color: #007bff;
+    }
+
+    .botao {
+        height: 60px;
+        width: 55px;
+        background-color: transparent;
+        gap: 0px;
+        border-radius: 0px;
+        padding: 10px 15px;
+        font-size: 80px;
+    }
+
+    body {
+        height: 100vh;
+    }
 }

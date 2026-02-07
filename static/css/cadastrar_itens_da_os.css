@@ -12,8 +12,22 @@
     visibility: hidden;
 }
 
+.box_celular {
+    display: none;
+}
+
 .opcoes {
     background-color: rgba(2, 2, 2, 0.6);
     color: white;
     width: 220px;
+}
+
+@media (max-width: 800px) {
+    .box_celular {
+        display: block;
+    }
+
+    .box_pc {
+        display: none;
+    }
 }

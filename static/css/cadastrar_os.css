@@ -2,14 +2,28 @@
     background-color: rgba(2, 2, 2, 0.6);
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     color: white;
     margin-top: 50px;
     margin-bottom: 30px;
+}
+
+.box_celular {
+    display: none;
 }
 
 .opcoes {
     background-color: rgba(2, 2, 2, 0.6);
     color: white;
     width: 220px;
+}
+
+@media (max-width: 800px) {
+    .box_celular {
+        display: block;
+    }
+
+    .box_pc {
+        display: none;
+    }
 }
