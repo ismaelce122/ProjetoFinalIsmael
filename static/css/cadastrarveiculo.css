@@ -17,6 +17,6 @@ body {
 
 .opcoes {
     background-color: rgba(2, 2, 2, 0.6);
-    outline: none;
+    width: auto;
     color: white;
 }

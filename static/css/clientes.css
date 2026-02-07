@@ -2,6 +2,7 @@ table {
     border: 1px solid black;
     box-shadow: 2px 2px 6px 2px black;
     margin-bottom: 30px;
+    margin-right: 5px;
 }
 thead {
     text-align: center;
@@ -17,6 +18,10 @@ tr, td {
     color: white;
 }
 
+th, td {
+    white-space: nowrap;
+}
+
 th {
     border: 1px solid black;
 }
@@ -24,6 +29,7 @@ th {
 .box_clientes {
     margin: auto;
     width: 95%;
+    overflow-x: auto;
 }
 
 .editar {

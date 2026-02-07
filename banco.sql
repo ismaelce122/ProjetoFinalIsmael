@@ -15,13 +15,13 @@ criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 
 CREATE TABLE veiculos (
 id INT PRIMARY KEY AUTO_INCREMENT,
-id_cliente INT,
+id_cliente INT NOT NULL,
 FOREIGN KEY(id_cliente) REFERENCES clientes(id),
 modelo VARCHAR(50) NOT NULL,
 marca VARCHAR(50) NOT NULL,
 ano VARCHAR(50) NOT NULL,
 placa VARCHAR(50) NOT NULL,
-observacoes VARCHAR(150),
+observacoes VARCHAR(150) NOT NULL,
 criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -34,18 +34,23 @@ criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 
 CREATE TABLE os (
 id INT PRIMARY KEY AUTO_INCREMENT,
-id_cliente INT,
-id_mecanico INT,
+id_cliente INT NOT NULL,
+id_mecanico INT NOT NULL,
 FOREIGN KEY(id_cliente) REFERENCES clientes(id),
-FOREIGN KEY(id_mecanico) REFERENCES mecanicos(id), 
-data_os DATE DEFAULT(CURRENT_DATE()),
+FOREIGN KEY(id_mecanico) REFERENCES mecanicos(id),
 status_os VARCHAR(100) NOT NULL,
 problema VARCHAR(150) NOT NULL,
 diagnostico VARCHAR(150) NOT NULL,
-mecanico VARCHAR(100) NOT NULL,
-itens_os VARCHAR(100) NOT NULL,
-valor_total VARCHAR(100) NOT NULL,
-observacoes VARCHAR(150) NOT NULL,
+criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE itens_os (
+id INT PRIMARY KEY AUTO_INCREMENT,
+id_os INT NOT NULL,
+FOREIGN KEY(id_os) REFERENCES os(id),
+nome VARCHAR(150) NOT NULL,
+quantidade VARCHAR(150) NOT NULL,
+preco DECIMAL(10, 2) NOT NULL,
 criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -57,7 +62,7 @@ criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 
 CREATE TABLE subcategoria (
 id INT PRIMARY KEY AUTO_INCREMENT,
-id_categoria INT,
+id_categoria INT NOT NULL,
 FOREIGN KEY(id_categoria) REFERENCES categoria(id),
 nome VARCHAR(100) NOT NULL,
 UNIQUE (nome, id_categoria),
@@ -66,12 +71,12 @@ criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 
 CREATE TABLE pecas (
 id INT PRIMARY KEY AUTO_INCREMENT,
-id_subcategoria INT,
+id_subcategoria INT NOT NULL,
 FOREIGN KEY(id_subcategoria) REFERENCES subcategoria(id),
 nome VARCHAR(100) NOT NULL,
-quantidade INT DEFAULT NOT NULL,
-preco DECIMAL(10, 2) DEFAULT NOT NULL,
-localizacao VARCHAR(100) DEFAULT NOT NULL,
+quantidade INT NOT NULL,
+preco DECIMAL(10, 2) NOT NULL,
+localizacao VARCHAR(100) NOT NULL,
 criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

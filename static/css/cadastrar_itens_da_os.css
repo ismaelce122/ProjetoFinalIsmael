@@ -1,21 +1,19 @@
-body {
-    background-image: url(/static/image/peça1.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
 .box1 {
-    background-color: rgba(2, 2, 2, 0.7);
+    background-color: rgba(2, 2, 2, 0.6);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-    width: 480px; 
     color: white;
     margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.apagar {
+    visibility: hidden;
 }
 
 .opcoes {
     background-color: rgba(2, 2, 2, 0.6);
-    width: auto;
     color: white;
+    width: 220px;
 }

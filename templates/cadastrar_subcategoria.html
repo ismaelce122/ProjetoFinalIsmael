@@ -20,7 +20,7 @@
         </div>
         <div class="mt-3">
             <label class="form-label" for="id_categoria">Categoria:</label>
-            <select name="id_categoria" id="id_categoria" class="opcoes">
+            <select name="id_categoria" class="opcoes form-select">
                 <option value="">-- selecione uma categoria --</option>
                 {% for categoria in resultado %}
                     <option value="{{categoria.id}}">{{categoria.nome}}</option>

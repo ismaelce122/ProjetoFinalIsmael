@@ -17,6 +17,10 @@ tr, td {
     color: white;
 }
 
+th, td {
+    white-space: nowrap;
+}
+
 th {
     border: 1px solid black;
 }
@@ -24,6 +28,7 @@ th {
 .box_mecanicos {
     margin: auto;
     width: 95%;
+    overflow-x: auto;
 }
 
 .editar {

@@ -32,7 +32,7 @@
         </div>
          <div class="mt-3">
             <label class="form-label" for="id_subcategoria">Sub-Categoria:</label>
-            <select name="id_subcategoria" id="id_subcategoria" class="opcoes">
+            <select name="id_subcategoria" class="opcoes form-select">
                 <option value="">-- selecione uma sub-categoria --</option>
                 {% for subcategoria in resultado %}
                     <option value="{{subcategoria.id}}">{{subcategoria.nome}}</option>
