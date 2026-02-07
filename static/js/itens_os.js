@@ -1,7 +1,7 @@
 let contador = 0
 let html = ''
 
-fetch('http://localhost:5000/api/pecas')
+fetch('https://ismaelce122.pythonanywhere.com/api/pecas')
     .then(resposta => resposta.json())
     .then(listaPecas => {
         listaPecas.forEach((peca) => {
