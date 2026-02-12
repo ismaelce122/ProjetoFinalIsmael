@@ -10,7 +10,7 @@
 {% block conteudo %}
 
 <div class="box_veiculos d-flex flex-column mt-4">
-    <a href="{{url_for('CadastrarVeiculos')}}"class="botao-menu botao_veiculos">
+    <a href="{{url_for('veiculos.CadastrarVeiculos')}}"class="botao-menu botao_veiculos">
         <i class="fas fa-plus"></i>
         <i class="fas fa-car-side"></i>
         Cadastrar Veículo
@@ -38,8 +38,8 @@
                 <td>{{veiculo.observacoes}}</td>
                 <td>
                     <div class="d-flex">
-                        <a href="{{url_for('EditarVeiculo', id = veiculo.id)}}" class="editar"><i class="fa fa-edit"></i></a>
-                        <a href="{{url_for('DeletarVeiculo', id = veiculo.id)}}" class="excluir"><i class="fa fa-trash"></i></a>
+                        <a href="{{url_for('veiculos.EditarVeiculo', id = veiculo.id)}}" class="editar"><i class="fa fa-edit"></i></a>
+                        <a href="{{url_for('veiculos.DeletarVeiculo', id = veiculo.id)}}" class="excluir"><i class="fa fa-trash"></i></a>
                     </div>
                 </td>
             </tr>

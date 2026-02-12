@@ -10,7 +10,7 @@
 {% block conteudo %}
 
 <div class="container mt-4 mb-5">
-    <form class="form-control p-3 box1" action="{{url_for('EditarCliente', id = resultado.id)}}" method="post">
+    <form class="form-control p-3 box1" action="{{url_for('usuarios.EditarCliente', id = resultado.id)}}" method="post">
         <div>
             <h1 class="text-center">Editar Cliente</h1>
         </div>
@@ -36,7 +36,7 @@
         </div>
         <div class="d-flex justify-content-center gap-2 mt-4">
             <div>
-                <a href="{{url_for('BuscarClientes')}}" class="btn btn-secondary">Cancelar</a>
+                <a href="{{url_for('usuarios.BuscarClientes')}}" class="btn btn-secondary">Cancelar</a>
             </div>
             <div>
                 <button type="submit" class="btn btn-success">Salvar</button>

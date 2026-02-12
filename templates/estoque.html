@@ -11,10 +11,10 @@
 
 <div class="box_estoque d-flex flex-column mt-4">
     <div>
-        <a href="{{url_for('CadastrarCategoria')}}" class="botao-menu botao_estoque mb-2 mb-lg-0"><i
+        <a href="{{url_for('estoque.CadastrarCategoria')}}" class="botao-menu botao_estoque mb-2 mb-lg-0"><i
                 class="fas fa-car-battery"></i>Cadastrar Categoria</a>
-        <a href="{{url_for('CadastrarSubcategoria')}}" class="botao-menu botao_estoque  mb-2 mb-lg-0"><i class="fas fa-stop"></i>Cadastrar Subcategoria</a>
-        <a href="{{url_for('CadastrarPeca')}}" class="botao-menu botao_estoque"><i
+        <a href="{{url_for('estoque.CadastrarSubcategoria')}}" class="botao-menu botao_estoque  mb-2 mb-lg-0"><i class="fas fa-stop"></i>Cadastrar Subcategoria</a>
+        <a href="{{url_for('estoque.CadastrarPeca')}}" class="botao-menu botao_estoque"><i
                 class="fas fa-cog fa-spin"></i>Cadastrar Peça</a>
     </div>
     <table class="mt-2">
@@ -36,9 +36,9 @@
                 <td>{{peca.localizacao}}</td>
                 <td>
                     <div class="d-flex">
-                        <a href="{{url_for('EditarPeca', id = peca.id, id_subcategoria = peca.id_subcategoria)}}"
+                        <a href="{{url_for('estoque.EditarPeca', id = peca.id, id_subcategoria = peca.id_subcategoria)}}"
                             class="editar"><i class="fa fa-edit"></i></a>
-                        <a href="{{url_for('DeletarPeca', id = peca.id)}}" class="excluir"><i
+                        <a href="{{url_for('estoque.DeletarPeca', id = peca.id)}}" class="excluir"><i
                                 class="fa fa-trash"></i></a>
                     </div>
                 </td>

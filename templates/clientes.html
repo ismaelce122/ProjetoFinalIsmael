@@ -10,7 +10,7 @@
 {% block conteudo %}
 
 <div class="box_clientes d-flex flex-column justify-content-center mt-4">
-    <a href="{{url_for('CadastrarClientes')}}" class="botao-menu botao_clientes"><i
+    <a href="{{url_for('usuarios.CadastrarClientes')}}" class="botao-menu botao_clientes"><i
             class="fas fa-user-plus"></i>Cadastrar Cliente</a>
     <table class="mt-2">
         <thead>
@@ -35,9 +35,9 @@
                 <td>{{cliente.criado_em}}</td>
                 <td>
                     <div class="d-flex">
-                        <a href="{{url_for('EditarCliente', id = cliente.id)}}" class="editar"><i
+                        <a href="{{url_for('usuarios.EditarCliente', id = cliente.id)}}" class="editar"><i
                                 class="fa fa-edit"></i></a>
-                        <a href="{{url_for('DeletarCliente', id = cliente.id)}}" class="excluir"><i
+                        <a href="{{url_for('usuarios.DeletarCliente', id = cliente.id)}}" class="excluir"><i
                                 class="fa fa-trash"></i></a>
                     </div>
                 </td>

@@ -10,7 +10,7 @@
 {% block conteudo %}
 
 <div class="container">
-    <form class="form-control p-3 box1" action="{{url_for('CadastrarMecanicos')}}" method="post">
+    <form class="form-control p-3 box1" action="{{url_for('mecanicos.CadastrarMecanicos')}}" method="post">
         <div>
             <h2 class="text-center">Cadastrar Mecânico</h2>
         </div>
@@ -24,7 +24,7 @@
         </div>
         <div class="d-flex justify-content-center gap-2 mt-4">
             <div>
-                <a href="{{url_for('BuscarMecanicos')}}" class="btn btn-primary">Voltar</a>
+                <a href="{{url_for('mecanicos.BuscarMecanicos')}}" class="btn btn-primary">Voltar</a>
             </div>
             <div>
                 <button type="submit" class="btn btn-success">Cadastrar</button>
