@@ -19,7 +19,7 @@ app.register_blueprint(estoque, url_prefix= '/estoque')
 def index():
     if session:
         return redirect(url_for('PainelServicos'))
-    return redirect(url_for('Login'))
+    return redirect(url_for('usuarios.Login'))
     
 @app.route("/painel")
 def PainelServicos():
