@@ -8,7 +8,6 @@ def ConectarBanco():
     conexao = my.connect(
         host = os.getenv("DB_HOST"),
         user = os.getenv("DB_USER"),
-        port = 3308,
         password = os.getenv("DB_PASSWORD"),
         database = os.getenv("DB_NAME"),
         cursorclass = my.cursors.DictCursor 
