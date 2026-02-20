@@ -25,7 +25,7 @@ def index():
 def PainelServicos():
     if session:
         return render_template('painelServicos.html', session = session)
-    return redirect(url_for('Login'))
+    return redirect(url_for('usuarios.Login'))
     
 @app.route('/logout')
 def logout():
