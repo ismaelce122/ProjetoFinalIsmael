@@ -1,5 +1,6 @@
 from flask import render_template, session, redirect, url_for, request, Blueprint
 from config import banco as db
+from auth import login_required
 import pymysql
 import pytz
 import bcrypt
@@ -7,6 +8,7 @@ import bcrypt
 usuarios_bp = Blueprint("usuarios", __name__, template_folder='usuarios_templates', static_folder='usuarios_static')
 
 @usuarios_bp.route("/clientes/cadastrar", methods = ['GET', 'POST'])
+@login_required
 def CadastrarClientes():
     if request.method == 'GET':
         return render_template("cadastrarclientes.html")
@@ -77,6 +79,7 @@ def CadastrarUsuario():
             cursor.close()
 
 @usuarios_bp.route('/clientes')
+@login_required
 def BuscarClientes():
     tz = pytz.timezone('America/Fortaleza')
     listaClientes = []
@@ -124,7 +127,7 @@ def Login():
                 senhaHash = resultado['senha']
                 print(f'Usuário Logado: {resultado['nome']}')
                 if bcrypt.checkpw(senha.encode('utf-8'), senhaHash.encode('utf-8')):
-                    session['usuario_nome'] = resultado['nome']
+                    session['usuario'] = resultado['nome']
                     session['usuario_id'] = resultado['id']
                     return redirect(url_for('PainelServicos'))
                 else:
@@ -154,6 +157,7 @@ def Login():
             cursor.close()
 
 @usuarios_bp.route("/clientes/editar/<int:id>", methods = ['GET', 'POST'])
+@login_required
 def EditarCliente(id):
     if request.method == 'GET':
         try:
@@ -206,6 +210,7 @@ def EditarCliente(id):
             cursor.close()
 
 @usuarios_bp.route("/clientes/deletar/<int:id>")
+@login_required
 def DeletarCliente(id):
     try:
         conexao = db.ConectarBanco()

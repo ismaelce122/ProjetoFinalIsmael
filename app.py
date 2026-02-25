@@ -1,5 +1,6 @@
 from flask import Flask, render_template, session, redirect, url_for
 from routes import Registrar_Blueprints
+from auth import login_required
 import os
 
 app = Flask(__name__)
@@ -7,16 +8,14 @@ app.secret_key = os.getenv("FLASK_SECRET_KEY")
 Registrar_Blueprints(app)
 
 @app.route("/")
+@login_required
 def index():
-    if session:
-        return redirect(url_for('PainelServicos'))
-    return redirect(url_for('usuarios.Login'))
+    return redirect(url_for('PainelServicos'))
     
 @app.route("/painel")
+@login_required
 def PainelServicos():
-    if session:
-        return render_template('painelServicos.html', session = session)
-    return redirect(url_for('usuarios.Login'))
+    return render_template('painelServicos.html', session = session)
     
 @app.route('/logout')
 def logout():

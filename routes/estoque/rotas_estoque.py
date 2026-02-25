@@ -1,10 +1,12 @@
 from flask import render_template, redirect, request, url_for, Blueprint
+from auth import login_required
 from config import banco as db
 import pymysql
 
 estoque_bp = Blueprint("estoque", __name__, url_prefix='/estoque', template_folder='estoque_templates', static_folder='estoque_static')
 
 @estoque_bp.route("/")
+@login_required
 def Estoque():
     try:
         conexao = db.ConectarBanco()
@@ -28,6 +30,7 @@ def Estoque():
         cursor.close()
 
 @estoque_bp.route("/cadastrar_categoria", methods = ['GET', 'POST'])
+@login_required
 def CadastrarCategoria():
     if request.method == 'GET':
         return render_template("cadastrar_categoria.html")
@@ -55,6 +58,7 @@ def CadastrarCategoria():
             cursor.close()
 
 @estoque_bp.route("/cadastrar_subcategoria", methods = ['GET', 'POST'])
+@login_required
 def CadastrarSubcategoria():
     if request.method == 'GET':
         try:
@@ -104,6 +108,7 @@ def CadastrarSubcategoria():
             cursor.close()
 
 @estoque_bp.route("/cadastrar_peca", methods = ['GET', 'POST'])
+@login_required
 def CadastrarPeca():
     if request.method == 'GET':
         try:
@@ -162,6 +167,7 @@ def CadastrarPeca():
             cursor.close()
 
 @estoque_bp.route("/editar_peca/<int:id>/<int:id_subcategoria>", methods = ['GET', 'POST'])
+@login_required
 def EditarPeca(id, id_subcategoria):
     if request.method == 'GET':
         try:
@@ -220,6 +226,7 @@ def EditarPeca(id, id_subcategoria):
             cursor.close()
 
 @estoque_bp.route("/deletar_peca/<int:id>")
+@login_required
 def DeletarPeca(id):
     try:
         conexao = db.ConectarBanco()

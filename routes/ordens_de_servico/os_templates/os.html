@@ -37,7 +37,7 @@
                         <a href="{{url_for('ordens.ItensOs', id_os = os.id, cliente = os.nome)}}" class="adicionar"><i class="fa fa-plus-square"></i></a>
                         <a href="{{url_for('ordens.InfoOs', id_os = os.id, cliente = os.nome, mecanico = os['mecanicos.nome'])}}" class="info_os"><i class="fa fa-info-circle"></i></a>
                         <a href="#" class="editar"><i class="fa fa-edit"></i></a>
-                        <a href="#" class="excluir"><i class="fa fa-trash"></i></a>
+                        <a href="{{url_for('ordens.DeletarOs', id = os.id)}}" class="excluir"><i class="fa fa-trash"></i></a>
                     </div>
                 </td>
             </tr>

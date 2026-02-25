@@ -1,10 +1,12 @@
 from flask import render_template, redirect, request, url_for, Blueprint
 from config import banco as db
+from auth import login_required
 import pymysql
 
 veiculos_bp = Blueprint("veiculos", __name__, url_prefix='/veiculos', template_folder='veiculos_templates', static_folder='veiculos_static')
 
 @veiculos_bp.route("/")
+@login_required
 def BuscarVeiculos():
     try:
         conexao = db.ConectarBanco()
@@ -28,6 +30,7 @@ def BuscarVeiculos():
         cursor.close()
 
 @veiculos_bp.route("/cadastrar", methods = ['GET', 'POST'])
+@login_required
 def CadastrarVeiculos():
     if request.method == 'GET':
         try:
@@ -83,6 +86,7 @@ def CadastrarVeiculos():
             cursor.close()
 
 @veiculos_bp.route("/editar/<int:id>", methods = ['GET', 'POST'])
+@login_required
 def EditarVeiculo(id):
     if request.method == 'GET':
         try:
@@ -135,6 +139,7 @@ def EditarVeiculo(id):
             cursor.close()
 
 @veiculos_bp.route("/deletar/<int:id>")
+@login_required
 def DeletarVeiculo(id):
     try:
         conexao = db.ConectarBanco()

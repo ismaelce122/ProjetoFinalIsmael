@@ -1,10 +1,12 @@
 from flask import render_template, redirect, url_for, request, jsonify, Blueprint
+from auth import login_required
 from config import banco as db
 import pymysql
 
 ordens_bp = Blueprint("ordens", __name__, url_prefix='/ordens_de_servico', template_folder='os_templates', static_folder='os_static')
 
 @ordens_bp.route("/", methods = ['GET', 'POST'])
+@login_required
 def OrdensServico():
     if request.method == 'GET':
         try:
@@ -54,6 +56,7 @@ def Pecas():
         cursor.close()
 
 @ordens_bp.route("/criar_ordem", methods = ['GET', 'POST'])
+@login_required
 def CadastrarOs():
     if request.method == 'GET':
         try:
@@ -109,6 +112,7 @@ def CadastrarOs():
             cursor.close()
 
 @ordens_bp.route("/itens_os/<int:id_os>/<cliente>", methods = ['GET', 'POST'])
+@login_required
 def ItensOs(id_os, cliente):
     if request.method == 'GET':
         try:
@@ -165,6 +169,7 @@ def ItensOs(id_os, cliente):
             cursor.close()
 
 @ordens_bp.route("/info_os/<int:id_os>/<cliente>/<mecanico>")
+@login_required
 def InfoOs(id_os, cliente, mecanico):
     try:
         conexao = db.ConectarBanco()
@@ -173,14 +178,40 @@ def InfoOs(id_os, cliente, mecanico):
         cursor.execute(sql, id_os)
         itens_os = cursor.fetchall()
         novoItem = []
+        soma = 0
         for item in itens_os:
             quantidade = int(item['quantidade'])
             preco = int(item['preco'])
+            soma = soma + (quantidade * preco)
             item['quantidade'] = quantidade
             item['preco'] = preco
             item['valor'] = item['preco'] * item['quantidade']
             novoItem.append(item)
-        return render_template("info_os.html", itens_os = novoItem, idOs = id_os, nomeCliente = cliente, nomeMecanico = mecanico)
+        return render_template("info_os.html", itens_os = novoItem, idOs = id_os, nomeCliente = cliente, nomeMecanico = mecanico, soma = soma)
+    except pymysql.MySQLError as e:
+        print('-----------------------------------------------')
+        print(f'Erro no banco de dados: {e.args[0]}')
+        print(f'Mensagem do Erro: {e.args[1]}')
+        print('-----------------------------------------------')
+        return f'<h2>Erro no banco de dados: {e}</h2>'    
+    except Exception as e:
+        erro = True
+        print(f'Houve um erro: {e}')
+        return f'<h2>Houve um erro: {e}</h2>'
+    finally:
+        conexao.close()
+        cursor.close()
+
+@ordens_bp.route("/deletar/<int:id>")
+@login_required
+def DeletarOs(id):
+    try:
+        conexao = db.ConectarBanco()
+        cursor = conexao.cursor()
+        sql = 'DELETE FROM os WHERE id = %s'
+        cursor.execute(sql, (id, ))
+        conexao.commit()
+        return redirect(url_for('ordens.OrdensServico'))
     except pymysql.MySQLError as e:
         print('-----------------------------------------------')
         print(f'Erro no banco de dados: {e.args[0]}')
