@@ -1,7 +1,7 @@
 let contador = 0
 let html = ''
 
-fetch('https://ismaelce122.pythonanywhere.com/api/pecas')
+fetch('https://ismaelce122.pythonanywhere.com/ordens_de_servico/api/pecas')
     .then(resposta => resposta.json())
     .then(listaPecas => {
         listaPecas.forEach((peca) => {
