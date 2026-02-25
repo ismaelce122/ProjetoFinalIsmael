@@ -1,4 +1,4 @@
-from flask import render_template, session, redirect, url_for, request, jsonify, Blueprint
+from flask import render_template, redirect, url_for, request, jsonify, Blueprint
 from config import banco as db
 import pymysql
 
@@ -13,7 +13,7 @@ def OrdensServico():
             sql = 'SELECT * FROM os JOIN clientes ON os.id_cliente = clientes.id JOIN mecanicos ON os.id_mecanico = mecanicos.id'
             cursor.execute(sql)
             resultado = cursor.fetchall()
-            return render_template("OS.html", resultado = resultado)
+            return render_template("os.html", resultado = resultado)
         except pymysql.MySQLError as e:
             print('-----------------------------------------------')
             print(f'Erro no banco de dados: {e.args[0]}')
