@@ -174,7 +174,7 @@ def InfoOs(id_os, cliente, mecanico):
     try:
         conexao = db.ConectarBanco()
         cursor = conexao.cursor()
-        sql = 'SELECT nome, quantidade, preco FROM itens_os WHERE id_os = %s'
+        sql = 'SELECT id, nome, quantidade, preco FROM itens_os WHERE id_os = %s'
         cursor.execute(sql, id_os)
         itens_os = cursor.fetchall()
         novoItem = []
@@ -202,7 +202,7 @@ def InfoOs(id_os, cliente, mecanico):
         conexao.close()
         cursor.close()
 
-@ordens_bp.route("/deletar/<int:id>")
+@ordens_bp.route("/deletar_os/<int:id>")
 @login_required
 def DeletarOs(id):
     try:
@@ -212,6 +212,43 @@ def DeletarOs(id):
         cursor.execute(sql, (id, ))
         conexao.commit()
         return redirect(url_for('ordens.OrdensServico'))
+    except pymysql.MySQLError as e:
+        print('-----------------------------------------------')
+        print(f'Erro no banco de dados: {e.args[0]}')
+        print(f'Mensagem do Erro: {e.args[1]}')
+        print('-----------------------------------------------')
+        return f'<h2>Erro no banco de dados: {e}</h2>'    
+    except Exception as e:
+        erro = True
+        print(f'Houve um erro: {e}')
+        return f'<h2>Houve um erro: {e}</h2>'
+    finally:
+        conexao.close()
+        cursor.close()
+
+@ordens_bp.route("/deletar_item_os/<int:id>")
+@login_required
+def DeletarItemOs(id):
+    try:
+        conexao = db.ConectarBanco()
+        cursor = conexao.cursor()
+        sql = 'DELETE FROM itens_os WHERE id = %s'
+        cursor.execute(sql, (id, ))
+        conexao.commit()
+        sql = 'SELECT * FROM itens_os'
+        cursor.execute(sql)
+        itens = cursor.fetchall()
+        novoItem = []
+        soma = 0
+        for item in itens:
+            quantidade = int(item['quantidade'])
+            preco = int(item['preco'])
+            soma = soma + (quantidade * preco)
+            item['quantidade'] = quantidade
+            item['preco'] = preco
+            item['valor'] = item['preco'] * item['quantidade']
+            novoItem.append(item)
+        return render_template('info_os.html', itens_os = novoItem, soma = soma)
     except pymysql.MySQLError as e:
         print('-----------------------------------------------')
         print(f'Erro no banco de dados: {e.args[0]}')
