@@ -12,23 +12,65 @@
 <div class="container">
     <div class="box1">
         <div class="row mt-4">
-            <div class="col-2">
+            <div class="col-3">
                 <label class="form-label" for="id_os">Número da Os:</label>
                 <h3>{{idOs}}</h3>
             </div>
-            <div class="col-5">
+            <div class="col-4">
                 <label class="form-label" for="cliente">Cliente:</label>
                 <h3>{{nomeCliente}}</h3>
             </div>
-            <div class="col-5">
+            <div class="col-4">
                 <label class="form-label" for="cliente">Mecânico:</label>
                 <h3>{{nomeMecanico}}</h3>
             </div>
         </div>
+        <div class="row mt-4">
+            <div class="col-4">
+                <label class="form-label" for="id_os">Peça:</label>
+            </div>
+            <div class="col-2">
+                <label class="form-label" for="cliente">Quantidade:</label>
+            </div>
+            <div class="col-1">
+                <h3></h3>
+            </div>
+            <div class="col-2">
+                <label class="form-label" for="cliente">Preço Unitário:</label>
+            </div>
+            <div class="col-2">
+                <label class="form-label" for="cliente">Valor:</label>
+            </div>
+        </div>
         <div class="row mt-2">
             {% for item in itens_os %}
-                <h3>{{item.nome}} - {{item.quantidade}} - {{item.preco}}</h3>
+            <div class="col-4">
+                <h3>{{item.nome}}</h3>
+            </div>
+            <div class="col-2 text-center">
+                <h3>{{item.quantidade}}</h3>
+            </div>
+            <div class="col-1">
+                <h3>X</h3>
+            </div>
+            <div class="col-2">
+                <h3>R$ {{item.preco}},00</h3>
+            </div>
+            <div class="col-2">
+                <h3>R$ {{item.valor}},00</h3>
+            </div>
             {% endfor %}
+        </div>
+        <div class="row mt-2">
+            <div class="col-7">
+                <h3></h3>
+            </div>
+            <div class="col-2">
+                <h2>Total:</h2>
+            </div>
+             <div class="col-2">
+                <h3>R$ 5000,00</h3>
+            </div>
         </div>
     </div>
 </div>

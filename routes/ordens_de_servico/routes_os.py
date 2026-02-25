@@ -169,10 +169,18 @@ def InfoOs(id_os, cliente, mecanico):
     try:
         conexao = db.ConectarBanco()
         cursor = conexao.cursor()
-        sql = 'SELECT * FROM itens_os WHERE id_os = %s'
+        sql = 'SELECT nome, quantidade, preco FROM itens_os WHERE id_os = %s'
         cursor.execute(sql, id_os)
         itens_os = cursor.fetchall()
-        return render_template("info_os.html", itens_os = itens_os, idOs = id_os, nomeCliente = cliente, nomeMecanico = mecanico)
+        novoItem = []
+        for item in itens_os:
+            quantidade = int(item['quantidade'])
+            preco = int(item['preco'])
+            item['quantidade'] = quantidade
+            item['preco'] = preco
+            item['valor'] = item['preco'] * item['quantidade']
+            novoItem.append(item)
+        return render_template("info_os.html", itens_os = novoItem, idOs = id_os, nomeCliente = cliente, nomeMecanico = mecanico)
     except pymysql.MySQLError as e:
         print('-----------------------------------------------')
         print(f'Erro no banco de dados: {e.args[0]}')
