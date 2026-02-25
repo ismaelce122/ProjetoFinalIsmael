@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+<link rel="stylesheet" href="{{url_for('mecanicos.static',
+    filename='css/editar_mecanico.css')}}">
+
+{% endblock %}
+
+{% block conteudo %}
+
+<div class="container mt-4 mb-5">
+    <form class="form-control p-3 box1" action="{{url_for('mecanicos.EditarMecanico', id = resultado.id)}}" method="post">
+        <div>
+            <h1 class="text-center">Editar Mecânico</h1>
+        </div>
+        <div>
+            <label class="form-label" for="nome">Nome:</label>
+            <input class="form-control" type="text" id="nome" name="nome" value="{{resultado.nome}}">
+        </div>
+        <div>
+            <label class="form-label" for="especialidade">Especialidade:</label>
+            <input class="form-control" type="text" id="especialidade" name="especialidade" value="{{resultado.especialidade}}">
+        </div>
+         <div class="d-flex justify-content-center gap-2 mt-4">
+            <div>
+                <a href="{{url_for('mecanicos.BuscarMecanicos')}}" class="btn btn-secondary">Cancelar</a>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-success">Salvar</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

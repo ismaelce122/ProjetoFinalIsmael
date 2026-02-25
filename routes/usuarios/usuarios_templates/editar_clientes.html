@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+<link rel="stylesheet" href="{{url_for('usuarios.static',
+    filename='css/editar_cliente.css')}}">
+
+{% endblock %}
+
+{% block conteudo %}
+
+<div class="container mt-4 mb-5">
+    <form class="form-control p-3 box1" action="{{url_for('usuarios.EditarCliente', id = resultado.id)}}" method="post">
+        <div>
+            <h1 class="text-center">Editar Cliente</h1>
+        </div>
+        <div>
+            <label class="form-label" for="nome">Nome:</label>
+            <input class="form-control" type="text" id="nome" name="nome" value="{{resultado.nome}}">
+        </div>
+        <div>
+            <label class="form-label" for="telefone">Telefone:</label>
+            <input class="form-control" type="text" id="telefone" name="telefone" value="{{resultado.telefone}}">
+        </div>
+        <div>
+            <label class="form-label" for="email">E-mail:</label>
+            <input class="form-control" type="email" id="email" name="email" value="{{resultado.email}}">
+        </div>
+        <div>
+            <label class="form-label" for="documento">Documento:</label>
+            <input class="form-control" type="text" id="documento" name="documento" value="{{resultado.documento}}">
+        </div>
+        <div>
+            <label class="form-label" for="enderco">Endereço:</label>
+            <input class="form-control" type="text" id="endereco" name="endereco" value="{{resultado.endereco}}">
+        </div>
+        <div class="d-flex justify-content-center gap-2 mt-4">
+            <div>
+                <a href="{{url_for('usuarios.BuscarClientes')}}" class="btn btn-secondary">Cancelar</a>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-success">Salvar</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

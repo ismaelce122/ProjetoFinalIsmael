@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ISP Serviços</title>
     <link rel="shortcut icon" href="{{url_for('static',
-    filename='image/icone.png')}}" type="image/png">
+    filename='image/icone/icone.png')}}" type="image/png">
     <link rel="stylesheet" href="{{url_for('static',
     filename='css_bootstrap/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{url_for('static',
@@ -40,7 +40,7 @@
             <a href="{{url_for('mecanicos.BuscarMecanicos')}}"
                 class="botao-menu botao mb-2 mb-lg-0 d-flex justify-content-center align-items-center"><i
                     class="fas fa-wrench"></i>Mecânicos</a>
-            <a href="{{url_for('OrdensServico')}}"
+            <a href="{{url_for('ordens.OrdensServico')}}"
                 class="botao-menu botao mb-2 mb-lg-0 d-flex justify-content-center align-items-center"><i
                     class="fas fa-folder-open"></i>Gerenciar OS</a>
             <a href="{{url_for('estoque.Estoque')}}"
@@ -65,7 +65,7 @@
             <a href="{{url_for('mecanicos.BuscarMecanicos')}}"
                 class="botao-menu botao justify-content-center align-items-center"><i
                     class="fas fa-wrench"></i></a>
-            <a href="{{url_for('OrdensServico')}}"
+            <a href="{{url_for('ordens.OrdensServico')}}"
                 class="botao-menu botao justify-content-center align-items-center"><i
                     class="fas fa-folder-open"></i></a>
             <a href="{{url_for('estoque.Estoque')}}"
@@ -81,7 +81,9 @@
     {% endblock %}
 
     <div class="text-center isp">
-        <p>Copyright © 2026 Feito por ISP Tecnologia</p>
+        <p>Feito por ISP Tecnologia</p>
+        <br>
+        <p>Copyright © 2026 Todos os Direitos Reservados</p>
     </div>
 
     <script src="{{url_for('static',

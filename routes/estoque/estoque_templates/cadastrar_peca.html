@@ -1,0 +1,53 @@
+{% extends 'base_cadastros.html' %}
+
+{% block head %}
+
+<link rel="stylesheet" href="{{url_for('estoque.static',
+    filename='css/cadastrarpeca.css')}}">
+
+{% endblock %}
+
+{% block conteudo %}
+
+<div class="container">
+    <form class="form-control p-3 box1" action="{{url_for('estoque.CadastrarPeca')}}" method="post">
+        <div>
+            <h2 class="text-center">Cadastrar Peça</h2>
+        </div>
+        <div>
+            <label class="form-label" for="nome">Nome:</label>
+            <input class="form-control" type="text" id="nome" name="nome">
+        </div>
+        <div>
+            <label class="form-label" for="quantidade">Quantidade:</label>
+            <input class="form-control" type="number" id="quantidade" name="quantidade">
+        </div>
+        <div>
+            <label class="form-label" for="preco">Preço:</label>
+            <input class="form-control" type="number" id="preco" name="preco">
+        </div>
+        <div>
+            <label class="form-label" for="localizacao">Localização:</label>
+            <input class="form-control" type="text" id="localizacao" name="localizacao">
+        </div>
+         <div class="mt-3">
+            <label class="form-label" for="id_subcategoria">Sub-Categoria:</label>
+            <select name="id_subcategoria" class="opcoes form-select">
+                <option value="">-- selecione uma sub-categoria --</option>
+                {% for subcategoria in resultado %}
+                    <option value="{{subcategoria.id}}">{{subcategoria.nome}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="d-flex justify-content-center gap-2 mt-4">
+            <div>
+                <a href="{{url_for('estoque.Estoque')}}" class="btn btn-primary">Voltar</a>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-success">Cadastrar</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

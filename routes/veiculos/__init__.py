@@ -1,0 +1,1 @@
+from .rotas_veiculos import veiculos_bp

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+<link rel="stylesheet" href="{{url_for('mecanicos.static',
+    filename='css/mecanicos.css')}}">
+
+{% endblock %}
+
+{% block conteudo %}
+
+<div class="box_mecanicos d-flex flex-column mt-4">
+    <a href="{{url_for('mecanicos.CadastrarMecanicos')}}"class="botao-menu botao_mecanicos">
+        <i class="fas fa-plus"></i>
+        <i class="fas fa-tools"></i>
+        Cadastrar Mecânico
+    </a>
+    <table class="mt-2">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Especialidade</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mecanico in resultado %}
+            <tr>
+                <td>{{mecanico.nome}}</td>
+                <td>{{mecanico.especialidade}}</td>
+                <td>
+                    <div class="d-flex">
+                        <a href="{{url_for('mecanicos.EditarMecanico', id = mecanico.id)}}" class="editar"><i class="fa fa-edit"></i></a>
+                        <a href="{{url_for('mecanicos.DeletarMecanico', id = mecanico.id)}}" class="excluir"><i class="fa fa-trash"></i></a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script src="{{url_for('mecanicos.static',
+    filename='js/mecanicos.js')}}"></script>
+
+{% endblock %}

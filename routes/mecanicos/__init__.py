@@ -1,0 +1,1 @@
+from .rotas_mecanicos import mecanicos_bp

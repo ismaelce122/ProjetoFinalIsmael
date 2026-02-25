@@ -1,0 +1,1 @@
+from .rotas_estoque import estoque_bp

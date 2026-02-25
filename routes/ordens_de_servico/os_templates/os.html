@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+<link rel="stylesheet" href="{{url_for('ordens.static',
+    filename='css/os.css')}}">
+
+{% endblock %}
+
+{% block conteudo %}
+
+<div class="box_os d-flex flex-column mt-4">
+    <a href="{{url_for('ordens.CadastrarOs')}}"
+        class="botao-menu botao_os"><i
+            class="fas fa-file-alt"></i>Cadastrar OS</a>
+    <table class="mt-2">
+        <thead>
+            <tr>
+                <th>Número da Os</th>
+                <th>Cliente</th>
+                <th>Mecânico</th>
+                <th>Problema</th>
+                <th>Diagnóstico</th>
+                <th>Status Os</th>
+                <th>Data Os</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for os in resultado %}
+            <tr>
+                <td>{{os.id}}</td>
+                <td>{{os.nome}}</td>
+                <td>{{os['mecanicos.nome']}}</td>
+                <td>{{os.problema}}</th>
+                <td>{{os.diagnostico}}</td>
+                <td>{{os.status_os}}</td>
+                <td>{{os.criado_em}}</td>
+                <td>
+                    <div class="d-flex">
+                        <a href="{{url_for('ordens.ItensOs', id_os = os.id, cliente = os.nome)}}" class="adicionar"><i class="fa fa-plus-square"></i></a>
+                        <a href="#" class="editar"><i class="fa fa-edit"></i></a>
+                        <a href="#" class="excluir"><i class="fa fa-trash"></i></a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script src="{{url_for('ordens.static',
+    filename='js/ordem_de_servico.js')}}"></script>
+
+{% endblock %}

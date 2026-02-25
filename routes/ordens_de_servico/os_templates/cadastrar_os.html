@@ -1,0 +1,108 @@
+{% extends 'base_cadastros.html' %}
+
+{% block head %}
+
+<link rel="stylesheet" href="{{url_for('ordens.static',
+    filename='css/cadastrar_os.css')}}">
+
+{% endblock %}
+
+{% block conteudo %}
+
+<div class="container box_pc">
+    <form class="form-control p-3 box1" action="{{url_for('ordens.CadastrarOs')}}" method="post">
+        <div>
+            <h2 class="text-center">Cadastrar Ordem de Serviço</h2>
+        </div>
+        <div class="row mt-3">
+            <div class="col-3">
+                <label class="form-label" for="id_cliente">Cliente:</label>
+                <select name="id_cliente" class="opcoes form-select">
+                    <option value="">-- selecione o cliente --</option>
+                    {% for cliente in clientes %}
+                    <option value="{{cliente.id}}">{{cliente.nome}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-3">
+                <label class="form-label" for="id_mecanico">Mecânico Designado:</label>
+                <select name="id_mecanico" class="opcoes form-select">
+                    <option value="">-- selecione o mecânico --</option>
+                    {% for mecanico in mecanicos %}
+                    <option value="{{mecanico.id}}">{{mecanico.nome}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="mt-2">
+            <label class="form-label" for="problema_relatado">Problema Relatado:</label>
+            <textarea class="form-control" name="problema_relatado"></textarea>
+        </div>
+        <div>
+            <label class="form-label" for="diagnostico">Diagnóstico:</label>
+            <textarea class="form-control" name="diagnostico"></textarea>
+        </div>
+        <div>
+            <label class="form-label" for="status_os">Status:</label>
+            <input class="form-control" type="text" name="status_os">
+        </div>
+        <div class="d-flex justify-content-center gap-2 mt-4">
+            <div>
+                <a href="{{url_for('ordens.OrdensServico')}}" class="btn btn-primary">Voltar</a>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-success">Cadastrar</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="container box_celular">
+    <form class="form-control p-3 box1" action="{{url_for('ordens.CadastrarOs')}}" method="post">
+        <div>
+            <h2 class="text-center">Cadastrar Ordem de Serviço</h2>
+        </div>
+        <div class="row mt-3">
+            <div class="col-12">
+                <label class="form-label" for="id_cliente">Cliente:</label>
+                <select name="id_cliente" class="opcoes form-select">
+                    <option value="">-- selecione o cliente --</option>
+                    {% for cliente in clientes %}
+                    <option value="{{cliente.id}}">{{cliente.nome}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-12 mt-2">
+                <label class="form-label" for="id_mecanico">Mecânico Designado:</label>
+                <select name="id_mecanico" class="opcoes form-select">
+                    <option value="">-- selecione o mecânico --</option>
+                    {% for mecanico in mecanicos %}
+                    <option value="{{mecanico.id}}">{{mecanico.nome}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="mt-2">
+            <label class="form-label" for="problema_relatado">Problema Relatado:</label>
+            <textarea class="form-control" name="problema_relatado"></textarea>
+        </div>
+        <div>
+            <label class="form-label" for="diagnostico">Diagnóstico:</label>
+            <textarea class="form-control" name="diagnostico"></textarea>
+        </div>
+        <div>
+            <label class="form-label" for="status_os">Status:</label>
+            <input class="form-control" type="text" name="status_os">
+        </div>
+        <div class="d-flex justify-content-center gap-2 mt-4">
+            <div>
+                <a href="{{url_for('ordens.OrdensServico')}}" class="btn btn-primary">Voltar</a>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-success">Cadastrar</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

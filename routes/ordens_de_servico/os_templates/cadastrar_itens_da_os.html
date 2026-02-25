@@ -1,0 +1,122 @@
+{% extends 'base_cadastros.html' %}
+
+{% block head %}
+
+<link rel="stylesheet" href="{{url_for('ordens.static',
+    filename='css/cadastrar_itens_da_os.css')}}">
+
+{% endblock %}
+
+{% block conteudo %}
+
+<div class="container box_pc">
+    <form class="form-control p-3 box1" action="{{url_for('ordens.ItensOs', id_os = idOs.id, cliente = nomeCliente.nome)}}"
+        method="post">
+        <div>
+            <h2 class="text-center">Cadastrar Itens da Os</h2>
+        </div>
+        <div class="row mt-4">
+            <div class="col-4">
+                <label class="form-label" for="id_os">Número da Os:</label>
+                <h3>{{idOs.id}}</h3>
+                <input class="form-control apagar" type="number" name="id_os" value="{{idOs.id}}">
+            </div>
+            <div class="col-8">
+                <label class="form-label" for="cliente">Itens do Cliente:</label>
+                <h3>{{nomeCliente.nome}}</h3>
+                <input class="form-control apagar" type="text" name="cliente" value="{{nomeCliente.nome}}">
+            </div>
+        </div>
+        <div id="itens_os" class="mt-2">
+            <div id="item" class="row">
+                <div class="col-4">
+                    <label class="form-label" for="peca">Peça:</label>
+                    <select name="peca[]" class="opcoes form-select">
+                        <option value="">-- selecione a peça --</option>
+                        {% for peca in pecas %}
+                        <option value="{{peca.nome}}-{{peca.preco}}">{{peca.nome}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" for="quantidade[]">Quantidade:</label>
+                    <input class="form-control" type="number" name="quantidade[]">
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-start gap-2 mt-2">
+            <div>
+                <button type="button" onclick="AddItem()" class="btn btn-primary">+ Adicionar item</button>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center gap-2 mt-4">
+            <div>
+                <a href="{{url_for('ordens.OrdensServico')}}" class="btn btn-primary">Voltar</a>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-success">Salvar</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<div class="container box_celular">
+    <form class="form-control p-3 box1" action="{{url_for('ordens.ItensOs', id_os = idOs.id, cliente = nomeCliente.nome)}}"
+        method="post">
+        <div>
+            <h2 class="text-center">Cadastrar Itens da Os</h2>
+        </div>
+        <div class="row mt-4">
+            <div class="col-4">
+                <label class="form-label" for="id_os">Número da Os:</label>
+                <h3>{{idOs.id}}</h3>
+                <input class="form-control apagar" type="number" name="id_os" value="{{idOs.id}}">
+            </div>
+            <div class="col-8">
+                <label class="form-label" for="cliente">Itens do Cliente:</label>
+                <h3>{{nomeCliente.nome}}</h3>
+                <input class="form-control apagar" type="text" name="cliente" value="{{nomeCliente.nome}}">
+            </div>
+        </div>
+        <div id="itens_os_celular" class="mt-2">
+            <div id="item" class="row">
+                <div class="col-12">
+                    <label class="form-label" for="peca">Peça:</label>
+                    <select name="peca[]" class="opcoes form-select">
+                        <option value="">-- selecione a peça --</option>
+                        {% for peca in pecas %}
+                        <option value="{{peca.nome}}-{{peca.preco}}">{{peca.nome}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-4 mt-2">
+                    <label class="form-label" for="quantidade[]">Quantidade:</label>
+                    <input class="form-control" type="number" name="quantidade[]">
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-start gap-2 mt-2">
+            <div>
+                <button type="button" onclick="AddItem2()" class="btn btn-primary">+ Adicionar item</button>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center gap-2 mt-4">
+            <div>
+                <a href="{{url_for('ordens.OrdensServico')}}" class="btn btn-primary">Voltar</a>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-success">Salvar</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script src="{{url_for('ordens.static',
+    filename='js/itens_os.js')}}"></script>
+
+{% endblock %}
