@@ -10,7 +10,7 @@ def OrdensServico():
         try:
             conexao = db.ConectarBanco()
             cursor = conexao.cursor()
-            sql = 'SELECT * FROM os JOIN clientes ON os.id_cliente = clientes.id JOIN mecanicos ON os.id_mecanico = mecanicos.id'
+            sql = 'SELECT * FROM os JOIN clientes ON os.id_cliente = clientes.id JOIN mecanicos ON os.id_mecanico = mecanicos.id ORDER BY os.id ASC'
             cursor.execute(sql)
             resultado = cursor.fetchall()
             return render_template("os.html", resultado = resultado)
@@ -141,8 +141,6 @@ def ItensOs(id_os, cliente):
         id_os = request.form.get('id_os')
         pecas = request.form.getlist('peca[]')
         quantidades = request.form.getlist('quantidade[]')
-        print(pecas)
-        print(quantidades)
         try:
             conexao = db.ConectarBanco()
             cursor = conexao.cursor()
@@ -165,3 +163,26 @@ def ItensOs(id_os, cliente):
         finally:
             conexao.close()
             cursor.close()
+
+@ordens_bp.route("/info_os/<int:id_os>/<cliente>/<mecanico>")
+def InfoOs(id_os, cliente, mecanico):
+    try:
+        conexao = db.ConectarBanco()
+        cursor = conexao.cursor()
+        sql = 'SELECT * FROM itens_os WHERE id_os = %s'
+        cursor.execute(sql, id_os)
+        itens_os = cursor.fetchall()
+        return render_template("info_os.html", itens_os = itens_os, idOs = id_os, nomeCliente = cliente, nomeMecanico = mecanico)
+    except pymysql.MySQLError as e:
+        print('-----------------------------------------------')
+        print(f'Erro no banco de dados: {e.args[0]}')
+        print(f'Mensagem do Erro: {e.args[1]}')
+        print('-----------------------------------------------')
+        return f'<h2>Erro no banco de dados: {e}</h2>'    
+    except Exception as e:
+        erro = True
+        print(f'Houve um erro: {e}')
+        return f'<h2>Houve um erro: {e}</h2>'
+    finally:
+        conexao.close()
+        cursor.close()

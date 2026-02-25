@@ -49,6 +49,20 @@ th {
     background-color: rgb(3, 131, 10);
 }
 
+.info_os {
+    text-decoration: none;
+    font-size: 20px;
+    width: 30px;
+    font-weight: 400;
+    display: block;
+    text-align: center;
+    color: black;
+    background-color: rgb(35, 141, 240);
+    border-radius: 5px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
 .editar {
     text-decoration: none;
     font-size: 20px;

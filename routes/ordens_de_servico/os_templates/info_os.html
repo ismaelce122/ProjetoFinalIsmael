@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+<link rel="stylesheet" href="{{url_for('ordens.static',
+    filename='css/info_os.css')}}">
+
+{% endblock %}
+
+{% block conteudo %}
+
+<div class="container">
+    <div class="box1">
+        <div class="row mt-4">
+            <div class="col-2">
+                <label class="form-label" for="id_os">Número da Os:</label>
+                <h3>{{idOs}}</h3>
+            </div>
+            <div class="col-5">
+                <label class="form-label" for="cliente">Cliente:</label>
+                <h3>{{nomeCliente}}</h3>
+            </div>
+            <div class="col-5">
+                <label class="form-label" for="cliente">Mecânico:</label>
+                <h3>{{nomeMecanico}}</h3>
+            </div>
+        </div>
+        <div class="row mt-2">
+            {% for item in itens_os %}
+                <h3>{{item.nome}} - {{item.quantidade}} - {{item.preco}}</h3>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
