@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+<script src="https://unpkg.com/html5-qrcode"></script>
+<link rel="stylesheet" href="{{url_for('scanner.static',
+    filename='css/scan.css')}}">
+
+{% endblock %}
+
+{% block conteudo %}
+
+<div class="container mt-4">
+    <h1 class="text-center">Scanner de QR Code</h1>
+    <audio id="beep" src="{{url_for('static', filename='audio/scanner/beep.mp3')}}" preload="auto"></audio>
+    <div class="m-auto" id="reader" style="width:300px;"></div>
+    <div class="resultado text-center mt-4" id="resultado"></div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script src="{{url_for('scanner.static',
+    filename='js/scan.js')}}"></script>
+
+{% endblock %}
