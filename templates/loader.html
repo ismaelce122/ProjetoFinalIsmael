@@ -1,0 +1,18 @@
+{% extends 'base_cadastros.html' %}
+
+{% block head %}
+
+<meta http-equiv="refresh" content="6; url='{{url_for('PainelServicos')}}">
+<link rel="stylesheet" href="{{url_for('static',
+    filename='css/loader.css')}}">
+
+{% endblock %}
+
+{% block conteudo %}
+
+<div class="overlay">
+    <div class="loader"></div>
+    <h2 class="texto">Iniciando o Sistema...</h2>
+</div>
+
+{% endblock %}

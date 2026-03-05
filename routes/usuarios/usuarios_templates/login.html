@@ -19,15 +19,20 @@
         <form id="formLogin" class="form" action="{{url_for('usuarios.Login')}}" method="post">
             <h2>Login</h2>
             <div class="form-group">
-                <input type="email" name="email" id="email" placeholder="Email" required /> 
+                <input type="email" name="email" id="email" placeholder="Email" required />
             </div>
             <div class="form-group">
                 <input type="password" name="senha" id="senha" placeholder="Senha" required />
+                <!-- Exibindo mensagens flash -->
+                {% for categoria, message in get_flashed_messages(with_categories=true) %}
+                    <p class="text-start text-{{categoria}}">{{message}}</p>
+                {% endfor %}
             </div>
             <button type="submit">Entrar</button>
         </form>
 
-        <form id="formCadastro" class="form" action="{{url_for('usuarios.CadastrarUsuario')}}" method="post" style="display: none;">
+        <form id="formCadastro" class="form" action="{{url_for('usuarios.CadastrarUsuario')}}" method="post"
+            style="display: none;">
             <h2>Crie a sua conta</h2>
             <div class="form-group">
                 <input type="text" name="nome" id="nome" placeholder="Nome completo" required />

@@ -16,8 +16,12 @@ body {
     display: none;
 }
 
+.flash {
+    display: none;
+}
+
 .titulo {
-    height: 80px;
+    height: 60px;
     background-color: #007bff;
     color: white;
 }
@@ -66,6 +70,10 @@ a {
 @media (max-width: 800px) {
     .card1 {
         display: none;
+    }
+
+    .flash {
+        display: block;
     }
 
     .card_celular {

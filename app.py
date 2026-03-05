@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, redirect, url_for
+from flask import Flask, render_template, session, redirect, url_for, flash
 from routes import Registrar_Blueprints
 from auth import login_required
 import os
@@ -16,6 +16,12 @@ def index():
 @login_required
 def PainelServicos():
     return render_template('painelServicos.html', session = session)
+
+@app.route("/loader")
+@login_required
+def Loader():
+    flash("login efetuado com sucesso!!!", "success")
+    return render_template('loader.html')
     
 @app.route('/logout')
 def logout():

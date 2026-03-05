@@ -1,4 +1,4 @@
-from flask import render_template, session, redirect, url_for, request, Blueprint
+from flask import render_template, session, redirect, url_for, request, Blueprint, flash
 from config import banco as db
 from auth import login_required
 import pymysql
@@ -129,21 +129,16 @@ def Login():
                 if bcrypt.checkpw(senha.encode('utf-8'), senhaHash.encode('utf-8')):
                     session['usuario_nome'] = resultado['nome']
                     session['usuario_id'] = resultado['id']
-                    return redirect(url_for('PainelServicos'))
+                    return redirect(url_for('Loader'))
                 else:
                     print('Senha Incorreta!!!')
-                    return '''
-                            <link rel="shortcut icon" href="../../static/image/icone/icone.png" type="image/png">
-                            <h2 style="text-align: center; margin-top: 20px;">Senha Incorreta!!!</h2>
-                            <a href="/login" style="text-align: center; display: block; text-decoration: none; color: white; background-color: #007bff; width: 150px; padding: 10px; border-radius: 5px; margin: auto;"><<< Voltar ao Login</a>
-                           ''' 
+                    flash("senha incorreta!!!", "danger")
+                    return redirect(url_for('usuarios.Login'))
+                    
             else:
                 print('E-mail Incorreto!!!')
-                return '''
-                        <link rel="shortcut icon" href="../../static/image/icone/icone.png" type="image/png">
-                        <h2 style="text-align: center; margin-top: 20px;">E-mail Incorreto!!!</h2>
-                        <a href="/login" style="text-align: center; display: block; text-decoration: none; color: white; background-color: #007bff; width: 150px; padding: 10px; border-radius: 5px; margin: auto;"><<< Voltar ao Login</a>
-                       '''
+                flash("e-mail incorreto!!!", "danger")
+                return redirect(url_for('usuarios.Login'))
         except pymysql.MySQLError as e:
             print('-----------------------------------------------')
             print(f'Erro no banco de dados: {e.args[0]}')
