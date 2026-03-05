@@ -8,7 +8,6 @@ app.secret_key = os.getenv("FLASK_SECRET_KEY")
 Registrar_Blueprints(app)
 
 @app.route("/")
-@login_required
 def index():
     return redirect(url_for('usuarios.Login'))
     
