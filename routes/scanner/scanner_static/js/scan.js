@@ -9,8 +9,6 @@ const Scannear = (decodedText, decodedResult) => {
         texto.push(decodedText)
         resultado.textContent = decodedText
         box.appendChild(resultado)
-    } else {
-        alert('Erro ao ler Qr Code!!!')
     }
 }
 
