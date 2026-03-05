@@ -15,6 +15,14 @@
     <audio id="beep" src="{{url_for('static', filename='audio/scanner/beep.mp3')}}" preload="auto"></audio>
     <div class="m-auto" id="reader" style="width:300px;"></div>
     <div class="resultado text-center mt-4" id="resultado"></div>
+    <div class="d-flex justify-content-center gap-2 mt-4">
+        <div>
+            <a href="{{url_for('estoque.Estoque')}}" class="btn btn-secondary">Voltar</a>
+        </div>
+        <div>
+            <button type="submit" onclick="ReiniciarScanner()" class="btn btn-primary">Reiniciar Scanner</button>
+        </div>
+    </div>
 </div>
 
 {% endblock %}
