@@ -127,18 +127,20 @@ def Login():
                 senhaHash = resultado['senha']
                 print(f'Usuário Logado: {resultado['nome']}')
                 if bcrypt.checkpw(senha.encode('utf-8'), senhaHash.encode('utf-8')):
-                    session['usuario'] = resultado['nome']
+                    session['usuario_nome'] = resultado['nome']
                     session['usuario_id'] = resultado['id']
                     return redirect(url_for('PainelServicos'))
                 else:
                     print('Senha Incorreta!!!')
                     return '''
+                            <link rel="shortcut icon" href="../../static/image/icone/icone.png" type="image/png">
                             <h2 style="text-align: center; margin-top: 20px;">Senha Incorreta!!!</h2>
                             <a href="/login" style="text-align: center; display: block; text-decoration: none; color: white; background-color: #007bff; width: 150px; padding: 10px; border-radius: 5px; margin: auto;"><<< Voltar ao Login</a>
                            ''' 
             else:
                 print('E-mail Incorreto!!!')
                 return '''
+                        <link rel="shortcut icon" href="../../static/image/icone/icone.png" type="image/png">
                         <h2 style="text-align: center; margin-top: 20px;">E-mail Incorreto!!!</h2>
                         <a href="/login" style="text-align: center; display: block; text-decoration: none; color: white; background-color: #007bff; width: 150px; padding: 10px; border-radius: 5px; margin: auto;"><<< Voltar ao Login</a>
                        '''
