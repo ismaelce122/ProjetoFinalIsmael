@@ -34,7 +34,7 @@
                     <select name="peca[]" class="opcoes form-select">
                         <option value="">-- selecione a peça --</option>
                         {% for peca in pecas %}
-                        <option value="{{peca.nome}}-{{peca.preco}}">{{peca.nome}}</option>
+                        <option value="{{peca.id}}-{{peca.nome}}-{{peca.preco}}">{{peca.nome}}</option>
                         {% endfor %}
                     </select>
                 </div>

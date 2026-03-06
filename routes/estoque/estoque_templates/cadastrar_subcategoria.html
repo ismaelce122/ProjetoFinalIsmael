@@ -16,11 +16,11 @@
         </div>
         <div>
             <label class="form-label" for="nome">Nome:</label>
-            <input class="form-control" type="text" id="nome" name="nome">
+            <input class="form-control" type="text" name="nome" required>
         </div>
         <div class="mt-3">
             <label class="form-label" for="id_categoria">Categoria:</label>
-            <select name="id_categoria" class="opcoes form-select">
+            <select name="id_categoria" class="opcoes form-select" required>
                 <option value="">-- selecione uma categoria --</option>
                 {% for categoria in resultado %}
                     <option value="{{categoria.id}}">{{categoria.nome}}</option>

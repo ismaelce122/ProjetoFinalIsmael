@@ -188,7 +188,7 @@ def EditarCliente(id):
         try:
             conexao = db.ConectarBanco()
             cursor = conexao.cursor()
-            sql = 'UPDATE clientes SET nome = %s, telefone = %s, email = %s, documento=%s, endereco=%s WHERE id = %s'
+            sql = 'UPDATE clientes SET nome = %s, telefone = %s, email = %s, documento = %s, endereco = %s WHERE id = %s'
             cursor.execute(sql, (cliente['nome'], cliente['telefone'], cliente['email'], cliente['documento'], cliente['endereco'], id))
             conexao.commit()
             return redirect(url_for('usuarios.BuscarClientes'))

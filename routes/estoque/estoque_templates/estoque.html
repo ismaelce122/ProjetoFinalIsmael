@@ -34,7 +34,11 @@
             {% for peca in resultado %}
             <tr>
                 <td>{{peca.nome}}</td>
-                <td>{{peca.quantidade}}</td>
+                {% if peca.quantidade == 0 %}
+                    <td style="color: red;">sem estoque</td>
+                {% else %}
+                 <td>{{peca.quantidade}}</td>
+                {% endif %}
                 <td>R$ {{peca.preco}}</th>
                 <td>{{peca.localizacao}}</td>
                 <td>

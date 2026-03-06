@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, request, jsonify, Blueprint
+from flask import render_template, redirect, url_for, request, jsonify, Blueprint, flash
 from auth import login_required
 from config import banco as db
 import pymysql
@@ -153,10 +153,27 @@ def ItensOs(id_os, cliente):
             conexao = db.ConectarBanco()
             cursor = conexao.cursor()
             for peca, quantidade in zip(pecas, quantidades):
-                nome, preco = peca.split('-')
-                sql = 'INSERT INTO itens_os (id_os, nome, quantidade, preco) VALUES (%s, %s, %s, %s)'
-                cursor.execute(sql, (id_os, nome, quantidade, preco))
+                id_peca, nome, preco = peca.split('-')
+                sql = 'SELECT quantidade FROM pecas WHERE id = %s'
+                cursor.execute(sql, id_peca)
+                estoque = cursor.fetchone()
+                if estoque['quantidade'] == 0:
+                    print('item sem estoque!!!')
+                    flash('item sem estoque!!!', 'info')
+                    return redirect(url_for('ordens.OrdensServico'))
+                elif int(quantidade) <= estoque['quantidade']:
+                    novaQtd = estoque['quantidade'] - int(quantidade)
+                    sql = 'INSERT INTO itens_os (id_os, nome, quantidade, preco) VALUES (%s, %s, %s, %s)'
+                    cursor.execute(sql, (id_os, nome, quantidade, preco))
+                    sql = 'UPDATE pecas SET quantidade = %s WHERE id = %s'
+                    cursor.execute(sql, (novaQtd, id_peca))
+                    print('Adicionado com sucesso')
+                else:
+                    print('quantidade maior que o estoque!!!')
+                    flash('quantidade maior que o estoque!!!', 'info')
+                    return redirect(url_for('ordens.OrdensServico'))
             conexao.commit()
+            flash('itens adicionados com sucesso!!!', 'success')
             return redirect(url_for('ordens.OrdensServico'))
         except pymysql.MySQLError as e:
             print('-----------------------------------------------')
@@ -233,14 +250,24 @@ def DeletarOs(id):
         conexao.close()
         cursor.close()
 
-@ordens_bp.route("/deletar_item_os/<int:id>/<int:id_os>")
+@ordens_bp.route("/deletar_item_os/<int:id>/<int:id_os>/<nome_peca>")
 @login_required
-def DeletarItemOs(id, id_os):
+def DeletarItemOs(id, id_os, nome_peca):
     try:
         conexao = db.ConectarBanco()
         cursor = conexao.cursor()
+        sql = 'SELECT quantidade FROM itens_os WHERE id = %s'
+        cursor.execute(sql, id)
+        quantidade = cursor.fetchone()
         sql = 'DELETE FROM itens_os WHERE id = %s'
         cursor.execute(sql, (id, ))
+        conexao.commit()
+        sql = 'SELECT quantidade FROM pecas WHERE nome = %s'
+        cursor.execute(sql, nome_peca)
+        resultado = cursor.fetchone()
+        novaQtd = resultado['quantidade'] + int(quantidade['quantidade'])
+        sql = 'UPDATE pecas SET quantidade = %s WHERE nome = %s'
+        cursor.execute(sql, (novaQtd, nome_peca))
         conexao.commit()
         return redirect(url_for('ordens.InfoOs', id_os = id_os))
     except pymysql.MySQLError as e:
