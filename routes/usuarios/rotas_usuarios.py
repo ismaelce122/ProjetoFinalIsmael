@@ -82,7 +82,6 @@ def CadastrarUsuario():
 @login_required
 def BuscarClientes():
     tz = pytz.timezone('America/Fortaleza')
-    listaClientes = []
     try:
         conexao = db.ConectarBanco()
         cursor = conexao.cursor()
@@ -92,10 +91,11 @@ def BuscarClientes():
         for cliente in resultado:
             horaFortaleza = cliente['criado_em'].astimezone(tz)
             cliente['criado_em'] = horaFortaleza
-            listaClientes.append(cliente)
-        for lista in listaClientes:
-            print(lista['criado_em'])
-        return render_template('clientes.html', listaClientes = listaClientes)
+            data = cliente['criado_em'].strftime("%d/%m/%Y")
+            hora = cliente['criado_em'].strftime("%H:%M:%S")
+            cliente['criado_em'] = data
+            cliente['hora'] = hora
+        return render_template('clientes.html', listaClientes = resultado)
     except pymysql.MySQLError as e:
         print('-----------------------------------------------')
         print(f'Erro no banco de dados: {e.args[0]}')

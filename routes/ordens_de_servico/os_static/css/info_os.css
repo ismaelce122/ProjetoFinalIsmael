@@ -8,6 +8,20 @@
     color: white;
 }
 
+.box2 {
+    background-color: rgba(2, 2, 2, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    margin-top: 50px;
+    margin-bottom: 30px;
+    color: white;
+}
+
+.celular {
+    display: none;
+}
+
 .excluir {
     text-decoration: none;
     font-size: 20px;
@@ -24,4 +38,15 @@
 
 .excluir:hover {
     background-color: darkred;
+}
+
+@media (max-width: 800px) {
+
+    .box1 {
+        display: none;
+    }
+
+    .celular {
+        display: block;
+    }
 }

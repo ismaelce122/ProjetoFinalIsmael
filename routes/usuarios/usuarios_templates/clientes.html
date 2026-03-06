@@ -22,7 +22,8 @@
                 <th>Cpf</th>
                 <th>Endereço</th>
                 <th>Data do Cadastro</th>
-                <th></th>
+                <th>Hora do Cadastro</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -34,6 +35,7 @@
                 <td>{{cliente.documento}}</td>
                 <td>{{cliente.endereco}}</td>
                 <td>{{cliente.criado_em}}</td>
+                <td>{{cliente.hora}}</td>
                 <td>
                     <div class="d-flex">
                         <a href="{{url_for('usuarios.EditarCliente', id = cliente.id)}}" class="editar"><i

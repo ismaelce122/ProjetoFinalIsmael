@@ -13,18 +13,19 @@
     <div class="box1">
         <div class="row mt-4">
             <div class="col-3">
-                <label class="form-label" for="id_os">Número da Os:</label>
-                <h3>{{idOs}}</h3>
+                <label class="form-label">Número da Os:</label>
+                <h3>{{cliente['id']}}</h3>
             </div>
             <div class="col-4">
-                <label class="form-label" for="cliente">Cliente:</label>
-                <h3>{{nomeCliente}}</h3>
+                <label class="form-label">Cliente:</label>
+                <h3>{{cliente['nome']}}</h3>
             </div>
             <div class="col-4">
-                <label class="form-label" for="cliente">Mecânico:</label>
-                <h3>{{nomeMecanico}}</h3>
+                <label class="form-label">Mecânico:</label>
+                <h3>{{cliente['mecanicos.nome']}}</h3>
             </div>
         </div>
+        {% if itens_os %}
         <div class="row mt-4">
             <div class="col-4">
                 <label class="form-label" for="id_os">Peça:</label>
@@ -60,7 +61,8 @@
                 <h3>R$ {{item.valor}},00</h3>
             </div>
             <div class="col-1">
-                <a href="{{url_for('ordens.DeletarItemOs', id = item.id)}}" class="excluir"><i class="fa fa-trash"></i></a>
+                <a href="{{url_for('ordens.DeletarItemOs', id = item.id, id_os = cliente['id'])}}" class="excluir"><i
+                        class="fa fa-trash"></i></a>
             </div>
             {% endfor %}
         </div>
@@ -75,6 +77,92 @@
                 <h3>R$ {{soma}},00</h3>
             </div>
         </div>
+        {% else %}
+        <div class="mt-2">
+            <h3>Aguardando Peças...</h3>
+        </div>
+        {% endif %}
+        <div class="row mt-2">
+            <div class="d-flex justify-content-center gap-2 mt-4">
+                <div>
+                    <a href="{{url_for('ordens.OrdensServico')}}" class="btn btn-primary">Voltar</a>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-success">Pagar Os</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box2 celular">
+        <div class="row mt-4">
+            <div class="col-3">
+                <label class="form-label">Número da Os:</label>
+                <h3>{{cliente['id']}}</h3>
+            </div>
+            <div class="col-4">
+                <label class="form-label">Cliente:</label>
+                <h3>{{cliente['nome']}}</h3>
+            </div>
+            <div class="col-4">
+                <label class="form-label">Mecânico:</label>
+                <h3>{{cliente['mecanicos.nome']}}</h3>
+            </div>
+        </div>
+        {% if itens_os %}
+        <div class="mt-2">
+            {% for item in itens_os %}
+            <div class="row">
+                <div class="col-12">
+                    <label class="form-label">Peça:</label>
+                </div>
+                <div class="col-12">
+                    <h3>{{item.nome}}</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1">
+                    <label class="form-label">Qtd:</label>
+                </div>
+                <div class="col-4 text-center">
+                    <label class="form-label">Preço:</label>
+                </div>
+                <div class="col-4 text-center">
+                    <label class="form-label">Valor:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1 text-center">
+                    <h3>{{item.quantidade}}</h3>
+                </div>
+                <div class="col-1">
+                    <h3>X</h3>
+                </div>
+                <div class="col-4">
+                    <h3>R$ {{item.preco}},00</h3>
+                </div>
+                <div class="col-4">
+                    <h3>R$ {{item.valor}},00</h3>
+                </div>
+                <div class="col-1">
+                    <a href="{{url_for('ordens.DeletarItemOs', id = item.id, id_os = cliente['id'])}}"
+                        class="excluir"><i class="fa fa-trash"></i></a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="row mt-2">
+            <div class="col-2">
+                <h2>Total:</h2>
+            </div>
+            <div class="col-10">
+                <h3>R$ {{soma}},00</h3>
+            </div>
+        </div>
+        {% else %}
+        <div class="mt-2">
+            <h3>Aguardando Peças...</h3>
+        </div>
+        {% endif %}
         <div class="row mt-2">
             <div class="d-flex justify-content-center gap-2 mt-4">
                 <div>

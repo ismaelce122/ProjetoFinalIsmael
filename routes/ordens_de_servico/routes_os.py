@@ -2,35 +2,39 @@ from flask import render_template, redirect, url_for, request, jsonify, Blueprin
 from auth import login_required
 from config import banco as db
 import pymysql
+import pytz
 
 ordens_bp = Blueprint("ordens", __name__, url_prefix='/ordens_de_servico', template_folder='os_templates', static_folder='os_static')
 
-@ordens_bp.route("/", methods = ['GET', 'POST'])
+@ordens_bp.route("/")
 @login_required
 def OrdensServico():
-    if request.method == 'GET':
-        try:
-            conexao = db.ConectarBanco()
-            cursor = conexao.cursor()
-            sql = 'SELECT * FROM os JOIN clientes ON os.id_cliente = clientes.id JOIN mecanicos ON os.id_mecanico = mecanicos.id ORDER BY os.id ASC'
-            cursor.execute(sql)
-            resultado = cursor.fetchall()
-            return render_template("os.html", resultado = resultado)
-        except pymysql.MySQLError as e:
-            print('-----------------------------------------------')
-            print(f'Erro no banco de dados: {e.args[0]}')
-            print(f'Mensagem do Erro: {e.args[1]}')
-            print('-----------------------------------------------')
-            return f'<h2>Erro no banco de dados: {e}</h2>'    
-        except Exception as e:
-            erro = True
-            print(f'Houve um erro: {e}')
-            return f'<h2>Houve um erro: {e}</h2>'
-        finally:
-            conexao.close()
-            cursor.close()
-    elif request.method == 'POST':
-        pass
+    tz = pytz.timezone('America/Fortaleza')
+    try:
+        conexao = db.ConectarBanco()
+        cursor = conexao.cursor()
+        sql = 'SELECT * FROM os JOIN clientes ON os.id_cliente = clientes.id JOIN mecanicos ON os.id_mecanico = mecanicos.id ORDER BY os.id ASC'
+        cursor.execute(sql)
+        resultado = cursor.fetchall()
+        for valor in resultado:
+            horaFortaleza = valor['criado_em'].astimezone(tz)
+            valor['criado_em'] = horaFortaleza
+            data = valor['criado_em'].strftime("%d/%m/%Y")
+            valor['criado_em'] = data
+        return render_template("os.html", resultado = resultado)
+    except pymysql.MySQLError as e:
+        print('-----------------------------------------------')
+        print(f'Erro no banco de dados: {e.args[0]}')
+        print(f'Mensagem do Erro: {e.args[1]}')
+        print('-----------------------------------------------')
+        return f'<h2>Erro no banco de dados: {e}</h2>'    
+    except Exception as e:
+        erro = True
+        print(f'Houve um erro: {e}')
+        return f'<h2>Houve um erro: {e}</h2>'
+    finally:
+        conexao.close()
+        cursor.close()
 
 @ordens_bp.route("/api/pecas")
 def Pecas():
@@ -168,12 +172,15 @@ def ItensOs(id_os, cliente):
             conexao.close()
             cursor.close()
 
-@ordens_bp.route("/info_os/<int:id_os>/<cliente>/<mecanico>")
+@ordens_bp.route("/info_os/<int:id_os>")
 @login_required
-def InfoOs(id_os, cliente, mecanico):
+def InfoOs(id_os):
     try:
         conexao = db.ConectarBanco()
         cursor = conexao.cursor()
+        sql = 'SELECT * FROM os JOIN clientes ON os.id_cliente = clientes.id JOIN mecanicos ON os.id_mecanico = mecanicos.id WHERE os.id = %s'
+        cursor.execute(sql, id_os)
+        cliente = cursor.fetchone()
         sql = 'SELECT id, nome, quantidade, preco FROM itens_os WHERE id_os = %s'
         cursor.execute(sql, id_os)
         itens_os = cursor.fetchall()
@@ -187,7 +194,7 @@ def InfoOs(id_os, cliente, mecanico):
             item['preco'] = preco
             item['valor'] = item['preco'] * item['quantidade']
             novoItem.append(item)
-        return render_template("info_os.html", itens_os = novoItem, idOs = id_os, nomeCliente = cliente, nomeMecanico = mecanico, soma = soma)
+        return render_template("info_os.html", itens_os = novoItem, cliente = cliente, soma = soma)
     except pymysql.MySQLError as e:
         print('-----------------------------------------------')
         print(f'Erro no banco de dados: {e.args[0]}')
@@ -226,29 +233,16 @@ def DeletarOs(id):
         conexao.close()
         cursor.close()
 
-@ordens_bp.route("/deletar_item_os/<int:id>")
+@ordens_bp.route("/deletar_item_os/<int:id>/<int:id_os>")
 @login_required
-def DeletarItemOs(id):
+def DeletarItemOs(id, id_os):
     try:
         conexao = db.ConectarBanco()
         cursor = conexao.cursor()
         sql = 'DELETE FROM itens_os WHERE id = %s'
         cursor.execute(sql, (id, ))
         conexao.commit()
-        sql = 'SELECT * FROM itens_os'
-        cursor.execute(sql)
-        itens = cursor.fetchall()
-        novoItem = []
-        soma = 0
-        for item in itens:
-            quantidade = int(item['quantidade'])
-            preco = int(item['preco'])
-            soma = soma + (quantidade * preco)
-            item['quantidade'] = quantidade
-            item['preco'] = preco
-            item['valor'] = item['preco'] * item['quantidade']
-            novoItem.append(item)
-        return render_template('info_os.html', itens_os = novoItem, soma = soma)
+        return redirect(url_for('ordens.InfoOs', id_os = id_os))
     except pymysql.MySQLError as e:
         print('-----------------------------------------------')
         print(f'Erro no banco de dados: {e.args[0]}')
