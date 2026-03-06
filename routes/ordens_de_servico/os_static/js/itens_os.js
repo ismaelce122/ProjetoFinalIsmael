@@ -5,7 +5,7 @@ fetch('https://ismaelce122.pythonanywhere.com/ordens_de_servico/api/pecas')
     .then(resposta => resposta.json())
     .then(listaPecas => {
         listaPecas.forEach((peca) => {
-            html += `<option value="${peca.nome}-${peca.preco}">${peca.nome}</option>`
+            html += `<option value="${peca.id}-${peca.nome}-${peca.preco}">${peca.nome}</option>`
         })
     })
     .catch(err => console.error('Erro ao Buscar Dados: ', err))
