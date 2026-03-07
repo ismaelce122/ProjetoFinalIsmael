@@ -91,14 +91,77 @@ def CadastrarOs():
                 'id_cliente': request.form.get('id_cliente'),
                 'id_mecanico': request.form.get('id_mecanico'),
                 'status_os': request.form.get('status_os'),
+                'status_servico': request.form.get('status_servico'),
+                'problema_relatado': request.form.get('problema_relatado'),
+                'diagnostico': request.form.get('diagnostico')
+            }
+        if os['diagnostico'] == '':
+            os['diagnostico'] = 'aguardando análise do mecânico...'
+        try:
+            conexao = db.ConectarBanco()
+            cursor = conexao.cursor()
+            sql = 'INSERT INTO os (id_cliente, id_mecanico, status_os, status_servico, problema, diagnostico) VALUES (%s, %s, %s, %s, %s, %s)'
+            cursor.execute(sql, (os['id_cliente'], os['id_mecanico'], os['status_os'], os['status_servico'], os['problema_relatado'], os['diagnostico']))
+            conexao.commit()
+            return redirect(url_for('ordens.OrdensServico'))
+        except pymysql.MySQLError as e:
+            print('-----------------------------------------------')
+            print(f'Erro no banco de dados: {e.args[0]}')
+            print(f'Mensagem do Erro: {e.args[1]}')
+            print('-----------------------------------------------')
+            return f'<h2>Erro no banco de dados: {e}</h2>'
+        except Exception as e:
+            erro = True
+            print(f'Houve um erro: {e}')
+            return f'<h2>Houve um erro: {e}</h2>'
+        finally:
+            conexao.close()
+            cursor.close()
+
+@ordens_bp.route("/editar/<int:id_os>", methods = ['GET', 'POST'])
+@login_required
+def EditarOs(id_os):
+    if request.method == 'GET':
+        try:
+            conexao = db.ConectarBanco()
+            cursor = conexao.cursor()
+            sql = 'SELECT * FROM os JOIN clientes ON os.id_cliente = clientes.id JOIN mecanicos ON os.id_mecanico = mecanicos.id WHERE os.id = %s'
+            cursor.execute(sql, (id_os, ))
+            resultado = cursor.fetchone()
+            sql = 'SELECT * FROM clientes ORDER BY nome ASC'
+            cursor.execute(sql)
+            clientes = cursor.fetchall()
+            sql = 'SELECT * FROM mecanicos ORDER BY nome ASC'
+            cursor.execute(sql)
+            mecanicos = cursor.fetchall()
+            return render_template('editar_os.html', resultado = resultado, clientes = clientes, mecanicos = mecanicos)
+        except pymysql.MySQLError as e:
+            print('-----------------------------------------------')
+            print(f'Erro no banco de dados: {e.args[0]}')
+            print(f'Mensagem do Erro: {e.args[1]}')
+            print('-----------------------------------------------')
+            return f'<h2>Erro no banco de dados: {e}</h2>'    
+        except Exception as e:
+            erro = True
+            print(f'Houve um erro: {e}')
+            return f'<h2>Houve um erro: {e}</h2>'
+        finally:
+            conexao.close()
+            cursor.close()
+    elif request.method == 'POST':
+        os = {
+                'id_cliente': request.form.get('id_cliente'),
+                'id_mecanico': request.form.get('id_mecanico'),
+                'status_os': request.form.get('status_os'),
+                'status_servico': request.form.get('status_servico'),
                 'problema_relatado': request.form.get('problema_relatado'),
                 'diagnostico': request.form.get('diagnostico')
             }
         try:
             conexao = db.ConectarBanco()
             cursor = conexao.cursor()
-            sql = 'INSERT INTO os (id_cliente, id_mecanico, status_os, problema, diagnostico) VALUES (%s, %s, %s, %s, %s)'
-            cursor.execute(sql, (os['id_cliente'], os['id_mecanico'], os['status_os'], os['problema_relatado'], os['diagnostico']))
+            sql = 'UPDATE os SET id_cliente = %s, id_mecanico = %s, status_os = %s, status_servico = %s, problema = %s, diagnostico = %s WHERE id = %s'
+            cursor.execute(sql, (os['id_cliente'], os['id_mecanico'], os['status_os'], os['status_servico'], os['problema_relatado'], os['diagnostico'], id_os))
             conexao.commit()
             return redirect(url_for('ordens.OrdensServico'))
         except pymysql.MySQLError as e:

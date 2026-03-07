@@ -17,10 +17,12 @@
     <table class="mt-2">
         <thead>
             <tr>
-                <th>Número da Os</th>
+                <th>Os</th>
                 <th>Cliente</th>
                 <th>Problema</th>
+                <th>Diagnóstico</th>
                 <th>Status Os</th>
+                <th>Serviço</th>
                 <th>Data Os</th>
                 <th>Ações</th>
             </tr>
@@ -31,13 +33,15 @@
                 <td>{{os.id}}</td>
                 <td>{{os.nome}}</td>
                 <td>{{os.problema}}</th>
+                <td>{{os.diagnostico}}</th>
                 <td>{{os.status_os}}</td>
+                <td>{{os.status_servico}}</td>
                 <td>{{os.criado_em}}</td>
                 <td>
                     <div class="d-flex">
                         <a href="{{url_for('ordens.ItensOs', id_os = os.id, cliente = os.nome)}}" class="adicionar"><i class="fa fa-plus-square"></i></a>
                         <a href="{{url_for('ordens.InfoOs', id_os = os.id)}}" class="info_os"><i class="fa fa-info-circle"></i></a>
-                        <a href="#" class="editar"><i class="fa fa-edit"></i></a>
+                        <a href="{{url_for('ordens.EditarOs', id_os = os.id)}}" class="editar"><i class="fa fa-edit"></i></a>
                         <a href="{{url_for('ordens.DeletarOs', id = os.id)}}" class="excluir"><i class="fa fa-trash"></i></a>
                     </div>
                 </td>

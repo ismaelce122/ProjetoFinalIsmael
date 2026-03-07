@@ -1,24 +1,24 @@
-{% extends 'base_cadastros.html' %}
+{% extends 'base.html' %}
 
 {% block head %}
 
 <link rel="stylesheet" href="{{url_for('ordens.static',
-    filename='css/cadastrar_os.css')}}">
+    filename='css/editar_os.css')}}">
 
 {% endblock %}
 
 {% block conteudo %}
 
 <div class="container box_pc">
-    <form class="form-control p-3 box1" action="{{url_for('ordens.CadastrarOs')}}" method="post">
+    <form class="form-control p-3 box1" action="{{url_for('ordens.EditarOs', id_os = resultado['id'])}}" method="post">
         <div>
-            <h2 class="text-center">Cadastrar Ordem de Serviço</h2>
+            <h2 class="text-center">Editar Ordem de Serviço</h2>
         </div>
         <div class="row mt-3">
             <div class="col-3">
                 <label class="form-label" for="id_cliente">Cliente:</label>
                 <select name="id_cliente" class="opcoes form-select" required>
-                    <option value="">-- selecione o cliente --</option>
+                    <option value="{{resultado['id_cliente']}}">{{resultado['nome']}}</option>
                     {% for cliente in clientes %}
                     <option value="{{cliente.id}}">{{cliente.nome}}</option>
                     {% endfor %}
@@ -27,7 +27,7 @@
             <div class="col-3">
                 <label class="form-label" for="id_mecanico">Mecânico Designado:</label>
                 <select name="id_mecanico" class="opcoes form-select" required>
-                    <option value="">-- selecione o mecânico --</option>
+                    <option value="{{resultado['mecanicos.id']}}">{{resultado['mecanicos.nome']}}</option>
                     {% for mecanico in mecanicos %}
                     <option value="{{mecanico.id}}">{{mecanico.nome}}</option>
                     {% endfor %}
@@ -36,18 +36,18 @@
         </div>
         <div class="mt-2">
             <label class="form-label" for="problema_relatado">Problema Relatado:</label>
-            <textarea class="form-control" name="problema_relatado" required></textarea>
+            <textarea class="form-control" name="problema_relatado" required>{{resultado['problema']}}</textarea>
         </div>
         <div>
             <label class="form-label" for="diagnostico">Diagnóstico:</label>
-            <textarea class="form-control" name="diagnostico"></textarea>
+            <textarea class="form-control" name="diagnostico">{{resultado['diagnostico']}}</textarea>
         </div>
         <div class="col-3 mt-2">
             <label class="form-label" for="status_os">Status da Os:</label>
             <select name="status_os" class="opcoes form-select" required>
-                <option value="">-- selecione o status --</option>
+                <option value="{{resultado['status_os']}}">{{resultado['status_os']}}</option>
                 <option value="aberta">aberta</option>
-                <option value="aguardando_pagamento">aguardando pagamento...</option>
+                <option value="aguardando_pagamento...">aguardando pagamento...</option>
                 <option value="paga">paga</option>
                 <option value="cancelada">cancelada</option>
             </select>
@@ -55,10 +55,10 @@
         <div class="col-3 mt-2">
             <label class="form-label" for="status_servico">Status do Serviço:</label>
             <select name="status_servico" class="opcoes form-select" required>
-                <option value="">-- selecione o status --</option>
-                <option value="em_analise">em análise...</option>
-                <option value="em_andamento">em andamento...</option>
-                <option value="aguardando_pecas">aguardando peças</option>
+                <option value="{{resultado['status_servico']}}">{{resultado['status_servico']}}</option>
+                <option value="em_analise...">em análise...</option>
+                <option value="em_andamento...">em andamento...</option>
+                <option value="aguardando_pecas...">aguardando peças</option>
                 <option value="terminado">terminado</option>
             </select>
         </div>
@@ -67,22 +67,22 @@
                 <a href="{{url_for('ordens.OrdensServico')}}" class="btn btn-primary">Voltar</a>
             </div>
             <div>
-                <button type="submit" class="btn btn-success">Cadastrar</button>
+                <button type="submit" class="btn btn-success">Salvar</button>
             </div>
         </div>
     </form>
 </div>
 
 <div class="container box_celular">
-    <form class="form-control p-3 box1" action="{{url_for('ordens.CadastrarOs')}}" method="post">
+    <form class="form-control p-3 box1" action="{{url_for('ordens.EditarOs', id_os = resultado['id'])}}" method="post">
         <div>
-            <h2 class="text-center">Cadastrar Ordem de Serviço</h2>
+            <h2 class="text-center">Editar Ordem de Serviço</h2>
         </div>
         <div class="row mt-3">
             <div class="col-12">
                 <label class="form-label" for="id_cliente">Cliente:</label>
-                <select name="id_cliente" class="opcoes form-select">
-                    <option value="">-- selecione o cliente --</option>
+                <select name="id_cliente" class="opcoes form-select" required>
+                    <option value="{{resultado['id_cliente']}}">{{resultado['nome']}}</option>
                     {% for cliente in clientes %}
                     <option value="{{cliente.id}}">{{cliente.nome}}</option>
                     {% endfor %}
@@ -90,8 +90,8 @@
             </div>
             <div class="col-12 mt-2">
                 <label class="form-label" for="id_mecanico">Mecânico Designado:</label>
-                <select name="id_mecanico" class="opcoes form-select">
-                    <option value="">-- selecione o mecânico --</option>
+                <select name="id_mecanico" class="opcoes form-select" required>
+                    <option value="{{resultado['mecanicos.id']}}">{{resultado['mecanicos.nome']}}</option>
                     {% for mecanico in mecanicos %}
                     <option value="{{mecanico.id}}">{{mecanico.nome}}</option>
                     {% endfor %}
@@ -100,18 +100,18 @@
         </div>
         <div class="mt-2">
             <label class="form-label" for="problema_relatado">Problema Relatado:</label>
-            <textarea class="form-control" name="problema_relatado"></textarea>
+            <textarea class="form-control" name="problema_relatado" required>{{resultado['problema']}}</textarea>
         </div>
         <div>
             <label class="form-label" for="diagnostico">Diagnóstico:</label>
-            <textarea class="form-control" name="diagnostico"></textarea>
+            <textarea class="form-control" name="diagnostico">{{resultado['diagnostico']}}</textarea>
         </div>
         <div class="col-12 mt-2">
             <label class="form-label" for="status_os">Status da Os:</label>
             <select name="status_os" class="opcoes form-select" required>
-                <option value="">-- selecione o status --</option>
+                <option value="{{resultado['status_os']}}">{{resultado['status_os']}}</option>
                 <option value="aberta">aberta</option>
-                <option value="aguardando_pagamento">aguardando pagamento...</option>
+                <option value="aguardando_pagamento...">aguardando pagamento...</option>
                 <option value="paga">paga</option>
                 <option value="cancelada">cancelada</option>
             </select>
@@ -119,10 +119,10 @@
         <div class="col-12 mt-2">
             <label class="form-label" for="status_servico">Status do Serviço:</label>
             <select name="status_servico" class="opcoes form-select" required>
-                <option value="">-- selecione o status --</option>
-                <option value="em_analise">em análise...</option>
-                <option value="em_andamento">em andamento...</option>
-                <option value="aguardando_pecas">aguardando peças</option>
+                <option value="{{resultado['status_servico']}}">{{resultado['status_servico']}}</option>
+                <option value="em_analise...">em análise...</option>
+                <option value="em_andamento...">em andamento...</option>
+                <option value="aguardando_pecas...">aguardando peças</option>
                 <option value="terminado">terminado</option>
             </select>
         </div>
@@ -131,7 +131,7 @@
                 <a href="{{url_for('ordens.OrdensServico')}}" class="btn btn-primary">Voltar</a>
             </div>
             <div>
-                <button type="submit" class="btn btn-success">Cadastrar</button>
+                <button type="submit" class="btn btn-success">Salvar</button>
             </div>
         </div>
     </form>

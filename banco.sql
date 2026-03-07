@@ -39,6 +39,7 @@ id_mecanico INT NOT NULL,
 FOREIGN KEY(id_cliente) REFERENCES clientes(id),
 FOREIGN KEY(id_mecanico) REFERENCES mecanicos(id),
 status_os VARCHAR(100) NOT NULL,
+status_servico VARCHAR(100) NOT NULL,
 problema VARCHAR(150) NOT NULL,
 diagnostico VARCHAR(150) NOT NULL,
 criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP

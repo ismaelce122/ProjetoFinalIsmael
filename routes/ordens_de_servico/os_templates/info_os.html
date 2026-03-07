@@ -96,16 +96,16 @@
     <div class="box2 celular">
         <div class="row mt-4">
             <div class="col-3">
-                <label class="form-label">Número da Os:</label>
-                <h4>{{cliente['id']}}</h4>
+                <label class="form-label">Os:</label>
+                <h5>{{cliente['id']}}</h5>
             </div>
             <div class="col-4">
                 <label class="form-label">Cliente:</label>
-                <h4>{{cliente['nome']}}</h4>
+                <h5>{{cliente['nome']}}</h5>
             </div>
             <div class="col-4">
                 <label class="form-label">Mecânico:</label>
-                <h4>{{cliente['mecanicos.nome']}}</h4>
+                <h5>{{cliente['mecanicos.nome']}}</h5>
             </div>
         </div>
         {% if itens_os %}
@@ -116,7 +116,7 @@
                     <label class="form-label">Peça:</label>
                 </div>
                 <div class="col-12">
-                    <h4>{{item.nome}}</h4>
+                    <h5>{{item.nome}}</h5>
                 </div>
             </div>
             <div class="row">
@@ -132,16 +132,16 @@
             </div>
             <div class="row">
                 <div class="col-1 text-center">
-                    <h4>{{item.quantidade}}</h4>
+                    <h5>{{item.quantidade}}</h5>
                 </div>
                 <div class="col-1">
-                    <h4>X</h4>
+                    <h5>X</h5>
                 </div>
                 <div class="col-4">
-                    <h4>R$ {{item.preco}},00</h4>
+                    <h5>R$ {{item.preco}},00</h5>
                 </div>
                 <div class="col-4">
-                    <h4>R$ {{item.valor}},00</h4>
+                    <h5>R$ {{item.valor}},00</h5>
                 </div>
                 <div class="col-1">
                     <a href="{{url_for('ordens.DeletarItemOs', id = item.id, id_os = cliente['id'], nome_peca = item.nome)}}"
@@ -152,10 +152,10 @@
         </div>
         <div class="row mt-2">
             <div class="col-2">
-                <h4>Total:</h4>
+                <h5>Total:</h5>
             </div>
             <div class="col-10">
-                <h4>R$ {{soma}},00</h4>
+                <h5>R$ {{soma}},00</h5>
             </div>
         </div>
         {% else %}
