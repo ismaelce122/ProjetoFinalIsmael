@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISP Iptv</title>
+    <link rel="shortcut icon" href="{{url_for('static',
+    filename='image/icone/icone.png')}}" type="image/png">
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <link rel="stylesheet" href="{{url_for('static',
+    filename='css_bootstrap/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('iptv.static',
+    filename='css/iptv.css')}}">
+</head>
+
+<body>
+    <div class="container">
+        <h2>ISP IPTV</h2>
+    </div>
+    <div class="container">
+        <label>Servidor:</label><br>
+        <input id="server" value="https://neweraserver10.top" disabled>
+        <label>Usuário:</label><br>
+        <input id="user" value="489172307" disabled>
+        <label>Senha:</label><br>
+        <input id="pass" type="password" value="373413098" disabled>
+    </div>
+    <div class="container">
+        <button onclick="carregarCategoria()">Canais</button>
+        <button onclick="carregarCategoriaSeries()">Séries</button>
+        <button onclick="carregarCategoriaFilmes()">Filmes</button><br>
+        <div class="d-flex">
+            <input type="text" id="pesquisar" placeholder="buscar...">
+            <button onclick='buscarSeries()'>Buscar</button>
+        </div>
+    </div>
+    <div class="container-fluid box">
+        <div class="box_lista h-100" id="lista"></div>
+        <div class="w-100">
+            <video id="player" controls></video>
+            <p id="assistindo"></p>
+            <video id="player2" controls></video>
+            <p id="assistindo2"></p>
+        </div>
+    </div>
+
+    <script src="{{url_for('static',
+    filename='js_bootstrap/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{url_for('iptv.static',
+    filename='js/iptv.js')}}"></script>
+</body>
+
+</html>
