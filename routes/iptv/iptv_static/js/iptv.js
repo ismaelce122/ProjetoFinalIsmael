@@ -53,7 +53,7 @@ function mostrarCategoria() {
 function mostrarCanais() {
     const lista = document.getElementById("lista")
     lista.innerHTML = ''
-    const server = 'https://neweraserver10.top:80/live'
+    const server = 'http://neweraserver10.top:80/live'
     const user = 489172307
     const pass = 373413098
     let html = "<h3 class='canal'>Canais:</h3>";
@@ -141,7 +141,7 @@ function mostrarCategoriaSeries() {
 
 async function buscarSeries() {
     const nomeSerie = document.getElementById("pesquisar").value
-    const urlSeries = "https://neweraserver10.top:80/get.php?username=489172307&password=373413098&type=m3u&output=m3u8";
+    const urlSeries = "http://neweraserver10.top:80/get.php?username=489172307&password=373413098&type=m3u&output=m3u8";
     const response = await fetch(urlSeries);
     const texto = await response.text();
 
@@ -176,7 +176,7 @@ function reproduzir(url, titulo) {
 
 async function carregarEpisodios(serie, imagem) {
     // URL da lista M3U fornecida pelo provedor
-    const urlLista = "https://neweraserver10.top:80/get.php?username=489172307&password=373413098&type=m3u&output=m3u8";
+    const urlLista = "http://neweraserver10.top:80/get.php?username=489172307&password=373413098&type=m3u&output=m3u8";
     const response = await fetch(urlLista);
     const texto = await response.text();
 
@@ -277,7 +277,7 @@ function mostrarListaFilmes(nome) {
 
 async function carregarFilme(imagem, filme) {
     // URL da lista M3U fornecida pelo provedor
-    const urlLista = "https://neweraserver10.top:80/get.php?username=489172307&password=373413098&type=m3u&output=m3u8";
+    const urlLista = "http://neweraserver10.top:80/get.php?username=489172307&password=373413098&type=m3u&output=m3u8";
     const response = await fetch(urlLista);
     const texto = await response.text();
 
