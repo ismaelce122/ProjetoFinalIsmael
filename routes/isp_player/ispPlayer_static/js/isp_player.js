@@ -101,7 +101,7 @@ function mostrarCanais() {
     const box = document.getElementById('box1')
     const lista = document.getElementById("lista")
     lista.innerHTML = ''
-    //const server = document.getElementById("server").value;
+    const server = document.getElementById("server").value;
     const user = document.getElementById("user").value;
     const pass = document.getElementById("pass").value;
     let html = "<h3 class='canal'>Canais:</h3>";
@@ -115,6 +115,7 @@ function mostrarCanais() {
 }
 
 function abrirCanal(url, canal) {
+    console.log(url)
     const lista = document.getElementById("lista")
     const video = document.getElementById('player');
     const assistindo = document.getElementById('assistindo');
@@ -124,6 +125,8 @@ function abrirCanal(url, canal) {
     if (url.startsWith("http://")) {
         url = url.replace("http://", "https://")
     }
+
+    console.log(url)
 
     if (Hls.isSupported()) {
         const hls = new Hls();
