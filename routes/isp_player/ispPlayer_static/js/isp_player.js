@@ -141,7 +141,8 @@ async function abrirCanal2(urlCanal, canal) {
 
     // busca o manifest original
     const res = await fetch(urlCanal, { redirect: 'follow' });
-    const fixedUrl = res.url
+    const finalUrl = res.url
+    const fixedUrl = finalUrl.replace("http://", "https://")
 
     // usa no Hls.js
     if (Hls.isSupported()) {
