@@ -106,7 +106,7 @@ function mostrarCanais() {
     const pass = document.getElementById("pass").value;
     let html = "<h3 class='canal'>Canais:</h3>";
     canaisCache.forEach((c, i) => {
-        const url = `https://vamooubora.shop/live/${user}/${pass}/${c.stream_id}.m3u8`
+        const url = `${server}/live/${user}/${pass}/${c.stream_id}.m3u8`
         html += `<button onclick="abrirCanal('${url}', '${c.name}')">${c.name}</button>`;
     });
     lista.style.border = '3px solid white'
@@ -119,6 +119,11 @@ function abrirCanal(url, canal) {
     const video = document.getElementById('player');
     const assistindo = document.getElementById('assistindo');
     assistindo.innerHTML = `<b>Assistindo:</b> ${canal}`
+
+    // Forçar https
+    if (url.startsWith("http://")) {
+        url = url.replace("http://", "https://")
+    }
 
     if (Hls.isSupported()) {
         const hls = new Hls();
