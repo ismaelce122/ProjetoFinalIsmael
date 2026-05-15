@@ -107,7 +107,7 @@ function mostrarCanais() {
     let html = "<h3 class='canal'>Canais:</h3>";
     canaisCache.forEach((c, i) => {
         const url = `${server}/live/${user}/${pass}/${c.stream_id}.m3u8`
-        html += `<button onclick="abrirCanal('${url}', '${c.name}')">${c.name}</button>`;
+        html += `<button onclick="abrirCanal2('${url}', '${c.name}')">${c.name}</button>`;
     });
     lista.style.border = '3px solid white'
     lista.innerHTML = html;
@@ -115,18 +115,9 @@ function mostrarCanais() {
 }
 
 function abrirCanal(url, canal) {
-    console.log(url)
-    const lista = document.getElementById("lista")
     const video = document.getElementById('player');
     const assistindo = document.getElementById('assistindo');
     assistindo.innerHTML = `<b>Assistindo:</b> ${canal}`
-
-    // Forçar https
-    if (url.startsWith("http://")) {
-        url = url.replace("http://", "https://")
-    }
-
-    console.log(url)
 
     if (Hls.isSupported()) {
         const hls = new Hls();
@@ -139,6 +130,34 @@ function abrirCanal(url, canal) {
         // Safari suporta nativamente
         video.src = url;
         video.play();
+    }
+}
+
+async function abrirCanal2(urlCanal, canal) {
+    const box = document.getElementById('box1')
+    box.style.display = 'flex'
+    const video = document.getElementById('player');
+    const assistindo = document.getElementById('assistindo');
+
+    // busca o manifest original
+    const res = await fetch(urlCanal, { redirect: 'follow' });
+    const fixedUrl = res.url
+
+    // usa no Hls.js
+    if (Hls.isSupported()) {
+        const hls = new Hls();
+        hls.loadSource(fixedUrl);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, function () {
+            video.play();
+            box.style.display = 'none'
+            assistindo.innerHTML = `<b>Assistindo:</b> ${canal}`
+        });
+    } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+        video.src = fixedUrl;
+        video.play()
+        box.style.display = 'none'
+        assistindo.innerHTML = `<b>Assistindo:</b> ${canal}`
     }
 }
 
@@ -280,7 +299,7 @@ async function mostrarEpisodiosSeries(serieNome, imagem) {
     lista.innerHTML = ''
     let html = `<h3 class='canal'>${serieNome}</h3>`;
     html += `<img src="${imagem}" width="130" height="130" alt="${serieNome}"><br>`
-    for(const temporada in serie.episodes) {
+    for (const temporada in serie.episodes) {
         //console.log('Temporada: ', temporada)
         serie.episodes[temporada].forEach((ep) => {
             //console.log(ep.title)
