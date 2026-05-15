@@ -1,1 +1,0 @@
-from .rotas_iptv import iptv_bp

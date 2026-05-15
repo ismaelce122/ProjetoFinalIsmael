@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISP PLAYER</title>
+    <link rel="shortcut icon" href="{{url_for('static',
+    filename='image/icone/iconeIsp_player.png')}}" type="image/png">
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <link rel="stylesheet" href="{{url_for('static',
+    filename='css_bootstrap/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('ispPlayer.static',
+    filename='css/isp_player.css')}}">
+</head>
+
+<body>
+    <div class="overlay" id="box1">
+        <div class="loader"></div>
+    </div>
+    <div class="container-fluid logo">
+        <div class="background"></div>
+        <div class="titulo">
+            <h2 class="texto_titulo">ISP PLAYER</h2>
+        </div>
+    </div>
+    <div class="container d-none">
+        <label>Servidor:</label><br>
+        <input id="server" value="https://vamooubora.shop">
+        <label>Usuário:</label><br>
+        <input id="user" value="31363361">
+        <label>Senha:</label><br>
+        <input id="pass" type="password" value="31368332">
+    </div>
+    <div class="container mt-4">
+        <div class="d-flex">
+            <button onclick="carregarCategoria()">Canais</button>
+            <button onclick="carregarCategoriaSeries()">Séries</button>
+            <button onclick="carregarCategoriaFilmes()">Filmes</button>
+        </div>
+    </div>
+    <div class="container-fluid box mt-3">
+        <div class="box_lista" id="lista"></div>
+        <div class="w-100">
+            <video id="player" controls></video>
+            <p id="assistindo"></p>
+        </div>
+    </div>
+
+    <script src="{{url_for('static',
+    filename='js_bootstrap/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{url_for('ispPlayer.static',
+    filename='js/isp_player.js')}}"></script>
+</body>
+
+</html>
