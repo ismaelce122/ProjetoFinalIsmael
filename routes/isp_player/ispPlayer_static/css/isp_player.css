@@ -24,12 +24,14 @@ button {
     width: 130px;
     border-radius: 5px;
     cursor: pointer;
+    transition: 0.2s;
 }
 
 button:focus {
-  outline: 2px solid yellow;
+  outline: 2px solid blue;
   background-color: #333;
   color: white;
+  transform: scale(1.2);
 }
 
 video {
