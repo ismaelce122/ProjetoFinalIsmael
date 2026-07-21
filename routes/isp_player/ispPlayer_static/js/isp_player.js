@@ -107,7 +107,7 @@ function mostrarCanais() {
     let html = "<h3 class='canal'>Canais:</h3>";
     canaisCache.forEach((c, i) => {
         const url = `${server}/live/${user}/${pass}/${c.stream_id}.m3u8`
-        html += `<button onclick="abrirCanal2('${url}', '${c.name}')">${c.name}</button>`;
+        html += `<button onclick="abrirCanal('${url}', '${c.name}')">${c.name}</button>`;
     });
     lista.style.border = '3px solid white'
     lista.innerHTML = html;
