@@ -2,23 +2,6 @@ let canais = [];
 let series = []
 let filmes = []
 
-const botoes = document.querySelectorAll("button");
-let indice = 0;
-
-// coloca foco inicial
-botoes[indice].focus();
-
-document.addEventListener("keydown", (e) => {
-  if (e.key === "ArrowDown") {
-    indice = (indice + 1) % botoes.length;
-    botoes[indice].focus();
-  }
-  if (e.key === "ArrowUp") {
-    indice = (indice - 1 + botoes.length) % botoes.length;
-    botoes[indice].focus();
-  }
-});
-
 async function carregarCategoria() {
     const box = document.getElementById('box1')
     box.style.display = 'flex'
