@@ -1,6 +1,8 @@
-let canais = [];
+let canais = []
 let series = []
 let filmes = []
+let urlAtual = null
+let canalAtual = null
 
 async function carregarCategoria() {
     const box = document.getElementById('box1')
@@ -115,6 +117,10 @@ function mostrarCanais() {
 }
 
 function abrirCanal(url, canal) {
+    let tempo = 0
+    let contador = 0
+    urlAtual = url
+    canalAtual = canal
     const video = document.getElementById('player');
     const assistindo = document.getElementById('assistindo');
     assistindo.innerHTML = `<b>Assistindo:</b> ${canal}`
@@ -131,35 +137,18 @@ function abrirCanal(url, canal) {
         video.src = url;
         video.play();
     }
-}
 
-async function abrirCanal2(urlCanal, canal) {
-    const box = document.getElementById('box1')
-    box.style.display = 'flex'
-    const video = document.getElementById('player');
-    const assistindo = document.getElementById('assistindo');
-
-    // busca o manifest original
-    const res = await fetch(urlCanal, { redirect: 'follow' });
-    const finalUrl = res.url
-    const fixedUrl = finalUrl.replace("http://", "https://")
-
-    // usa no Hls.js
-    if (Hls.isSupported()) {
-        const hls = new Hls();
-        hls.loadSource(fixedUrl);
-        hls.attachMedia(video);
-        hls.on(Hls.Events.MANIFEST_PARSED, function () {
-            video.play();
-            box.style.display = 'none'
-            assistindo.innerHTML = `<b>Assistindo:</b> ${canal}`
-        });
-    } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-        video.src = fixedUrl;
-        video.play()
-        box.style.display = 'none'
-        assistindo.innerHTML = `<b>Assistindo:</b> ${canal}`
-    }
+    let monitorId = setInterval(() => {
+        if(contador < 5) {
+          contador++
+        } else if(contador === 5){
+             if(video.currentTime === tempo) {
+                        clearInterval(monitorId)
+                        abrirCanal(urlAtual, canalAtual)
+                    }
+          }
+          tempo = video.currentTime
+    }, 3000)
 }
 
 async function carregarCategoriaSeries() {
