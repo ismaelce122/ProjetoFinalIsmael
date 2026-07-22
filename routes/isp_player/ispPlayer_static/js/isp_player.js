@@ -78,7 +78,6 @@ function buscarCanais() {
             html += `<button onclick="abrirCanal('${url}', '${c.name}')" tabindex="0">${c.name}</button>`;
         })
     }
-    lista.style.border = '3px solid white'
     lista.innerHTML = html;
     setTimeout(() => {
         box.style.display = 'none'
@@ -94,7 +93,6 @@ function mostrarCategoria() {
     categoriasCache.forEach((c, i) => {
         html += `<button onclick="carregarCanais('${c.category_id}')" tabindex="0">${c.category_name}</button>`;
     });
-    lista.style.border = '3px solid white'
     lista.innerHTML = html;
     box.style.display = 'none'
 }
@@ -111,7 +109,6 @@ function mostrarCanais() {
         const url = `${server}/live/${user}/${pass}/${c.stream_id}.m3u8`
         html += `<button onclick="abrirCanal('${url}', '${c.name}')" tabindex="0">${c.name}</button>`;
     });
-    lista.style.border = '3px solid white'
     lista.innerHTML = html;
     box.style.display = 'none'
 }
@@ -237,7 +234,6 @@ function mostrarCategoriaSeries() {
     seriesCache.forEach((c, i) => {
         html += `<button onclick="carregarListaSeries('${c.category_id}', '${c.category_name}')" tabindex="0">${c.category_name}</button>`;
     });
-    lista.style.border = '3px solid white'
     lista.innerHTML = html;
     box.style.display = 'none'
 }
@@ -263,7 +259,6 @@ function buscarSeries() {
             html += `<button onclick="carregarEpisodiosSeries('${c.series_id}', '${c.name}', '${c.cover}')" tabindex="0">${c.name}</button>`;
         })
     }
-    lista.style.border = '3px solid white'
     lista.innerHTML = html;
     setTimeout(() => {
         box.style.display = 'none'
@@ -296,7 +291,6 @@ async function mostrarEpisodiosSeries(serieNome, imagem) {
             html += `<button onclick="reproduzirSeries('${ep.id}', '${ep.title}')" tabindex="0">${ep.title}</button>`;
         })
     }
-    lista.style.border = '3px solid white'
     lista.innerHTML = html;
     box.style.display = 'none'
 }
@@ -308,7 +302,6 @@ function mostrarListaSeries(nome) {
     lista_seriesCache.forEach((c, i) => {
         html += `<button onclick="carregarEpisodiosSeries('${c.series_id}', '${c.name}', '${c.cover}')" tabindex="0">${c.name}</button>`;
     });
-    lista.style.border = '3px solid white'
     lista.innerHTML = html;
     box.style.display = 'none'
 }
@@ -350,7 +343,6 @@ function mostrarCategoriaFilmes() {
     filmesCache.forEach((c, i) => {
         html += `<button onclick="carregarListaFilmes('${c.category_id}', '${c.category_name}')" tabindex="0">${c.category_name}</button>`;
     });
-    lista.style.border = '3px solid white'
     lista.innerHTML = html;
     box.style.display = 'none'
 }
@@ -408,7 +400,6 @@ function mostrarListaFilmes(nome) {
     lista_filmesCache.forEach((c, i) => {
         html += `<button onclick="carregarInfoFilmes('${c.stream_id}', '${c.stream_icon}', '${c.name}')" tabindex="0">${c.name}</button>`;
     });
-    lista.style.border = '3px solid white'
     lista.innerHTML = html;
     box.style.display = 'none'
 }
@@ -420,7 +411,6 @@ function carregarFilme(filme_id, imagem, filmeNome) {
     let html = `<h3 class='canal'>${filmeNome}</h3>`;
     html += `<img src="${imagem}" width="130" height="130" alt="${filmeNome}"><br>`
     html += `<button onclick="reproduzirFilmes('${filme_id}', '${filmeNome}')" tabindex="0">Assistir</button>`
-    lista.style.border = '3px solid white'
     lista.innerHTML = html;
     box.style.display = 'none'
 }
@@ -455,7 +445,6 @@ function buscarFilmes() {
             html += `<button onclick="carregarInfoFilmes('${c.stream_id}', '${c.stream_icon}', '${c.name}')" tabindex="0">${c.name}</button>`;
         })
     }
-    lista.style.border = '3px solid white'
     lista.innerHTML = html;
     setTimeout(() => {
         box.style.display = 'none'
