@@ -478,10 +478,6 @@ function carregarFilme(filme_id, imagem, filmeNome) {
     const box = document.getElementById('box1')
     const lista = document.getElementById("lista")
     const video = document.getElementById('box_player')
-    const divRemover = document.getElementById("container")
-    if(divRemover) {
-        divRemover.remove()
-    }
     lista.style.display = 'flex'
     lista.innerHTML = ''
     video.style.display = 'block'
@@ -507,10 +503,6 @@ function reproduzirFilmes(filme_id, filmeNome) {
 function buscarFilmes() {
     const box = document.getElementById('box1')
     box.style.display = 'flex'
-    const divRemover = document.getElementById("container")
-    if(divRemover) {
-        divRemover.remove()
-    }
     const listaFilmes = filmes
     const pesquisa = document.getElementById('pesquisar').value
     const buscarFilme = pesquisa.trim().toLowerCase()
