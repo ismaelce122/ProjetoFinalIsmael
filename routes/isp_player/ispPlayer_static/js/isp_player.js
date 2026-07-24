@@ -298,6 +298,13 @@ function reproduzirSeries(ep_id, ep_titulo) {
 async function mostrarEpisodiosSeries(serieNome, imagem) {
     const box = document.getElementById('box1')
     const lista = document.getElementById("lista")
+    const video = document.getElementById('box_player')
+    const divRemover = document.getElementById("container")
+    if(divRemover) {
+        divRemover.remove()
+    }
+    video.style.display = 'block'
+    lista.style.display = 'flex'
     serie = episodios_seriesCache
     lista.innerHTML = ''
     let html = `<h3 class='canal'>${serieNome}</h3>`;
@@ -470,11 +477,13 @@ function mostrarListaFilmes(nome) {
 function carregarFilme(filme_id, imagem, filmeNome) {
     const box = document.getElementById('box1')
     const lista = document.getElementById("lista")
+    const video = document.getElementById('box_player')
     const divRemover = document.getElementById("container")
     if(divRemover) {
         divRemover.remove()
     }
     lista.innerHTML = ''
+    video.style.display = 'block'
     let html = `<h3 class='canal'>${filmeNome}</h3>`;
     html += `<img src="${imagem}" width="130" height="130" alt="${filmeNome}"><br>`
     html += `<button onclick="reproduzirFilmes('${filme_id}', '${filmeNome}')" tabindex="0">Assistir</button>`
