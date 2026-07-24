@@ -475,6 +475,10 @@ function mostrarListaFilmes(nome) {
 }
 
 function carregarFilme(filme_id, imagem, filmeNome) {
+    const divRemover = document.getElementById("container")
+    if(divRemover) {
+       divRemover.remove()
+    }
     const box = document.getElementById('box1')
     const lista = document.getElementById("lista")
     const video = document.getElementById('box_player')
