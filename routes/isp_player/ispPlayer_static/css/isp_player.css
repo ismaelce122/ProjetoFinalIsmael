@@ -71,11 +71,11 @@ ul {
 }
 
 .box_card {
-            justify-content: center;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-            margin-bottom: 20px;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 20px;
 }
 
 .overlay {
