@@ -87,6 +87,14 @@ function buscarCanais() {
 function mostrarCategoria() {
     const box = document.getElementById('box1')
     const lista = document.getElementById("lista")
+    const video = document.getElementById('box_player')
+    const divRemover = document.getElementById("container")
+    if(divRemover) {
+        divRemover.remove()
+    }
+    video.style.display = 'block'
+    lista.style.display = 'flex'
+    lista.innerHTML = ''
     let html = "<h3 class='canal'>Canais Ao Vivo:</h3>";
     html += `<input type="text" id="pesquisar" placeholder="buscar canais...">
              <button onclick="buscarCanais()" tabindex="0">Buscar</button>`
@@ -228,6 +236,13 @@ async function carregarEpisodiosSeries(series_id, nome, imagem) {
 function mostrarCategoriaSeries() {
     const box = document.getElementById('box1')
     const lista = document.getElementById("lista")
+    const video = document.getElementById('box_player')
+    const divRemover = document.getElementById("container")
+    if(divRemover) {
+        divRemover.remove()
+    }
+    video.style.display = 'none'
+    lista.style.display = 'flex'
     let html = "<h3 class='canal'>Séries:</h3>";
     html += `<input type="text" id="pesquisar" placeholder="buscar séries...">
              <button onclick="buscarSeries()" tabindex="0">Buscar</button>`
@@ -256,7 +271,10 @@ function buscarSeries() {
         html += `<p>Nenhum resultado encontrado.</p>`
     } else {
         listaAtual.forEach(c => {
-            html += `<button onclick="carregarEpisodiosSeries('${c.series_id}', '${c.name}', '${c.cover}')" tabindex="0">${c.name}</button>`;
+            html += `<button onclick="carregarEpisodiosSeries('${c.series_id}', '${c.name}', '${c.cover}')">
+                        <img src="${c.cover}" width="130" height="130" alt="">${c.name}
+                     </button>
+                    `
         })
     }
     lista.innerHTML = html;
@@ -298,11 +316,30 @@ async function mostrarEpisodiosSeries(serieNome, imagem) {
 function mostrarListaSeries(nome) {
     const box = document.getElementById('box1')
     const lista = document.getElementById("lista")
-    let html = `<h3 class='canal'>${nome}:</h3>`;
+    const video = document.getElementById('box_player')
+    const boxPai = document.getElementById('box_pai')
+    const boxCard = document.createElement("div")
+    const boxTitulo = document.createElement("div")
+    const card = document.createElement("div")
+    const boxBotoes = document.createElement("div")
+    video.style.display = 'none'
+    boxCard.id = "container"
+    card.classList.add("box_card")
+    boxPai.appendChild(boxCard)
+    boxCard.appendChild(boxTitulo)
+    boxCard.appendChild(boxBotoes)
+    boxBotoes.appendChild(card)
+    let html = ''
+    let html2 = `<h3 class='canal'>${nome}:</h3>`;
     lista_seriesCache.forEach((c, i) => {
-        html += `<button onclick="carregarEpisodiosSeries('${c.series_id}', '${c.name}', '${c.cover}')" tabindex="0">${c.name}</button>`;
+        html += `<button onclick="carregarEpisodiosSeries('${c.series_id}', '${c.name}', '${c.cover}')">
+                     <img src="${c.cover}" width="130" height="130" alt="">${c.name}
+                 </button>
+                `
     });
-    lista.innerHTML = html;
+    lista.style.display = 'none'
+    card.innerHTML = html;
+    boxTitulo.innerHTML = html2
     box.style.display = 'none'
 }
 
@@ -337,6 +374,13 @@ async function carregarCategoriaFilmes() {
 function mostrarCategoriaFilmes() {
     const box = document.getElementById('box1')
     const lista = document.getElementById("lista")
+    const video = document.getElementById('box_player')
+    const divRemover = document.getElementById("container")
+    if(divRemover) {
+         divRemover.remove()
+    }
+    video.style.display = 'none'
+    lista.style.display = 'flex'
     let html = "<h3 class='canal'>Filmes:</h3>";
     html += `<input type="text" id="pesquisar" placeholder="buscar filmes...">
              <button onclick="buscarFilmes()" tabindex="0">Buscar</button>`
@@ -396,17 +440,40 @@ async function carregarInfoFilmes(filme_id, imagem, filmeNome) {
 function mostrarListaFilmes(nome) {
     const box = document.getElementById('box1')
     const lista = document.getElementById("lista")
-    let html = `<h3 class='canal'>${nome}:</h3>`;
+    const video = document.getElementById('box_player')
+    const boxPai = document.getElementById('box_pai')
+    const boxCard = document.createElement("div")
+    const boxTitulo = document.createElement("div")
+    const card = document.createElement("div")
+    const boxBotoes = document.createElement("div")
+    video.style.display = 'none'
+    boxCard.id = "container"
+    card.classList.add("box_card")
+    boxPai.appendChild(boxCard)
+    boxCard.appendChild(boxTitulo)
+    boxCard.appendChild(boxBotoes)
+    boxBotoes.appendChild(card)
+    let html = ''
+    let html2 = `<h3 class='canal'>${nome}:</h3>`;
     lista_filmesCache.forEach((c, i) => {
-        html += `<button onclick="carregarInfoFilmes('${c.stream_id}', '${c.stream_icon}', '${c.name}')" tabindex="0">${c.name}</button>`;
+        html += `<button onclick="carregarInfoFilme('${c.stream_id}', '${c.stream_icon}', '${c.name}')">
+                      <img src="${c.stream_icon}" width="130" height="130" alt="">${c.name}
+                 </button>
+                `
     });
-    lista.innerHTML = html;
+    lista.style.display = 'none'
+    card.innerHTML = html;
+    boxTitulo.innerHTML = html2
     box.style.display = 'none'
 }
 
 function carregarFilme(filme_id, imagem, filmeNome) {
     const box = document.getElementById('box1')
     const lista = document.getElementById("lista")
+    const divRemover = document.getElementById("container")
+    if(divRemover) {
+        divRemover.remove()
+    }
     lista.innerHTML = ''
     let html = `<h3 class='canal'>${filmeNome}</h3>`;
     html += `<img src="${imagem}" width="130" height="130" alt="${filmeNome}"><br>`
@@ -430,6 +497,10 @@ function reproduzirFilmes(filme_id, filmeNome) {
 function buscarFilmes() {
     const box = document.getElementById('box1')
     box.style.display = 'flex'
+    const divRemover = document.getElementById("container")
+    if(divRemover) {
+        divRemover.remove()
+    }
     const listaFilmes = filmes
     const pesquisa = document.getElementById('pesquisar').value
     const buscarFilme = pesquisa.trim().toLowerCase()
@@ -442,7 +513,10 @@ function buscarFilmes() {
         html += `<p>Nenhum resultado encontrado.</p>`
     } else {
         listaAtual.forEach(c => {
-            html += `<button onclick="carregarInfoFilmes('${c.stream_id}', '${c.stream_icon}', '${c.name}')" tabindex="0">${c.name}</button>`;
+            html += `<button onclick="carregarInfoFilme('${c.stream_id}', '${c.stream_icon}', '${c.name}')">
+                          <img src="${c.stream_icon}" width="130" height="130" alt="">${c.name}
+                     </button>
+                    `
         })
     }
     lista.innerHTML = html;
