@@ -70,6 +70,14 @@ ul {
     border-radius: 5px;
 }
 
+.box_card {
+            justify-content: center;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 20px;
+}
+
 .overlay {
     top: 0;
     left: 0;
