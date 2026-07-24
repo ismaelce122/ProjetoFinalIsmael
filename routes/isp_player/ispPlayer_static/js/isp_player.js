@@ -482,6 +482,7 @@ function carregarFilme(filme_id, imagem, filmeNome) {
     if(divRemover) {
         divRemover.remove()
     }
+    lista.style.display = 'flex'
     lista.innerHTML = ''
     video.style.display = 'block'
     let html = `<h3 class='canal'>${filmeNome}</h3>`;
