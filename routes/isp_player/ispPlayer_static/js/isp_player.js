@@ -448,26 +448,12 @@ function mostrarListaFilmes(nome) {
     const box = document.getElementById('box1')
     const lista = document.getElementById("lista")
     const video = document.getElementById('box_player')
-    const boxPai = document.getElementById('box_pai')
-    const boxCard = document.createElement("div")
-    const boxTitulo = document.createElement("div")
-    const card = document.createElement("div")
-    const boxBotoes = document.createElement("div")
     video.style.display = 'none'
-    boxCard.id = "container2"
-    card.classList.add("box_card")
-    boxPai.appendChild(boxCard)
-    boxCard.appendChild(boxTitulo)
-    boxCard.appendChild(boxBotoes)
-    boxBotoes.appendChild(card)
-    let html = ''
-    let html2 = `<h3 class='canal'>${nome}:</h3>`;
+    let html = `<h3 class='canal'>${nome}:</h3>`;
     lista_filmesCache.forEach((c, i) => {
         html += `<button onclick="carregarInfoFilme('${c.stream_id}', '${c.stream_icon}', '${c.name}')">${c.name}</button>`
     });
-    lista.style.display = 'none'
-    card.innerHTML = html;
-    boxTitulo.innerHTML = html2
+    lista.innerHTML = html;
     box.style.display = 'none'
 }
 
