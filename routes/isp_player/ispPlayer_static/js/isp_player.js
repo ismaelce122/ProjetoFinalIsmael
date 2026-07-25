@@ -463,10 +463,7 @@ function mostrarListaFilmes(nome) {
     let html = ''
     let html2 = `<h3 class='canal'>${nome}:</h3>`;
     lista_filmesCache.forEach((c, i) => {
-        html += `<button onclick="carregarInfoFilme('${c.stream_id}', '${c.stream_icon}', '${c.name}')">
-                    <img src="${c.stream_icon}" width="130" height="130" alt="">${c.name}
-                 </button>
-                `
+        html += `<button onclick="carregarInfoFilme('${c.stream_id}', '${c.stream_icon}', '${c.name}')">${c.name}</button>`
     });
     lista.style.display = 'none'
     card.innerHTML = html;
@@ -519,10 +516,7 @@ function buscarFilmes() {
         html += `<p>Nenhum resultado encontrado.</p>`
     } else {
         listaAtual.forEach(c => {
-            html += `<button onclick="carregarInfoFilme('${c.stream_id}', '${c.stream_icon}', '${c.name}')">
-                        <img src="${c.stream_icon}" width="130" height="130" alt="">${c.name}
-                     </button>
-                    `
+            html += `<button onclick="carregarInfoFilme('${c.stream_id}', '${c.stream_icon}', '${c.name}')">${c.name}</button>`
         })
     }
     lista.innerHTML = html;
