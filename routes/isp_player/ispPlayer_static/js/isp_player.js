@@ -448,12 +448,29 @@ function mostrarListaFilmes(nome) {
     const box = document.getElementById('box1')
     const lista = document.getElementById("lista")
     const video = document.getElementById('box_player')
+    const boxPai = document.getElementById('box_pai')
+    const boxCard = document.createElement("div")
+    const boxTitulo = document.createElement("div")
+    const card = document.createElement("div")
+    const boxBotoes = document.createElement("div")
     video.style.display = 'none'
-    let html = `<h3 class='canal'>${nome}:</h3>`;
+    boxCard.id = "container"
+    card.classList.add("box_card")
+    boxPai.appendChild(boxCard)
+    boxCard.appendChild(boxTitulo)
+    boxCard.appendChild(boxBotoes)
+    boxBotoes.appendChild(card)
+    let html = ''
+    let html2 = `<h3 class='canal'>${nome}:</h3>`;
     lista_filmesCache.forEach((c, i) => {
-        html += `<button onclick="carregarInfoFilme('${c.stream_id}', '${c.stream_icon}', '${c.name}')">${c.name}</button>`
+        html += `<button onclick="carregarInfoFilmes('${c.stream_id}', '${c.stream_icon}', '${c.name}')">
+                    <img src="${c.stream_icon}" width="130" height="130" alt="">${c.name}
+                 </button>
+                `
     });
-    lista.innerHTML = html;
+    lista.style.display = 'none'
+    card.innerHTML = html;
+    boxTitulo.innerHTML = html2
     box.style.display = 'none'
 }
 
@@ -465,9 +482,8 @@ function carregarFilme(filme_id, imagem, filmeNome) {
     const box = document.getElementById('box1')
     const lista = document.getElementById("lista")
     const video = document.getElementById('box_player')
-    lista.style.display = 'none'
+    lista.style.display = 'flex'
     lista.innerHTML = ''
-    alert('oioikjj')
     video.style.display = 'block'
     let html = `<h3 class='canal'>${filmeNome}</h3>`;
     html += `<img src="${imagem}" width="130" height="130" alt="${filmeNome}"><br>`
@@ -503,7 +519,10 @@ function buscarFilmes() {
         html += `<p>Nenhum resultado encontrado.</p>`
     } else {
         listaAtual.forEach(c => {
-            html += `<button onclick="carregarInfoFilme('${c.stream_id}', '${c.stream_icon}', '${c.name}')">${c.name}</button>`
+            html += `<button onclick="carregarInfoFilmes('${c.stream_id}', '${c.stream_icon}', '${c.name}')">
+                        <img src="${c.stream_icon}" width="130" height="130" alt="">${c.name}
+                     </button>
+                    `
         })
     }
     lista.innerHTML = html;
