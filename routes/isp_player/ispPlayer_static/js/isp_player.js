@@ -465,8 +465,9 @@ function carregarFilme(filme_id, imagem, filmeNome) {
     const box = document.getElementById('box1')
     const lista = document.getElementById("lista")
     const video = document.getElementById('box_player')
-    lista.style.display = 'flex'
+    lista.style.display = 'none'
     lista.innerHTML = ''
+    alert('oioikjj')
     video.style.display = 'block'
     let html = `<h3 class='canal'>${filmeNome}</h3>`;
     html += `<img src="${imagem}" width="130" height="130" alt="${filmeNome}"><br>`
