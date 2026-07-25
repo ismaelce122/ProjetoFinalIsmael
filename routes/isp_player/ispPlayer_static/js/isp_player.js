@@ -454,7 +454,7 @@ function mostrarListaFilmes(nome) {
     const card = document.createElement("div")
     const boxBotoes = document.createElement("div")
     video.style.display = 'none'
-    boxCard.id = "container"
+    boxCard.id = "container2"
     card.classList.add("box_card")
     boxPai.appendChild(boxCard)
     boxCard.appendChild(boxTitulo)
