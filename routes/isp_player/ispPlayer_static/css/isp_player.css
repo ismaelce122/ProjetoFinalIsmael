@@ -72,6 +72,7 @@ ul {
 }
 
 .box_card {
+    height: 100vh;
     justify-content: center;
     display: flex;
     flex-wrap: wrap;
