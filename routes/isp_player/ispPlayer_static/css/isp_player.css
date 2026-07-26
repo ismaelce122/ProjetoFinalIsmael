@@ -14,8 +14,9 @@ input {
 }
 
 img {
-    margin: 5px;
-    padding: 5px;
+    width: 130px;
+    height: 130px;
+    object-position: center;
 }
 
 button {
