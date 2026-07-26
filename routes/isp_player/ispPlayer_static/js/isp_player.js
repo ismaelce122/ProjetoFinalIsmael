@@ -337,10 +337,7 @@ function mostrarListaSeries(nome) {
     boxCard.appendChild(boxBotoes)
     boxBotoes.appendChild(card)
     let html = ''
-    let html2 = `<div class="container">
-                    <h3 class='canal'>${nome}:</h3>
-                 </div>
-                `
+    let html2 = `<h3 class='canal'>${nome}:</h3>`
     lista_seriesCache.forEach((c, i) => {
         html += `<button onclick="carregarEpisodiosSeries('${c.series_id}', '${c.name}', '${c.cover}')">
                      <img src="${c.cover}" alt="${c.name}">${c.name}
