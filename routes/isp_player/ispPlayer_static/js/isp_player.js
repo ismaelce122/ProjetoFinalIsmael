@@ -272,7 +272,7 @@ function buscarSeries() {
     } else {
         listaAtual.forEach(c => {
             html += `<button onclick="carregarEpisodiosSeries('${c.series_id}', '${c.name}', '${c.cover}')">
-                        <img src="${c.cover}" width="130" height="130" alt="">${c.name}
+                        <img src="${c.cover}" alt="${c.name}">${c.name}
                      </button>
                     `
         })
@@ -308,7 +308,7 @@ async function mostrarEpisodiosSeries(serieNome, imagem) {
     serie = episodios_seriesCache
     lista.innerHTML = ''
     let html = `<h3 class='canal'>${serieNome}</h3>`;
-    html += `<img src="${imagem}" width="130" height="130" alt="${serieNome}"><br>`
+    html += `<img src="${imagem}" alt="${serieNome}"><br>`
     for (const temporada in serie.episodes) {
         //console.log('Temporada: ', temporada)
         serie.episodes[temporada].forEach((ep) => {
@@ -340,7 +340,7 @@ function mostrarListaSeries(nome) {
     let html2 = `<h3 class='canal'>${nome}:</h3>`;
     lista_seriesCache.forEach((c, i) => {
         html += `<button onclick="carregarEpisodiosSeries('${c.series_id}', '${c.name}', '${c.cover}')">
-                     <img src="${c.cover}" width="130" height="130" alt="">${c.name}
+                     <img src="${c.cover}" alt="${c.name}">${c.name}
                  </button>
                 `
     });
@@ -464,7 +464,7 @@ function mostrarListaFilmes(nome) {
     let html2 = `<h3 class='canal'>${nome}:</h3>`;
     lista_filmesCache.forEach((c, i) => {
         html += `<button onclick="carregarInfoFilmes('${c.stream_id}', '${c.stream_icon}', '${c.name}')">
-                    <img src="${c.stream_icon}" width="130" height="130" alt="">${c.name}
+                    <img src="${c.stream_icon}" alt="${c.name}">${c.name}
                  </button>
                 `
     });
@@ -486,7 +486,7 @@ function carregarFilme(filme_id, imagem, filmeNome) {
     lista.innerHTML = ''
     video.style.display = 'block'
     let html = `<h3 class='canal'>${filmeNome}</h3>`;
-    html += `<img src="${imagem}" width="130" height="130" alt="${filmeNome}"><br>`
+    html += `<img src="${imagem}" alt="${filmeNome}"><br>`
     html += `<button onclick="reproduzirFilmes('${filme_id}', '${filmeNome}')" tabindex="0">Assistir</button>`
     lista.innerHTML = html;
     box.style.display = 'none'
@@ -520,7 +520,7 @@ function buscarFilmes() {
     } else {
         listaAtual.forEach(c => {
             html += `<button onclick="carregarInfoFilmes('${c.stream_id}', '${c.stream_icon}', '${c.name}')">
-                        <img src="${c.stream_icon}" width="130" height="130" alt="">${c.name}
+                        <img src="${c.stream_icon}" alt="${c.name}">${c.name}
                      </button>
                     `
         })
