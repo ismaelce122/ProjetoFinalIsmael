@@ -14,15 +14,15 @@ input {
 }
 
 img {
-    width: 120px;
-    height: 120px;
+    width: 600px;
+    height: 900px;
     object-position: center;
 }
 
 button {
     margin: 5px;
     padding: 5px;
-    width: 130px;
+    width: 610px;
     border-radius: 5px;
     cursor: pointer;
     transition: 0.2s;
