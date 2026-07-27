@@ -143,4 +143,8 @@ ul {
         width: 300px;
         height: 450px;
     }
+    button {
+        witdth: 310px;
+        height: 460px;
+    }
 }
