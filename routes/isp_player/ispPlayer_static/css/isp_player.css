@@ -138,6 +138,10 @@ ul {
     text-align: center;
 }
 
+#hora {
+    margin-right: 10px;
+}
+
 @media screen and (max-width: 600px) {
     img {
         width: 120px;
