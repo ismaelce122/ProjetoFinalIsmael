@@ -138,14 +138,13 @@ ul {
     text-align: center;
 }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 1920px) {
     img {
         width: 200px;
         height: 280px;
     }
     
     button {
-        witdth: 210px;
         background-color: blue;
     }
 }
