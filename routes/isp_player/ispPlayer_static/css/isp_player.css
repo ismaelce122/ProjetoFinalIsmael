@@ -14,15 +14,15 @@ input {
 }
 
 img {
-    width: 200px;
-    height: 280px;
+    width: 120px;
+    height: 120px;
     object-position: center;
 }
 
 button {
     margin: 5px;
     padding: 5px;
-    width: 210px;
+    width: 130px;
     border-radius: 5px;
     cursor: pointer;
     transition: 0.2s;
@@ -138,13 +138,12 @@ ul {
     text-align: center;
 }
 
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 3840px) {
     img {
-        width: 600px;
-        height: 900px;
+        width: 200px;
+        height: 260px;
     }
     button {
-        witdth: 610px;
-        height: 910px;
+        witdth: 210px;
     }
 }
