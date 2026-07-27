@@ -137,3 +137,10 @@ ul {
     font-weight: bold;
     text-align: center;
 }
+
+@media screen and (min-width: 1920px) {
+    img {
+        width: 300px;
+        height: 450px;
+    }
+}
