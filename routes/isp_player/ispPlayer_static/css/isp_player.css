@@ -141,9 +141,11 @@ ul {
 @media screen and (min-width: 900px) {
     img {
         width: 200px;
-        height: 260px;
+        height: 280px;
     }
+    
     button {
         witdth: 210px;
+        background-color: blue;
     }
 }
