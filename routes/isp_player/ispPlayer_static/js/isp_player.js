@@ -4,6 +4,17 @@ let filmes = []
 let urlAtual = null
 let canalAtual = null
 
+function atualizarHora() {
+    const agora = new Date()
+    const horas = agora.getHours().toString().padStart(2, '0')
+    const minutos = agora.getMinutes().toString().padStart(2, '0')
+    const segundos = agora.getSeconds().toString().padStart(2, '0')
+    document.getElementById('hora').textContent = `${horas}:${minutos}:${segundos}`
+}
+    
+setInterval(atualizarHora, 1000)
+atualizarHora()
+
 async function carregarCategoria() {
     const box = document.getElementById('box1')
     box.style.display = 'flex'
