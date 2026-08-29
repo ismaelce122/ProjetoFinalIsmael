@@ -164,7 +164,7 @@ function abrirCanal(url, canal) {
                     }
           }
           tempo = video.currentTime
-    }, 3000)
+    }, 10000)
 }
 
 async function carregarCategoriaSeries() {
