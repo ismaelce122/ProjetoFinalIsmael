@@ -100,11 +100,20 @@ function buscarCanais() {
 function mostrarCategoria() {
     const box = document.getElementById('box1')
     const lista = document.getElementById("lista")
-    const video = document.getElementById('box_player')
+    const video = document.getElementById('player')
+    const boxPlayer = document.getElementById('box_player')
     const divRemover = document.getElementById("container")
+    if (!video.currentSrc.endsWith(".mp4")) {
+        // Não faz nada Aqui!!!
+    } else if (!video.paused) {
+          video.pause()
+          video.removeAttribute("src")
+          video.load()
+    }
     if(divRemover) {
         divRemover.remove()
     }
+    boxPlayer.style.display = 'block'
     video.style.display = 'block'
     lista.style.display = 'flex'
     lista.innerHTML = ''
@@ -167,13 +176,23 @@ function abrirCanal(url, canal) {
           contador++
         } else if(contador === 5){
              if(video.currentTime === tempo) {
-                        alert('Reconectando Canal...')
+                        console.log('Reconectando Canal...')
                         clearInterval(monitorId)
                         abrirCanal(urlAtual, canalAtual)
                     }
           }
           tempo = video.currentTime
     }, 10000)
+
+    video.addEventListener("play", () => {
+        if (video.requestFullscreen) {
+            video.requestFullscreen();
+        } else if (video.webkitRequestFullscreen) { // Safari
+            video.webkitRequestFullscreen();
+        } else if (player.msRequestFullscreen) { // IE/Edge antigo
+            video.msRequestFullscreen();
+        }
+    });
 }
 
 async function carregarCategoriaSeries() {
