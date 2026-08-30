@@ -162,7 +162,7 @@ function abrirCanal(url, canal) {
         video.play();
     }
 
-    let monitorId = setInterval(() => {
+    monitorId = setInterval(() => {
         if(contador < 5) {
           contador++
         } else if(contador === 5){
