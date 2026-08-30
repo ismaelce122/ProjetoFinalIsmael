@@ -3,6 +3,8 @@ let series = []
 let filmes = []
 let urlAtual = null
 let canalAtual = null
+let monitorId = null;
+let hls = new Hls();
 
 function atualizarHora() {
     const agora = new Date()
@@ -133,6 +135,12 @@ function mostrarCanais() {
 }
 
 function abrirCanal(url, canal) {
+    if (monitorId) {
+        clearInterval(monitorId)
+    }
+    if (hls) {
+        hls.destroy()
+    }
     let tempo = 0
     let contador = 0
     urlAtual = url
@@ -142,7 +150,7 @@ function abrirCanal(url, canal) {
     assistindo.innerHTML = `<b>Assistindo:</b> ${canal}`
 
     if (Hls.isSupported()) {
-        const hls = new Hls();
+        hls = new Hls();
         hls.loadSource(url);
         hls.attachMedia(video);
         hls.on(Hls.Events.MANIFEST_PARSED, function () {
@@ -159,6 +167,7 @@ function abrirCanal(url, canal) {
           contador++
         } else if(contador === 5){
              if(video.currentTime === tempo) {
+                        alert('Reconectando Canal...')
                         clearInterval(monitorId)
                         abrirCanal(urlAtual, canalAtual)
                     }
@@ -245,6 +254,12 @@ async function carregarEpisodiosSeries(series_id, nome, imagem) {
 }
 
 function mostrarCategoriaSeries() {
+    if (monitorId) {
+        clearInterval(monitorId)
+    }
+    if (hls) {
+        hls.destroy()
+    }
     const box = document.getElementById('box1')
     const lista = document.getElementById("lista")
     const video = document.getElementById('box_player')
@@ -390,6 +405,12 @@ async function carregarCategoriaFilmes() {
 }
 
 function mostrarCategoriaFilmes() {
+    if (monitorId) {
+        clearInterval(monitorId)
+    }
+    if (hls) {
+        hls.destroy()
+    }
     const box = document.getElementById('box1')
     const lista = document.getElementById("lista")
     const video = document.getElementById('box_player')
