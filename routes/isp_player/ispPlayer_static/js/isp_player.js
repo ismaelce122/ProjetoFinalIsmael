@@ -275,9 +275,11 @@ async function carregarEpisodiosSeries(series_id, nome, imagem) {
 function mostrarCategoriaSeries() {
     if (monitorId) {
         clearInterval(monitorId)
+        monitorId = null
     }
     if (hls) {
         hls.destroy()
+        hls = null
     }
     const box = document.getElementById('box1')
     const lista = document.getElementById("lista")
@@ -426,9 +428,11 @@ async function carregarCategoriaFilmes() {
 function mostrarCategoriaFilmes() {
     if (monitorId) {
         clearInterval(monitorId)
+        monitorId = null
     }
     if (hls) {
         hls.destroy()
+        hls = null
     }
     const box = document.getElementById('box1')
     const lista = document.getElementById("lista")
