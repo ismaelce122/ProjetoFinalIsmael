@@ -24,16 +24,10 @@ def Proxy():
     url = request.args.get("url")
     if not url:
         return {"error": "URL não fornecida"}, 400
-
-    # Faz a requisição ao servidor IPTV
-    resp = requests.get(url)
-
-    # Cria resposta com os dados recebidos
-    response = Response(resp.content, status=resp.status_code)
-
-    # Adiciona cabeçalhos CORS para liberar no navegador
-    response.headers["Access-Control-Allow-Origin"] = "*"
-    response.headers["Access-Control-Allow-Headers"] = "Content-Type"
-    response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
-
-    return response
+    try:
+        resp = requests.get(url, timeout=10)
+        response = Response(resp.content, status=resp.status_code)
+        response.headers["Access-Control-Allow-Origin"] = "*"
+        return response
+    except Exception as e:
+        return {"error": str(e)}, 500
