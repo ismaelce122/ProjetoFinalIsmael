@@ -51,7 +51,7 @@ async function carregarCanais(categoria) {
     const user = document.getElementById("user").value;
     const pass = document.getElementById("pass").value;
 
-    const url = `https://ismaelce122.pythonanywhere.com/isp_player/proxy?url=${server}/player_api.php?username=${user}&password=${pass}&action=get_live_streams&category_id=${categoria}`;
+    const url = `${server}/player_api.php?username=${user}&password=${pass}&action=get_live_streams&category_id=${categoria}`;
 
     try {
         const response = await fetch(url);
