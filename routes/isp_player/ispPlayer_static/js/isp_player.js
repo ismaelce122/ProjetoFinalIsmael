@@ -24,8 +24,8 @@ async function carregarCategoria() {
     const user = document.getElementById("user").value;
     const pass = document.getElementById("pass").value;
 
-    const url = `https://ismaelce122.pythonanywhere.com/isp_player/proxy?url=${server}/player_api.php?username=${user}&password=${pass}&action=get_live_categories`;
-    const urlCanaisAll = `https://ismaelce122.pythonanywhere.com/isp_player/proxy?url=${server}/player_api.php?username=${user}&password=${pass}&action=get_live_streams`;
+    const url = `${server}/player_api.php?username=${user}&password=${pass}&action=get_live_categories`;
+    const urlCanaisAll = `${server}/player_api.php?username=${user}&password=${pass}&action=get_live_streams`;
 
     try {
         const response = await fetch(url);
