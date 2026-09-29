@@ -1,7 +1,7 @@
 from flask import Flask, render_template, session, redirect, url_for, flash
 from routes import Registrar_Blueprints
 from auth import login_required
-from flask-cors import CORS
+from flask_cors import CORS
 import os
 
 app = Flask(__name__)
