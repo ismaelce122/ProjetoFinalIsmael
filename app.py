@@ -1,10 +1,12 @@
 from flask import Flask, render_template, session, redirect, url_for, flash
 from routes import Registrar_Blueprints
 from auth import login_required
+from flask-cors import CORS
 import os
 
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY")
+CORS(app)
 Registrar_Blueprints(app)
 
 @app.route("/")
