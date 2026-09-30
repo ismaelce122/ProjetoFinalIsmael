@@ -206,9 +206,21 @@ async function carregarCategoriaSeries() {
     const urlSeriesAll = `${server}/player_api.php?username=${user}&password=${pass}&action=get_series`;
 
     try {
-        const response = await fetch(url);
+        const response = await fetch(url, {
+            method: "GET",
+            mode: "cors", // pede ao navegador para aceitar CORS
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+        });
         const data = await response.json();
-        const responseSeriesAll = await fetch(urlSeriesAll);
+        const responseSeriesAll = await fetch(urlSeriesAll, {
+            method: "GET",
+            mode: "cors", // pede ao navegador para aceitar CORS
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+        });
         const dataSeriesAll = await responseSeriesAll.json();
         seriesCache = data;
         series = dataSeriesAll
@@ -408,9 +420,21 @@ async function carregarCategoriaFilmes() {
     const urlFilmesAll = `${server}/player_api.php?username=${user}&password=${pass}&action=get_vod_streams`;
 
     try {
-        const response = await fetch(url);
+        const response = await fetch(url, {
+            method: "GET",
+            mode: "cors", // pede ao navegador para aceitar CORS
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+        });
         const data = await response.json();
-        const responseFimesAll = await fetch(urlFilmesAll);
+        const responseFimesAll = await fetch(urlFilmesAll, {
+            method: "GET",
+            mode: "cors", // pede ao navegador para aceitar CORS
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+        });
         const dataFilmesAll = await responseFimesAll.json();
         filmesCache = data;
         filmes = dataFilmesAll
