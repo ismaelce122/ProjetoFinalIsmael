@@ -212,6 +212,7 @@ async function carregarCategoriaSeries() {
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json"
+            }
         });
         const data = await response.json();
         const responseSeriesAll = await fetch(urlSeriesAll, {
@@ -220,6 +221,7 @@ async function carregarCategoriaSeries() {
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json"
+            }
         });
         const dataSeriesAll = await responseSeriesAll.json();
         seriesCache = data;
@@ -426,6 +428,7 @@ async function carregarCategoriaFilmes() {
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json"
+            }
         });
         const data = await response.json();
         const responseFimesAll = await fetch(urlFilmesAll, {
@@ -434,6 +437,7 @@ async function carregarCategoriaFilmes() {
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json"
+            }
         });
         const dataFilmesAll = await responseFimesAll.json();
         filmesCache = data;
