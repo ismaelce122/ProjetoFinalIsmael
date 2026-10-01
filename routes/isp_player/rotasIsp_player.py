@@ -17,8 +17,10 @@ def Home():
 
 @ispPlayer_bp.route("/isp_player/canais")
 def Canais():
+    print('fazendo requisição...')
     url = f"{server}/player_api.php?username={user}&password={password}&action=get_live_categories"
     r = requests.get(url)
+    print('enviando...')
     return jsonify(r.json())
 
 @ispPlayer_bp.route("/isp_player/politica-privacidade")
