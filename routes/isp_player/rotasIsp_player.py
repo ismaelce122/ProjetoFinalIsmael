@@ -7,6 +7,10 @@ ispPlayer_bp = Blueprint("ispPlayer", __name__, template_folder='ispPlayer_templ
 def ispPlayer():
     return render_template('isp_player.html')
 
+@ispPlayer_bp.route("/isp_player/home")
+def Home():
+    return render_template('isp_player.html')
+
 @ispPlayer_bp.route("/isp_player/politica-privacidade")
 def politicaPortugues():
     return render_template('politica_portugues.html')
