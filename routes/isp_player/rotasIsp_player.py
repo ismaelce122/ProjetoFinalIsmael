@@ -1,4 +1,4 @@
-from flask import render_template, Blueprint, request, Response
+from flask import render_template, Blueprint, request, Response, jsonify
 import requests
 
 server = 'https://dnsturbo.sbs'
