@@ -15,6 +15,12 @@ def ispPlayer():
 def Home():
     return render_template('isp_player.html')
 
+@ispPlayer_bp.route("/isp_player/canais")
+def Canais():
+    url = f"{server}/playerapi.php?username={user}&password={password}&action=getlive_streams"
+    r = requests.get(url)
+    return jsonify(r.json())
+
 @ispPlayer_bp.route("/isp_player/politica-privacidade")
 def politicaPortugues():
     return render_template('politica_portugues.html')
