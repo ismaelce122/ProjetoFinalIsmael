@@ -17,7 +17,7 @@ def Home():
 
 @ispPlayer_bp.route("/isp_player/canais")
 def Canais():
-    url = f"{server}/playerapi.php?username={user}&password={password}&action=getlive_streams"
+    url = f"{server}/playerapi.php?username={user}&password={password}&action=get_live_categories"
     r = requests.get(url)
     return jsonify(r.json())
 
