@@ -1,6 +1,10 @@
 from flask import render_template, Blueprint, request, Response
 import requests
 
+server = 'https://dnsturbo.sbs'
+user = '31363361'
+password = '31368332'
+
 ispPlayer_bp = Blueprint("ispPlayer", __name__, template_folder='ispPlayer_templates', static_folder='ispPlayer_static')
 
 @ispPlayer_bp.route("/isp_player")
