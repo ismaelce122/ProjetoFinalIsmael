@@ -1,28 +1,11 @@
-from flask import render_template, Blueprint, request, Response, jsonify
-import requests
-
-server = 'https://dnsturbo.sbs'
-user = '31363361'
-password = '31368332'
+from flask import render_template, Blueprint, request, Response
 
 ispPlayer_bp = Blueprint("ispPlayer", __name__, template_folder='ispPlayer_templates', static_folder='ispPlayer_static')
 
 @ispPlayer_bp.route("/isp_player")
 def ispPlayer():
     return render_template('isp_player.html')
-
-@ispPlayer_bp.route("/isp_player/home")
-def Home():
-    return render_template('isp_player.html')
-
-@ispPlayer_bp.route("/isp_player/canais")
-def Canais():
-    print('fazendo requisição...')
-    url = f"{server}/player_api.php?username={user}&password={password}&action=get_live_categories"
-    r = requests.get(url)
-    print('enviando...')
-    return jsonify(r.json())
-
+    
 @ispPlayer_bp.route("/isp_player/politica-privacidade")
 def politicaPortugues():
     return render_template('politica_portugues.html')
@@ -34,16 +17,3 @@ def politicaIngles():
 @ispPlayer_bp.route("/isp_player/privacy-policy-ko")
 def politicaKoreano():
     return render_template('politica_koreano.html')
-
-@ispPlayer_bp.route("/isp_player/proxy")
-def Proxy():
-    url = request.args.get("url")
-    if not url:
-        return {"error": "URL não fornecida"}, 400
-    try:
-        resp = requests.get(url, timeout=10)
-        response = Response(resp.content, status=resp.status_code)
-        response.headers["Access-Control-Allow-Origin"] = "*"
-        return response
-    except Exception as e:
-        return {"error": str(e)}, 500
