@@ -453,7 +453,6 @@ function reproduzirSeries(ep_id, ep_titulo) {
     const pass = document.getElementById("pass").value;
     const url = `${server}/series/${user}/${pass}/${ep_id}.mp4`
     const video = document.getElementById('player');
-    const assistindo = document.getElementById('assistindo');
     assistindo.innerHTML = `<b>Assistindo:</b> ${ep_titulo}`
     video.src = url
     video.play()
@@ -515,11 +514,11 @@ function mostrarListaSeries(nome) {
 }
 
 async function carregarCategoriaFilmes() {
-    const box = document.getElementById('box1')
-    box.style.display = 'flex'
     const server = document.getElementById("server").value;
     const user = document.getElementById("user").value;
     const pass = document.getElementById("pass").value;
+    const info = document.getElementById('conteudo')
+    info.innerHTML = 'carregando filmes...'
 
     const url = `${server}/player_api.php?username=${user}&password=${pass}&action=get_vod_categories`;
     const urlFilmesAll = `${server}/player_api.php?username=${user}&password=${pass}&action=get_vod_streams`;
@@ -532,9 +531,7 @@ async function carregarCategoriaFilmes() {
         filmesCache = data;
         filmes = dataFilmesAll
 
-        mostrarCategoriaFilmes();
     } catch (err) {
-        box.style.display = 'none'
         alert(err)
         document.getElementById("lista").innerHTML = "Erro ao carregar categoria de Filmes.";
         console.error(err);
@@ -543,6 +540,9 @@ async function carregarCategoriaFilmes() {
 }
 
 function mostrarCategoriaFilmes() {
+    assistindo.innerHTML = ''
+    document.getElementById("programacao").innerHTML = ''
+    document.getElementById("titulo_programacao").innerHTML = ''
     if (monitorId) {
         clearInterval(monitorId)
         monitorId = null
@@ -551,14 +551,23 @@ function mostrarCategoriaFilmes() {
         hls.destroy()
         hls = null
     }
+    tipoConteudo = 'filmes'
+    if (tipoConteudo === 'series' || tipoConteudo === 'filmes' ) {
+        const video = document.getElementById('player')
+        if (video.currentTime >= 0) {
+            video.pause()
+            video.removeAttribute("src")
+            video.load()
+        }
+    }
     const box = document.getElementById('box1')
     const lista = document.getElementById("lista")
-    const video = document.getElementById('box_player')
+    const boxPlayer = document.getElementById('box_player')
     const divRemover = document.getElementById("container")
     if(divRemover) {
          divRemover.remove()
     }
-    video.style.display = 'none'
+    boxPlayer.style.display = 'none'
     lista.style.display = 'flex'
     let html = "<h3 class='canal'>Filmes:</h3>";
     html += `<input type="text" id="pesquisar" placeholder="buscar filmes...">
@@ -567,7 +576,9 @@ function mostrarCategoriaFilmes() {
         html += `<button onclick="carregarListaFilmes('${c.category_id}', '${c.category_name}')" tabindex="0">${c.category_name}</button>`;
     });
     lista.innerHTML = html;
-    box.style.display = 'none'
+    setTimeout(() => {
+        box.style.display = 'none'
+    }, 500)
 }
 
 async function carregarListaFilmes(categoria, nome) {
