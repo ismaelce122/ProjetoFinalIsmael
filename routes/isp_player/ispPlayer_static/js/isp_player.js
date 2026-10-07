@@ -196,6 +196,37 @@ function mostrarCanais() {
     box.style.display = 'none'
 }
 
+async function carregarEPG() {
+    const info = document.getElementById('conteudo')
+    info.innerHTML = 'carregando epg...'
+    const url = "https://dnsturbo.sbs/xmltv.php?username=31363361&password=31368332";
+    const resposta = await fetch(url);
+    const texto = await resposta.text();
+
+    const parser = new DOMParser();
+    const xml = parser.parseFromString(texto, "application/xml");
+
+    const programas = xml.getElementsByTagName("programme");
+
+    // Data atual no formato AAAAMMDD
+    const hoje = new Date().toISOString().slice(0,10).replace(/-/g,"");
+    const programa = []
+
+    for (let i = 0; i < programas.length; i++) {
+        const inicio = programas[i].getAttribute("start"); // AAAAMMDDHHMMSS
+        const canal = programas[i].getAttribute("channel")
+        if (inicio.startsWith(hoje)) {
+            novoPrograma = {
+                inicio: programas[i].getAttribute("start"), // AAAAMMDDHHMMSS
+                canal: programas[i].getAttribute("channel"),
+                titulo: programas[i].getElementsByTagName("title")[0].textContent
+            }
+            programa.push(novoPrograma)
+        }
+    }
+    return programa
+}
+
 function abrirCanal(url, canal) {
     if (monitorId) {
         clearInterval(monitorId)
