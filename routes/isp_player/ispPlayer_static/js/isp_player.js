@@ -227,20 +227,41 @@ async function carregarEPG() {
     return programa
 }
 
-function abrirCanal(url, canal) {
+function mostrarEPG(epgCanal) {
+    const tituloProgramacao = document.getElementById("titulo_programacao")
+    const boxProgramacao = document.getElementById("programacao")
+    tituloProgramacao.textContent = 'Programação - Hoje'
+    html = '<ul>'
+    if (!epgCanal) {
+        // não faz nada.
+    } else {
+        epg.forEach((programa) => {
+            if (programa.canal === epgCanal) {
+                html += `<li>${programa.inicio} - ${programa.titulo}</li>`
+            }
+        })
+    }
+    html += '</ul>'
+    boxProgramacao.innerHTML = html
+}
+
+function abrirCanal(url, canal, epgCanal) {
     if (monitorId) {
         clearInterval(monitorId)
+        monitorId = null
     }
     if (hls) {
         hls.destroy()
+        hls = null
     }
     let tempo = 0
     let contador = 0
     urlAtual = url
     canalAtual = canal
+    epgId = epgCanal
     const video = document.getElementById('player');
-    const assistindo = document.getElementById('assistindo');
     assistindo.innerHTML = `<b>Assistindo:</b> ${canal}`
+    mostrarEPG(epgId)
 
     if (Hls.isSupported()) {
         hls = new Hls();
@@ -262,7 +283,7 @@ function abrirCanal(url, canal) {
              if(video.currentTime === tempo) {
                         console.log('Reconectando Canal...')
                         clearInterval(monitorId)
-                        abrirCanal(urlAtual, canalAtual)
+                        abrirCanal(urlAtual, canalAtual, epgId)
                     }
           }
           tempo = video.currentTime
