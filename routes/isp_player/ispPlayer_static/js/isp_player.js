@@ -403,6 +403,7 @@ function mostrarCategoriaSeries() {
     if(divRemover) {
         divRemover.remove()
     }
+    box.style.display = 'flex'
     boxPlayer.style.display = 'none'
     lista.style.display = 'flex'
     let html = "<h3 class='canal'>Séries:</h3>";
@@ -567,6 +568,7 @@ function mostrarCategoriaFilmes() {
     if(divRemover) {
          divRemover.remove()
     }
+    box.style.display = 'flex'
     boxPlayer.style.display = 'none'
     lista.style.display = 'flex'
     let html = "<h3 class='canal'>Filmes:</h3>";
