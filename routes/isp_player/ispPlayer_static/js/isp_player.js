@@ -376,6 +376,9 @@ async function carregarEpisodiosSeries(series_id, nome, imagem) {
 }
 
 function mostrarCategoriaSeries() {
+    assistindo.innerHTML = ''
+    document.getElementById("programacao").innerHTML = ''
+    document.getElementById("titulo_programacao").innerHTML = ''
     if (monitorId) {
         clearInterval(monitorId)
         monitorId = null
@@ -384,14 +387,23 @@ function mostrarCategoriaSeries() {
         hls.destroy()
         hls = null
     }
+    tipoConteudo = 'series'
+    if (tipoConteudo === 'series') {
+        const video = document.getElementById('player')
+        if (video.currentTime >= 0) {
+            video.pause()
+            video.removeAttribute("src")
+            video.load()
+        }
+    }
     const box = document.getElementById('box1')
     const lista = document.getElementById("lista")
-    const video = document.getElementById('box_player')
+    const boxPlayer = document.getElementById('box_player')
     const divRemover = document.getElementById("container")
     if(divRemover) {
         divRemover.remove()
     }
-    video.style.display = 'none'
+    boxPlayer.style.display = 'none'
     lista.style.display = 'flex'
     let html = "<h3 class='canal'>Séries:</h3>";
     html += `<input type="text" id="pesquisar" placeholder="buscar séries...">
@@ -400,7 +412,9 @@ function mostrarCategoriaSeries() {
         html += `<button onclick="carregarListaSeries('${c.category_id}', '${c.category_name}')" tabindex="0">${c.category_name}</button>`;
     });
     lista.innerHTML = html;
-    box.style.display = 'none'
+    setTimeout(() => {
+        box.style.display = 'none'
+    }, 500)
 }
 
 function buscarSeries() {
