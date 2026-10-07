@@ -117,13 +117,13 @@ function buscarCanais() {
     const lista = document.getElementById("lista")
     let html = `<h3 class='canal'>Busca por: ${pesquisa}</h3>`;
     html += `<input type="text" id="pesquisar" placeholder="buscar canais...">
-             <button onclick="buscarCanais()" tabindex="0">Buscar</button>`
+             <button class="btn_lista" onclick="buscarCanais()" tabindex="0">Buscar</button>`
     if (listaAtual.length === 0) {
         html += `<p>Nenhum resultado encontrado.</p>`
     } else {
         listaAtual.forEach(c => {
             const url = `${server}/live/${user}/${pass}/${c.stream_id}.m3u8`
-            html += `<button onclick="abrirCanal('${url}', '${c.name}')" tabindex="0">${c.name}</button>`;
+            html += `<button class="btn_lista" onclick="abrirCanal('${url}', '${c.name}')" tabindex="0">${c.name}</button>`;
         })
     }
     lista.innerHTML = html;
