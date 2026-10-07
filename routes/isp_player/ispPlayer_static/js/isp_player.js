@@ -301,11 +301,11 @@ function abrirCanal(url, canal, epgCanal) {
 }
 
 async function carregarCategoriaSeries() {
-    const box = document.getElementById('box1')
-    box.style.display = 'flex'
     const server = document.getElementById("server").value;
     const user = document.getElementById("user").value;
     const pass = document.getElementById("pass").value;
+    const info = document.getElementById('conteudo')
+    info.innerHTML = 'carregando séries...'
 
     const url = `${server}/player_api.php?username=${user}&password=${pass}&action=get_series_categories`;
     const urlSeriesAll = `${server}/player_api.php?username=${user}&password=${pass}&action=get_series`;
@@ -319,9 +319,7 @@ async function carregarCategoriaSeries() {
         series = dataSeriesAll
         //console.log(JSON.stringify(data, null, 2))
 
-        mostrarCategoriaSeries();
     } catch (err) {
-        box.style.display = 'none'
         alert(err)
         document.getElementById("lista").innerHTML = "Erro ao carregar categoria de Séries.";
         console.error(err);
