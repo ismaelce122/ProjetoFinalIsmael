@@ -408,9 +408,9 @@ function mostrarCategoriaSeries() {
     lista.style.display = 'flex'
     let html = "<h3 class='canal'>Séries:</h3>";
     html += `<input type="text" id="pesquisar" placeholder="buscar séries...">
-             <button onclick="buscarSeries()" tabindex="0">Buscar</button>`
+             <button class="btn_lista" onclick="buscarSeries()" tabindex="0">Buscar</button>`
     seriesCache.forEach((c, i) => {
-        html += `<button onclick="carregarListaSeries('${c.category_id}', '${c.category_name}')" tabindex="0">${c.category_name}</button>`;
+        html += `<button class="btn_lista" onclick="carregarListaSeries('${c.category_id}', '${c.category_name}')" tabindex="0">${c.category_name}</button>`;
     });
     lista.innerHTML = html;
     setTimeout(() => {
@@ -431,12 +431,12 @@ function buscarSeries() {
     const lista = document.getElementById("lista")
     let html = `<h3 class='canal'>Busca por: ${pesquisa}</h3>`;
     html += `<input type="text" id="pesquisar" placeholder="buscar séries...">
-             <button onclick="buscarSeries()" tabindex="0">Buscar</button>`
+             <button class="btn_lista" onclick="buscarSeries()" tabindex="0">Buscar</button>`
     if (listaAtual.length === 0) {
         html += `<p>Nenhum resultado encontrado.</p>`
     } else {
         listaAtual.forEach(c => {
-            html += `<button onclick="carregarEpisodiosSeries('${c.series_id}', '${c.name}', '${c.cover}')">
+            html += `<button class="btn_lista" onclick="carregarEpisodiosSeries('${c.series_id}', '${c.name}', '${c.cover}')">
                         <img src="${c.cover}" alt="${c.name}">${c.name}
                      </button>
                     `
@@ -573,9 +573,9 @@ function mostrarCategoriaFilmes() {
     lista.style.display = 'flex'
     let html = "<h3 class='canal'>Filmes:</h3>";
     html += `<input type="text" id="pesquisar" placeholder="buscar filmes...">
-             <button onclick="buscarFilmes()" tabindex="0">Buscar</button>`
+             <button class="btn_lista" onclick="buscarFilmes()" tabindex="0">Buscar</button>`
     filmesCache.forEach((c, i) => {
-        html += `<button onclick="carregarListaFilmes('${c.category_id}', '${c.category_name}')" tabindex="0">${c.category_name}</button>`;
+        html += `<button class="btn_lista" onclick="carregarListaFilmes('${c.category_id}', '${c.category_name}')" tabindex="0">${c.category_name}</button>`;
     });
     lista.innerHTML = html;
     setTimeout(() => {
@@ -698,12 +698,12 @@ function buscarFilmes() {
     const lista = document.getElementById("lista")
     let html = `<h3 class='canal'>Busca por: ${pesquisa}</h3>`;
     html += `<input type="text" id="pesquisar" placeholder="buscar filmes...">
-             <button onclick="buscarFilmes()" tabindex="0">Buscar</button>`
+             <button class="btn_lista" onclick="buscarFilmes()" tabindex="0">Buscar</button>`
     if (listaAtual.length === 0) {
         html += `<p>Nenhum resultado encontrado.</p>`
     } else {
         listaAtual.forEach(c => {
-            html += `<button onclick="carregarInfoFilmes('${c.stream_id}', '${c.stream_icon}', '${c.name}')">
+            html += `<button class="btn_lista" onclick="carregarInfoFilmes('${c.stream_id}', '${c.stream_icon}', '${c.name}')">
                         <img src="${c.stream_icon}" alt="${c.name}">${c.name}
                      </button>
                     `
