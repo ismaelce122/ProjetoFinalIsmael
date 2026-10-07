@@ -681,7 +681,6 @@ function reproduzirFilmes(filme_id, filmeNome) {
     const pass = document.getElementById("pass").value;
     const url = `${server}/movie/${user}/${pass}/${filme_id}.mp4`
     const video = document.getElementById('player');
-    const assistindo = document.getElementById('assistindo');
     assistindo.innerHTML = `<b>Assistindo:</b> ${filmeNome}`
     video.src = url
     video.play()
@@ -714,4 +713,24 @@ function buscarFilmes() {
     }, 1000)
 }
 
-carregarCategoria()
+async function Conteudo() {
+    const box = document.getElementById('box1')
+    const info = document.getElementById('conteudo')
+    box.style.display = 'flex'
+    try {
+        categoriaCanais = await carregarCategoria()
+        categoriaCanais = dados.categoriaCanais
+        canais = dados.canais
+    } catch (err) {
+        console.error('Erro: ', err)
+        console.log('retorno: ' + categoriaCanais)
+    }
+    await carregarCategoriaSeries()
+    await carregarCategoriaFilmes()
+    epg = await carregarEPG()
+    mostrarCategoria()   
+    box.style.display = 'none'
+    info.innerHTML = ''
+}
+    
+Conteudo()
