@@ -477,7 +477,7 @@ async function mostrarEpisodiosSeries(serieNome, imagem) {
         //console.log('Temporada: ', temporada)
         serie.episodes[temporada].forEach((ep) => {
             //console.log(ep.title)
-            html += `<button onclick="reproduzirSeries('${ep.id}', '${ep.title}')" tabindex="0">${ep.title}</button>`;
+            html += `<button class="btn_lista" onclick="reproduzirSeries('${ep.id}', '${ep.title}')" tabindex="0">${ep.title}</button>`;
         })
     }
     lista.innerHTML = html;
@@ -503,7 +503,7 @@ function mostrarListaSeries(nome) {
     let html = ''
     let html2 = `<h3 class='canal'>${nome}:</h3>`
     lista_seriesCache.forEach((c, i) => {
-        html += `<button onclick="carregarEpisodiosSeries('${c.series_id}', '${c.name}', '${c.cover}')">
+        html += `<button class="btn_lista" onclick="carregarEpisodiosSeries('${c.series_id}', '${c.name}', '${c.cover}')">
                      <img src="${c.cover}" alt="${c.name}">${c.name}
                  </button>
                 `
@@ -648,7 +648,7 @@ function mostrarListaFilmes(nome) {
     let html = ''
     let html2 = `<h3 class='canal'>${nome}:</h3>`;
     lista_filmesCache.forEach((c, i) => {
-        html += `<button onclick="carregarInfoFilmes('${c.stream_id}', '${c.stream_icon}', '${c.name}')">
+        html += `<button class="btn_lista" onclick="carregarInfoFilmes('${c.stream_id}', '${c.stream_icon}', '${c.name}')">
                     <img src="${c.stream_icon}" alt="${c.name}">${c.name}
                  </button>
                 `
@@ -672,7 +672,7 @@ function carregarFilme(filme_id, imagem, filmeNome) {
     video.style.display = 'block'
     let html = `<h3 class='canal'>${filmeNome}</h3>`;
     html += `<img src="${imagem}" alt="${filmeNome}"><br>`
-    html += `<button onclick="reproduzirFilmes('${filme_id}', '${filmeNome}')" tabindex="0">Assistir</button>`
+    html += `<button class="btn_lista" onclick="reproduzirFilmes('${filme_id}', '${filmeNome}')" tabindex="0">Assistir</button>`
     lista.innerHTML = html;
     box.style.display = 'none'
 }
