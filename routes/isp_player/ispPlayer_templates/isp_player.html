@@ -16,7 +16,12 @@
 
 <body>
     <div class="overlay" id="box1">
-        <div class="loader"></div>
+        <div class="w-100">
+            <div class="loader"></div>
+            <div class="info">
+                <h5 id="conteudo"></h5>
+            </div>
+        </div>
     </div>
     <div class="container-fluid logo">
         <div class="background"></div>
@@ -35,9 +40,9 @@
     </div>
     <div class="container mt-1">
         <div class="d-flex">
-            <button onclick="carregarCategoria()" autofocus>Canais</button>
-            <button onclick="carregarCategoriaSeries()" tabindex="0">Séries</button>
-            <button onclick="carregarCategoriaFilmes()" tabindex="0">Filmes</button>
+            <button onclick="mostrarCategoria()" autofocus>Canais</button>
+            <button onclick="mostrarCategoriaSeries()" tabindex="0">Séries</button>
+            <button onclick="mostrarCategoriaFilmes()" tabindex="0">Filmes</button>
         </div>
     </div>
     <div class="container-fluid box mt-3" id="box_pai">
@@ -45,6 +50,12 @@
         <div class="w-100" id="box_player">
             <video id="player" controls></video>
             <p id="assistindo"></p>
+            <div>
+                <h6 id="titulo_programacao"></h6>
+                <div class="box_programacao">
+                    <div id="programacao"></div>
+                </div>
+            </div>
         </div>
     </div>
 
