@@ -1,10 +1,17 @@
-let canais = []
-let series = []
-let filmes = []
-let urlAtual = null
-let canalAtual = null
+const assistindo = document.getElementById('assistindo');
+assistindo.innerHTML = ''
+let epg = []
+let categoriaCanais = null
+let canais = [];
+let series = [];
+let filmes = [];
+let urlAtual = null;
+let canalAtual = null;
+let epgId = null;
 let monitorId = null;
 let hls = new Hls();
+let tipoConteudo = null
+let erro = true
 
 function atualizarHora() {
     const agora = new Date()
@@ -18,12 +25,14 @@ setInterval(atualizarHora, 1000)
 atualizarHora()
 
 async function carregarCategoria() {
-    const box = document.getElementById('box1')
-    box.style.display = 'flex'
     const server = document.getElementById("server").value;
     const user = document.getElementById("user").value;
     const pass = document.getElementById("pass").value;
+    const info = document.getElementById('conteudo')
+    info.innerHTML = 'carregando canais...'
 
+           
+    //const url = `${server}/player_api.php?username=${user}&password=${pass}`; // Url para informações do Usuário.
     const url = `${server}/player_api.php?username=${user}&password=${pass}&action=get_live_categories`;
     const urlCanaisAll = `${server}/player_api.php?username=${user}&password=${pass}&action=get_live_streams`;
 
@@ -32,18 +41,21 @@ async function carregarCategoria() {
         const data = await response.json();
         const responseCanaisAll = await fetch(urlCanaisAll);
         const dataCanaisAll = await responseCanaisAll.json();
-        categoriasCache = data;
-        canais = dataCanaisAll
-
-        mostrarCategoria();
+        //console.log(JSON.stringify(dataCanaisAll, null, 2))
+        //console.log(canais.length)
+        return dados = {
+            categoriaCanais: data,
+            canais: dataCanaisAll
+        } 
+                
     } catch (err) {
-        box.style.display = 'none'
+        console.error('Erro: ', err);
         alert(err)
         document.getElementById("lista").innerHTML = "Erro ao carregar categoria de Canais.";
-        console.error(err);
     }
 
 }
+
 async function carregarCanais(categoria) {
     const box = document.getElementById('box1')
     box.style.display = 'flex'
