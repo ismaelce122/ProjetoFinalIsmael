@@ -30,8 +30,7 @@ async function carregarCategoria() {
     const pass = document.getElementById("pass").value;
     const info = document.getElementById('conteudo')
     info.innerHTML = 'carregando canais...'
-
-           
+      
     //const url = `${server}/player_api.php?username=${user}&password=${pass}`; // Url para informações do Usuário.
     const url = `${server}/player_api.php?username=${user}&password=${pass}&action=get_live_categories`;
     const urlCanaisAll = `${server}/player_api.php?username=${user}&password=${pass}&action=get_live_streams`;
@@ -56,7 +55,7 @@ async function carregarCategoria() {
 
 }
 
-async function carregarCanais(categoria) {
+async function carregarCanais2(categoria) {
     const box = document.getElementById('box1')
     box.style.display = 'flex'
     const server = document.getElementById("server").value;
@@ -78,6 +77,30 @@ async function carregarCanais(categoria) {
         console.error(err);
     }
 
+}
+
+function carregarCanais(categoria) {
+    const box = document.getElementById('box1')
+    box.style.display = 'flex'
+    const lista = document.getElementById("lista")
+    const server = document.getElementById("server").value;
+    const user = document.getElementById("user").value;
+    const pass = document.getElementById("pass").value;
+    const listaCanais = canais
+    const buscarCanais = listaCanais.filter(c => (c.category_id || "").includes(categoria))
+    let html = `<h3 class='canal'>Canais:</h3>`;
+    if (buscarCanais.length === 0 || buscarCanais == '' ) {
+        html += `<p>Erro ao carregar canais.</p>`;
+    } else {
+        buscarCanais.forEach(c => {
+            const url = `${server}/live/${user}/${pass}/${c.stream_id}.m3u8`
+            html += `<button class="btn_lista" onclick="abrirCanal('${url}', '${c.name}', '${c.epg_channel_id}')">${c.name}</button>`;
+        });
+    }
+    lista.innerHTML = html;
+    setTimeout(() => {
+        box.style.display = 'none'
+    }, 500)
 }
 
 function buscarCanais() {
