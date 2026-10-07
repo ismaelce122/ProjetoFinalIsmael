@@ -138,28 +138,46 @@ function mostrarCategoria() {
     const video = document.getElementById('player')
     const boxPlayer = document.getElementById('box_player')
     const divRemover = document.getElementById("container")
-    if (!video.currentSrc.endsWith(".mp4")) {
-        // Não faz nada Aqui!!!
-    } else if (!video.paused) {
-          video.pause()
-          video.removeAttribute("src")
-          video.load()
+    if (tipoConteudo === 'series' || tipoConteudo === 'filmes') {
+        assistindo.innerHTML = ''    
+        if (video.currentTime >= 0) {
+            video.pause()
+            video.removeAttribute("src")
+            video.load()
+        }
     }
+    tipoConteudo = 'canais'
     if(divRemover) {
         divRemover.remove()
     }
+    box.style.display = 'flex'
     boxPlayer.style.display = 'block'
     video.style.display = 'block'
     lista.style.display = 'flex'
     lista.innerHTML = ''
+    //console.log(JSON.stringify(categoriasCache, null, 2))
+            
     let html = "<h3 class='canal'>Canais Ao Vivo:</h3>";
-    html += `<input type="text" id="pesquisar" placeholder="buscar canais...">
-             <button onclick="buscarCanais()" tabindex="0">Buscar</button>`
-    categoriasCache.forEach((c, i) => {
-        html += `<button onclick="carregarCanais('${c.category_id}')" tabindex="0">${c.category_name}</button>`;
-    });
-    lista.innerHTML = html;
-    box.style.display = 'none'
+    html += `<input type="text" id="pesquisar" name="pesquisar" autocomplete="on" placeholder="buscar canais...">
+             <button class="btn_lista" onclick='buscarCanais()'>Buscar</button>`
+    try {
+        categoriaCanais.forEach((c, i) => {
+            html += `<button class="btn_lista" onclick="carregarCanais('${c.category_id}')">${c.category_name}</button>`;
+        });
+        erro = false
+    } catch (err) {
+        lista.innerHTML = 'erro ao carregar os canais.'
+        alert(err)
+        console.error('Erro: ', err)
+    }
+    if (erro) {
+        // não faz nada. 
+    } else {
+        lista.innerHTML = html;
+    }
+    setTimeout(() => {
+        box.style.display = 'none'
+    }, 500)
 }
 
 function mostrarCanais() {
