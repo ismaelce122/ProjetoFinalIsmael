@@ -20,6 +20,10 @@ img {
     object-position: center;
 }
 
+.listaImg {
+    width: 200px;
+}
+
 .img_tela_cheia {
     width: 16px;
     height: 16px;
