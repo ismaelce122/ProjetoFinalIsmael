@@ -42,7 +42,8 @@ img {
 }
 
 .menu {
-    gap: 20px;
+    gap: 25px;
+    justify-content: center;
 }
     
 .btn_menu {
@@ -246,6 +247,7 @@ ul {
     }
 
     .menu {
-        gap: 5px;
+        gap: 10px;
+        height: 30px;
     }
 }
