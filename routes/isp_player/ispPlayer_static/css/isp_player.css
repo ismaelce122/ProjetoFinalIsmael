@@ -229,7 +229,11 @@ ul {
         height: 120px;
     }
     
-    button {
+    .btn_lista {
         width: 130px;
+    }
+
+    .loader {
+        margin-top: 0px;
     }
 }
