@@ -40,6 +40,10 @@ img {
     transition: 0.2s;
     cursor: pointer;
 }
+
+.menu {
+    gap: 20px;
+}
     
 .btn_menu {
     background-color: white;
@@ -239,5 +243,9 @@ ul {
 
     .btn_menu {
         width: 100px;
+    }
+
+    .menu {
+        gap: 5px;
     }
 }
