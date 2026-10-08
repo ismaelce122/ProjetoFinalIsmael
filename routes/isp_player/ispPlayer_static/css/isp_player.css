@@ -156,7 +156,6 @@ ul {
 
 .loader {
     margin: auto;
-    margin-top: 50%;
     border: 5px solid #f3f3f3;
     border-top: 5px solid #3498db;
     border-bottom: 5px solid #3498db;
@@ -230,10 +229,6 @@ ul {
     }
     
     .btn_lista {
-        width: 130px;
-    }
-
-    .loader {
-        margin-top: 0px;
+        width: 230px;
     }
 }
