@@ -251,4 +251,12 @@ ul {
         height: 25px;
         margin-bottom: 20px;
     }
+
+    .titulo_series {
+        margin-top: 10px;
+    }
+
+    .titulo_filmes {
+        margin-top: 10px;
+    }
 }
