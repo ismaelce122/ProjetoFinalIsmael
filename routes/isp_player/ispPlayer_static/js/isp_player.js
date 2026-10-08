@@ -472,7 +472,7 @@ async function mostrarEpisodiosSeries(serieNome, imagem) {
     serie = episodios_seriesCache
     lista.innerHTML = ''
     let html = `<h3 class='canal'>${serieNome}</h3>`;
-    html += `<img src="${imagem}" alt="${serieNome}"><br>`
+    html += `<img class="listaImg" src="${imagem}" alt="${serieNome}"><br>`
     for (const temporada in serie.episodes) {
         //console.log('Temporada: ', temporada)
         serie.episodes[temporada].forEach((ep) => {
@@ -671,7 +671,7 @@ function carregarFilme(filme_id, imagem, filmeNome) {
     lista.innerHTML = ''
     video.style.display = 'block'
     let html = `<h3 class='canal'>${filmeNome}</h3>`;
-    html += `<img src="${imagem}" alt="${filmeNome}"><br>`
+    html += `<img class="listaImg" src="${imagem}" alt="${filmeNome}"><br>`
     html += `<button class="btn_lista" onclick="reproduzirFilmes('${filme_id}', '${filmeNome}')" tabindex="0">Assistir</button>`
     lista.innerHTML = html;
     box.style.display = 'none'
