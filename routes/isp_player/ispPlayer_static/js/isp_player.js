@@ -216,8 +216,11 @@ async function carregarEPG() {
         const inicio = programas[i].getAttribute("start"); // AAAAMMDDHHMMSS
         const canal = programas[i].getAttribute("channel")
         if (inicio.startsWith(hoje)) {
+            const hora = programas[i].getAttribute("start").slice(8,10)
+            const minuto = programas[i].getAttribute("start").slice(10,12)
+            const inicioFormatado = `${hora}:${minuto}`
             novoPrograma = {
-                inicio: programas[i].getAttribute("start"), // AAAAMMDDHHMMSS
+                inicio: inicioFormatado,
                 canal: programas[i].getAttribute("channel"),
                 titulo: programas[i].getElementsByTagName("title")[0].textContent
             }
