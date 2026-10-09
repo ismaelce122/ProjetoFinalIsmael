@@ -21,7 +21,7 @@ img {
 }
 
 .listaImg {
-    width: 150px;
+    width: 130px;
 }
 
 .img_tela_cheia {
@@ -243,7 +243,7 @@ ul {
     }
 
     .listaImg {
-        width: 100%;
+        width: 200px;
     }
 
     input {
