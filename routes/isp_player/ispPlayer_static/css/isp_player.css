@@ -21,7 +21,7 @@ img {
 }
 
 .listaImg {
-    width: 100px;
+    width: 150px;
 }
 
 .img_tela_cheia {
@@ -240,6 +240,10 @@ ul {
     
     .btn_lista {
         width: 150px;
+    }
+
+    .listaImg {
+        width: 100%;
     }
 
     input {
