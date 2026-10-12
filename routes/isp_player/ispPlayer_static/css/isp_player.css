@@ -232,6 +232,15 @@ ul {
     background-color: white;
 }
 
+.programa_inicio {
+    color: blue;
+    font-weigth: 800;
+}
+
+.programa_titulo {
+    font-weigth: 700;
+}
+
 @media screen and (max-width: 600px) {
     img {
         width: 100%;
