@@ -240,9 +240,11 @@ function mostrarEPG(epgCanal) {
     } else {
         epg.forEach((programa) => {
             if (programa.canal === epgCanal) {
-                html += `<li class="d-flex gap-3">
-                             <p class="programa_inicio">${programa.inicio}</p>  
-                             <p class="programa_titulo">${programa.titulo}</p>
+                html += `<li class="mt-1">
+                             <div class="d-flex gap-3">
+                                 <p class="programa_inicio mb-0">${programa.inicio}</p>  
+                                 <p class="programa_titulo mb-0">${programa.titulo}</p>
+                             </div>
                          </li>
                         `
             }
