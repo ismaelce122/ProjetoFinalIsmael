@@ -42,7 +42,7 @@ img {
 .btn_lista {
     background-color: white;
     color: #4DD0E1;
-    font-weight: 500;
+    font-weight: 800;
     border: none;
     margin: 5px;
     padding: 5px;
@@ -60,7 +60,7 @@ img {
 .btn_menu {
     background-color: white;
     color: #4DD0E1;
-    font-weight: 500;
+    font-weight: 800;
     border: none;
     height: 40px;
     margin: 5px;
@@ -227,7 +227,7 @@ ul {
 
 #hora {
     color: #4DD0E1;
-    font-weight: 500;
+    font-weight: 700;
     margin-right: 10px;
 }
 
