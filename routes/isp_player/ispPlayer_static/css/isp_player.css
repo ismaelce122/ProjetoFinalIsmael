@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: orange;
+    background-color: #131729;
     padding-bottom: 30px;
     width: 100%;
     height: 100vh;
@@ -12,6 +12,11 @@ input {
     width: 200px;
     border-radius: 5px;
     border: none;
+}
+
+input::placeholder {
+    color: #4DD0E1;
+    opacity: 0.6;
 }
 
 img {
@@ -36,6 +41,8 @@ img {
 
 .btn_lista {
     background-color: white;
+    color: #4DD0E1;
+    font-weight: 500;
     border: none;
     margin: 5px;
     padding: 5px;
@@ -52,6 +59,8 @@ img {
     
 .btn_menu {
     background-color: white;
+    color: #4DD0E1;
+    font-weight: 500;
     border: none;
     height: 40px;
     margin: 5px;
@@ -109,7 +118,9 @@ ul {
 }
 
 .canal {
-    margin-left: 5px
+    margin-left: 5px;
+    color: #4DD0E1;
+    font-weight: 500;
 }
 
 .box {
@@ -166,13 +177,15 @@ ul {
 .loader {
     margin: auto;
     margin-top: 40vh;
-    border: 5px solid #f3f3f3;
-    border-top: 5px solid #3498db;
-    border-bottom: 5px solid #3498db;
+    border-top: 5px solid #4DD0E1;
     border-radius: 50%;
     width: 80px;
     height: 80px;
-    animation: spin 1s linear infinite;
+    animation: spin 0.8s linear infinite;
+}
+
+#conteudo {
+    color: #4DD0E1;
 }
 
 @keyframes spin {
