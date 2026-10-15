@@ -219,25 +219,31 @@ ul {
 }
 
 .texto_titulo {
+    color: #4DD0E1;
+    font-family: 'Montserrat', sans-serif;
     font-size: 35px;
-    color: black;
-    font-weight: bold;
     text-align: left;
 }
 
 #hora {
+    color: #4DD0E1;
+    font-weight: 500;
     margin-right: 10px;
+}
+
+#assistindo {
+    color: white;
 }
 
 .btn_lista:focus {
     color: white;
-    background-color: #333;
+    background-color: #4DD0E1;
     transform: scale(1.2);
 }
     
 .btn_menu:focus {
     color: white;
-    background-color: #333;
+    background-color: #4DD0E1;
     transform: scale(1.2);
 }
     
@@ -246,12 +252,18 @@ ul {
 }
 
 .programa_inicio {
-    color: blue;
+    color: #4DD0E1;
     font-weigth: 800;
 }
 
 .programa_titulo {
+    color: white;
     font-weigth: 700;
+}
+
+#titulo_programacao {
+    color: #4DD0E1;
+    font-weigth: 800;
 }
 
 @media screen and (max-width: 600px) {
