@@ -724,6 +724,80 @@ function buscarFilmes() {
     }, 1000)
 }
 
+function iniciarControle(video) {
+    document.addEventListener('keydown', function(e) {
+        switch(e.keyCode) {
+            case 37: // ← seta esquerda
+                alert("Seta Esquerda");
+                break;
+            case 38: // ↑ seta cima
+                alert("Seta Cima");
+                break;
+            case 39: // → seta direita
+                alert("Seta Direita");
+                break;
+            case 40: // ↓ seta baixo
+                alert("Seta Baixo");
+                break;
+            case 13: // Enter / OK
+                alert("Enter / OK");
+                break;
+            case 10009: // Return (voltar)
+                console.log("Return / Voltar");
+                tizen.application.getCurrentApplication().exit();
+                break;
+            case 10182: // Exit
+                console.log("Exit");
+                tizen.application.getCurrentApplication().exit();
+                break;
+            case 10252: // Play/Pause
+                if (video.paused) {
+                    video.play();
+                    console.log("Play");
+                } else {
+                      video.pause();
+                      console.log("Pause");
+                }
+                break;
+            case 415: // Play
+                video.play();
+                console.log("Play");
+                break;
+            case 19: // Pause
+                video.pause();
+                console.log("Pause");
+                break;
+            case 413: // Stop
+                video.pause();
+                video.currentTime = 0;
+                console.log("Stop");
+                break;
+            case 412: // Rewind
+                video.currentTime = Math.max(video.currentTime - 10, 0);
+                console.log("Rewind -10s");
+                break;
+            case 417: // Fast Forward
+                video.currentTime = Math.min(video.currentTime + 10, video.duration);
+                console.log("Forward +10s");
+                break;
+            case 10071: // Info
+                console.log("Info");
+                break;
+            case 10190: // Tools/Menu
+                console.log("Tools/Menu");
+                break;
+            case 10256: // Subtitle
+                console.log("Subtitle");
+                break;
+            case 10257: // Audio
+                console.log("Audio");
+                break;
+            default:
+                console.log("Tecla não mapeada: " + e.keyCode);
+        }
+    });
+                            }
+
 async function Conteudo() {
     const box = document.getElementById('box1')
     const info = document.getElementById('conteudo')
@@ -739,6 +813,7 @@ async function Conteudo() {
     await carregarCategoriaSeries()
     await carregarCategoriaFilmes()
     epg = await carregarEPG()
+    iniciarControle(document.getElementById('player'))
     mostrarCategoria()   
     box.style.display = 'none'
     info.innerHTML = ''
