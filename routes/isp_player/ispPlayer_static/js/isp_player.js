@@ -813,7 +813,7 @@ async function Conteudo() {
     await carregarCategoriaSeries()
     await carregarCategoriaFilmes()
     epg = await carregarEPG()
-    iniciarControle(document.getElementById('player'))
+    //iniciarControle(document.getElementById('player'))
     mostrarCategoria()   
     box.style.display = 'none'
     info.innerHTML = ''
