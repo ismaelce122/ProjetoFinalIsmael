@@ -157,9 +157,6 @@ ul {
 }
 
 .info {
-    margin: auto;
-    margin-top: 5px;
-    color: white;
     text-align: center;
 }
 
@@ -220,6 +217,7 @@ ul {
     display: none;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 .logo-animada {
