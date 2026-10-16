@@ -12,6 +12,7 @@ let monitorId = null;
 let hls = new Hls();
 let tipoConteudo = null
 let erro = true
+let iniciado = false
 
 function atualizarHora() {
     const agora = new Date()
@@ -133,6 +134,7 @@ function buscarCanais() {
 }
 
 function mostrarCategoria() {
+    const boxPai = document.getElementById('box_pai')
     const box = document.getElementById('box1')
     const lista = document.getElementById("lista")
     const video = document.getElementById('player')
@@ -150,7 +152,21 @@ function mostrarCategoria() {
     if(divRemover) {
         divRemover.remove()
     }
-    box.style.display = 'flex'
+    if (!iniciado) {
+        setTimeout(() => {
+            box.style.display = 'flex'
+            setTimeout(() => {
+                box.style.display = 'none'
+                boxPai.style.display = 'flex'
+                iniciado = true
+            }, 2000)
+        }, 800)
+    } else {
+        box.style.display = 'flex'
+        setTimeout(() => {
+            box.style.display = 'none'
+        }, 500)
+    }
     boxPlayer.style.display = 'block'
     video.style.display = 'block'
     lista.style.display = 'flex'
@@ -175,9 +191,6 @@ function mostrarCategoria() {
     } else {
         lista.innerHTML = html;
     }
-    setTimeout(() => {
-        box.style.display = 'none'
-    }, 500)
 }
 
 function mostrarCanais() {
@@ -802,7 +815,6 @@ async function Conteudo() {
     const logo = document.getElementById('logo')
     const boxLogo = document.getElementById('box_logo')
     const boxMenu = document.getElementById('box_menu')
-    const boxPai = document.getElementById('box_pai')
     const info = document.getElementById('conteudo')
     logo.style.display = 'flex'
     try {
@@ -819,10 +831,12 @@ async function Conteudo() {
     //iniciarControle(document.getElementById('player'))
     boxLogo.style.display = 'block'
     boxMenu.style.display = 'block'
-    boxPai.style.display = 'flex'
+    logo.classList.add('fade-out')
     mostrarCategoria()   
-    logo.style.display = 'none'
-    info.innerHTML = ''
+    setTimeout(() => {
+        logo.style.display = 'none'
+        info.innerHTML = ''
+    }, 2000)   
 }
     
 Conteudo()
