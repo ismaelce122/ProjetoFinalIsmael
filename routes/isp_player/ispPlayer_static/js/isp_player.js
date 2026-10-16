@@ -799,9 +799,9 @@ function iniciarControle(video) {
                             }
 
 async function Conteudo() {
-    const box = document.getElementById('box1')
+    const logo = document.getElementById('logo')
     const info = document.getElementById('conteudo')
-    box.style.display = 'flex'
+    logo.style.display = 'flex'
     try {
         categoriaCanais = await carregarCategoria()
         categoriaCanais = dados.categoriaCanais
@@ -815,7 +815,7 @@ async function Conteudo() {
     epg = await carregarEPG()
     //iniciarControle(document.getElementById('player'))
     mostrarCategoria()   
-    box.style.display = 'none'
+    logo.style.display = 'none'
     info.innerHTML = ''
 }
     
