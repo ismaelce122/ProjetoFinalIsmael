@@ -245,6 +245,16 @@ ul {
     text-align: left;
 }
 
+.texto_titulo::before {
+    content: "";
+    display: inline-block;
+    width: 90px;
+    height: 90px;
+    background: url('logo.png') no-repeat center / contain;
+    vertical-align: middle;
+    margin-bottom: 12px;
+}
+
 #hora {
     color: #4DD0E1;
     font-weight: 600;
