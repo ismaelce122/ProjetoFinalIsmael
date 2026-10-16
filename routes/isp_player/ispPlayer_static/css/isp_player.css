@@ -124,7 +124,7 @@ ul {
 }
 
 .box {
-    display: flex;
+    display: none;
     width: 100%;
 }
 
@@ -228,6 +228,7 @@ ul {
 
 .logo {
     height: 100px;
+    display: none;
 }
 
 .titulo {
@@ -293,6 +294,10 @@ ul {
 #titulo_programacao {
     color: #4DD0E1;
     font-weigth: 800;
+}
+
+#box_menu {
+    display: none;
 }
 
 @media screen and (max-width: 600px) {
