@@ -10,8 +10,14 @@ input {
     margin: 5px;
     padding: 5px;
     width: 200px;
-    border-radius: 5px;
-    border: none;
+    background: #242E4F;
+    color: #4DD0E1;
+    border: 1px solid rgba(77, 208, 225, 0.3);
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 1px;
+    outline: none;
 }
 
 input::placeholder {
@@ -40,16 +46,18 @@ img {
 }
 
 .btn_lista {
-    background-color: white;
+    background: #242E4F;
     color: #4DD0E1;
-    font-weight: 800;
-    border: none;
+    border: 1px solid rgba(77, 208, 225, 0.3);
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 150px;
     margin: 5px;
     padding: 5px;
-    width: 200px;
-    border-radius: 5px;
-    transition: 0.2s;
-    cursor: pointer;
 }
 
 .menu {
@@ -58,17 +66,18 @@ img {
 }
     
 .btn_menu {
-    background-color: white;
+    background: #242E4F;
     color: #4DD0E1;
-    font-weight: 800;
-    border: none;
-    height: 40px;
+    border: 1px solid rgba(77, 208, 225, 0.3);
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 150px;
     margin: 5px;
     padding: 5px;
-    width: 150px;
-    border-radius: 5px;
-    transition: 0.2s;
-    cursor: pointer;
 }
 
 .btn_abertura {
@@ -275,15 +284,17 @@ ul {
 }
 
 .btn_lista:focus {
-    color: white;
-    background-color: #4DD0E1;
-    transform: scale(1.2);
+    background: #2D3A5E;
+    border-color: #4DD0E1;
+    box-shadow: 0 0 15px rgba(77, 208, 225, 0.3);
+    transform: scale(1.1);
 }
     
 .btn_menu:focus {
-    color: white;
-    background-color: #4DD0E1;
-    transform: scale(1.2);
+    background: #2D3A5E;
+    border-color: #4DD0E1;
+    box-shadow: 0 0 15px rgba(77, 208, 225, 0.3);
+    transform: scale(1.1);
 }
     
 .btn_tela:focus {
