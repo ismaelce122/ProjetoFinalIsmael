@@ -193,6 +193,40 @@ ul {
     100% { transform: rotate(360deg); }
 }
 
+@keyframes pulse-glow {
+    0% {
+        transform: scale(0.95);
+        opacity: 0.8;
+        filter: drop-shadow(0 0 0px #4DD0E1);
+    }
+    50% {
+        transform: scale(1);
+        opacity: 1;
+        filter: drop-shadow(0 0 25px #4DD0E1);
+    }
+    100% {
+        transform: scale(0.95);
+        opacity: 0.8;
+        filter: drop-shadow(0 0 0px #4DD0E1);
+    }
+}
+
+.splash {
+    background: #131729;
+    position: fixed;
+    z-index: 9999;
+    width: 100%;
+    height: 100vh;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-animada {
+    width: 220px;
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
 .logo {
     height: 100px;
 }
