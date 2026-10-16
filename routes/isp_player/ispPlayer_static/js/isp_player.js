@@ -800,6 +800,9 @@ function iniciarControle(video) {
 
 async function Conteudo() {
     const logo = document.getElementById('logo')
+    const boxLogo = document.getElementById('box_logo')
+    const boxMenu = document.getElementById('box_menu')
+    const boxPai = document.getElementById('box_pai')
     const info = document.getElementById('conteudo')
     logo.style.display = 'flex'
     try {
@@ -814,6 +817,9 @@ async function Conteudo() {
     await carregarCategoriaFilmes()
     epg = await carregarEPG()
     //iniciarControle(document.getElementById('player'))
+    boxLogo.style.display = 'block'
+    boxMenu.style.display = 'block'
+    boxPai.style.display = 'flex'
     mostrarCategoria()   
     logo.style.display = 'none'
     info.innerHTML = ''
