@@ -669,7 +669,7 @@ function mostrarListaFilmes(nome) {
     boxBotoes.appendChild(card)
     let html = ''
     let html2 = `<h3 class='canal titulo_filmes'>${nome}:</h3>`;
-    lista_filmesCache.forEach((c, i) => {
+    lista_filmesCache.slice().reverse().forEach((c, i) => {
         html += `<button class="btn_lista" onclick="carregarInfoFilmes('${c.stream_id}', '${c.stream_icon}', '${c.name}')">
                     <img src="${c.stream_icon}" alt="${c.name}">${c.name}
                  </button>
