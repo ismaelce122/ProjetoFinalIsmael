@@ -7,7 +7,6 @@ let series = [];
 let filmes = [];
 let urlAtual = null;
 let canalAtual = null;
-let epgId = null;
 let monitorId = null;
 let hls = new Hls();
 let tipoConteudo = null
@@ -203,7 +202,7 @@ function mostrarCanais() {
     let html = "<h3 class='canal'>Canais:</h3>";
     canaisCache.forEach((c, i) => {
         const url = `${server}/live/${user}/${pass}/${c.stream_id}.m3u8`
-        html += `<button onclick="abrirCanal('${url}', '${c.name}')" tabindex="0">${c.name}</button>`;
+        html += `<button onclick="abrirCanal('${url}', '${c.name}', '${c.epg_channel_id}')" tabindex="0">${c.name}</button>`;
     });
     lista.innerHTML = html;
     box.style.display = 'none'
@@ -212,7 +211,7 @@ function mostrarCanais() {
 async function carregarEPG() {
     const info = document.getElementById('conteudo')
     info.innerHTML = 'carregando epg...'
-    const url = "https://dnsturbo.sbs/xmltv.php?username=31363361&password=31368332";
+    const url = "https://drastcdn.online/xmltv.php?username=972035386663&password=264501749978";
     const resposta = await fetch(url);
     const texto = await resposta.text();
 
@@ -243,16 +242,16 @@ async function carregarEPG() {
     return programa
 }
 
-function mostrarEPG(epgCanal) {
+function mostrarEPG(epgId) {
     const tituloProgramacao = document.getElementById("titulo_programacao")
     const boxProgramacao = document.getElementById("programacao")
     tituloProgramacao.textContent = 'Programação - Hoje'
     html = '<ul>'
-    if (!epgCanal) {
+    if (!epgId) {
         // não faz nada.
     } else {
         epg.forEach((programa) => {
-            if (programa.canal === epgCanal) {
+            if (programa.canal === epgId) {
                 html += `<li class="mt-1">
                              <div class="d-flex gap-3">
                                  <p class="programa_inicio mb-0">${programa.inicio}</p>  
@@ -267,7 +266,7 @@ function mostrarEPG(epgCanal) {
     boxProgramacao.innerHTML = html
 }
 
-function abrirCanal(url, canal, epgCanal) {
+function abrirCanal(url, canal, epgId) {
     if (monitorId) {
         clearInterval(monitorId)
         monitorId = null
@@ -280,7 +279,6 @@ function abrirCanal(url, canal, epgCanal) {
     let contador = 0
     urlAtual = url
     canalAtual = canal
-    epgId = epgCanal
     const video = document.getElementById('player');
     assistindo.innerHTML = `<b>Assistindo:</b> ${canal}`
     mostrarEPG(epgId)
@@ -827,7 +825,7 @@ async function Conteudo() {
     }
     await carregarCategoriaSeries()
     await carregarCategoriaFilmes()
-    //epg = await carregarEPG()
+    epg = await carregarEPG()
     //iniciarControle(document.getElementById('player'))
     boxLogo.style.display = 'block'
     boxMenu.style.display = 'block'
